@@ -7,8 +7,10 @@ export function getWeb3Instance() {
 }
 
 export function initializeWeb3() {
-  const currentProvider = window.web3.currentProvider;
-  web3 = new Web3(currentProvider);
+  if (!web3) {
+    const currentProvider = window.web3.currentProvider;
+    web3 = new Web3(currentProvider);
+  }
 }
 
 export function getLatestBlockNumber() {

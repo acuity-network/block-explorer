@@ -3,7 +3,7 @@ import createHistory from 'history/createBrowserHistory';
 import { connectRoutes } from 'redux-first-router';
 
 import routes from './router';
-import { initializeApp } from './actions/creators';
+import routerOptions from './router/options';
 import * as middlewareModules from './middleware';
 import * as reducers from './reducers';
 
@@ -17,7 +17,7 @@ const {
     reducer: routerReducer,
     middleware: routerMiddleware,
     enhancer: routerEnhancer,
-} = connectRoutes(history, routes);
+} = connectRoutes(history, routes, routerOptions);
 
 // Generate store from reducers and enhancers
 const combinedReducers = combineReducers({
@@ -28,7 +28,5 @@ const combinedReducers = combineReducers({
 const middleware = applyMiddleware(routerMiddleware, ...customMiddleware);
 const enhancers = composeEnhancers(routerEnhancer, middleware);
 const store = createStore(combinedReducers, enhancers);
-
-store.dispatch(initializeApp());
 
 export default store;
