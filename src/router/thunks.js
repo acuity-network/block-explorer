@@ -5,7 +5,7 @@ export function fetchSingleBlock(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
   const blockInState = selectors.getSingleBlock(getState(), blockNumber);
 
-  if (!blockInState) {
+  if (!blockInState.hasOwnProperty('number')) {
     dispatch(actions.fetchBlocks(blockNumber, 1));
   }
 }
