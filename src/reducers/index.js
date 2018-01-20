@@ -1,1 +1,1 @@
-export { default as blockNumber } from './blockNumber';
+export { default as blocks } from './blocks';

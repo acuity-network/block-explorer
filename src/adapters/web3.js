@@ -11,7 +11,7 @@ export function initializeWeb3() {
   web3 = new Web3(currentProvider);
 }
 
-export function getBlockNumber() {
+export function getLatestBlockNumber() {
   return new Promise((resolve, reject) => {
     const eth = getWeb3Instance().eth;
 
@@ -33,4 +33,21 @@ export function getBlockNumber() {
       }
     });
   });
+}
+
+export async function getBlocks(blockNumbers = []) {
+  const eth = getWeb3Instance().eth;
+
+  const blockRequests = blockNumbers.map(number => {
+    return new Promise((resolve, reject) => {
+      eth.getBlock(number, (err, block) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(block);
+      });
+    });
+  });
+
+  return await Promise.all(blockRequests);
 }

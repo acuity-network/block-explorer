@@ -6,9 +6,12 @@ export function initializeApp() {
   };
 }
 
-export function fetchBlocks() {
+export function fetchBlocks(endingBlockNumber, amountBlocks) {
   return {
     type: t.FETCH_BLOCKS,
-    payload: {},
+    payload: {
+      endingBlockNumber,
+      amountBlocks,
+    },
   };
 }

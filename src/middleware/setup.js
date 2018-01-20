@@ -1,14 +1,17 @@
 import * as actions from '../actions/creators';
 import * as t from '../actions/types';
-import { initializeWeb3, getWeb3Instance } from '../adapters/web3';
+import * as web3 from '../adapters/web3';
+import { maxBlocksPerPage } from '../constants';
 
-export default ({ dispatch }) => next => action => {
+export default ({ dispatch }) => next => async action => {
   if (action.type === t.INITIALIZE_APP) {
-    if (!getWeb3Instance()) {
-      initializeWeb3();
+    if (!web3.getWeb3Instance()) {
+      web3.initializeWeb3();
     }
 
-    dispatch(actions.fetchBlocks());
+    const latestBlockNumber = await web3.getLatestBlockNumber();
+    dispatch(actions.fetchBlocks(latestBlockNumber, maxBlocksPerPage));
   }
+
   next(action);
 }
