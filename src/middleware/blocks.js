@@ -2,7 +2,7 @@ import * as t from '../actions/types';
 import * as web3 from '../adapters/web3';
 import { maxBlocksPerPage } from '../constants';
 
-export default ({ dispatch, getState }) => next => async action => {
+export default (store, adapter = web3) => next => async action => {
   if (action.type === t.FETCH_BLOCKS) {
     const {
       endingBlockNumber = -1,
@@ -12,7 +12,7 @@ export default ({ dispatch, getState }) => next => async action => {
     let previousBlock = endingBlockNumber;
 
     if (endingBlockNumber < 0) {
-      previousBlock = await web3.getLatestBlockNumber();
+      previousBlock = await adapter.getLatestBlockNumber();
     }
 
     while (blockNumbers.length < amountBlocks) {
@@ -22,7 +22,7 @@ export default ({ dispatch, getState }) => next => async action => {
       if (previousBlock < 0) break;
     }
 
-    const fetchedBlocks = await web3.getBlocks(blockNumbers);
+    const fetchedBlocks = await adapter.getBlocks(blockNumbers);
     const blocks = {};
 
     fetchedBlocks.forEach(block => {
