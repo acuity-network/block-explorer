@@ -13,7 +13,12 @@
   "bugs": {
     "url": "https://github.com/mix-blockchain/block-explorer/issues"
   },
-  "keywords": ["MIX", "JavaScript", "block explorer", "web3"],
+  "keywords": [
+    "MIX",
+    "JavaScript",
+    "block explorer",
+    "web3"
+  ],
   "author": {
     "name": "Alina Beck",
     "email": "alina@a-square.eu",
@@ -27,9 +32,13 @@
     }
   ],
   "dependencies": {
+    "history": "^4.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
+    "redux": "^3.7.2",
+    "redux-first-router": "^0.0.16-next",
     "web3": "^1.0.0-beta.28"
   },
   "scripts": {
