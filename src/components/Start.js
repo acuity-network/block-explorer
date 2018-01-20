@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
-import { getBlocks } from '../reducers/selectors';
+import { getLatestBlocks } from '../reducers/selectors';
 import { BLOCK_DETAIL } from '../router';
 
 const mapStateToProps = (state) => ({
-  blocks: getBlocks(state),
+  blocks: getLatestBlocks(state),
 });
 
 const Start = ({ blocks = [] }) => (

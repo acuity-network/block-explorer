@@ -22,7 +22,19 @@ export default ({ dispatch, getState }) => next => async action => {
       if (previousBlock < 0) break;
     }
 
-    action.payload.blocks = await web3.getBlocks(blockNumbers);
+    const fetchedBlocks = await web3.getBlocks(blockNumbers);
+    const blocks = {};
+
+    fetchedBlocks.forEach(block => {
+      if (block) {
+        blocks[block.number] = block;
+      }
+    });
+
+    action.payload = {
+      blocksLoaded: Object.keys(blocks),
+      byNumber: blocks,
+    };
   }
 
   next(action);
