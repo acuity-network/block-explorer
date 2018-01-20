@@ -30,7 +30,7 @@ export function getLatestBlocks(state, maxBlocks = maxBlocksPerPage) {
     const blockNumber = blocksLoaded[i];
     latestBlocks.push(byNumber[blockNumber]);
 
-    if (i === maxBlocks) break;
+    if (latestBlocks.length === maxBlocks) break;
   }
 
   return latestBlocks;
