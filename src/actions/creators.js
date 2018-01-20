@@ -5,3 +5,10 @@ export function initializeApp() {
     type: t.INITIALIZE_APP,
   };
 }
+
+export function fetchBlocks() {
+  return {
+    type: t.FETCH_BLOCKS,
+    payload: {},
+  };
+}
