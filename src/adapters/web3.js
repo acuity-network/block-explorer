@@ -1,4 +1,4 @@
-import Web3 from 'web3';
+import pkg from 'web3';
 
 let web3;
 
@@ -6,17 +6,17 @@ export function getWeb3Instance() {
   return web3;
 }
 
-export function initializeWeb3() {
+export function initializeWeb3(browser = window, Web3 = pkg) {
   if (!web3) {
-    const currentProvider = window.web3.currentProvider;
+    const currentProvider = browser.web3.currentProvider;
     web3 = new Web3(currentProvider);
   }
 }
 
-export function getLatestBlockNumber() {
-  return new Promise((resolve, reject) => {
-    const eth = getWeb3Instance().eth;
+export function getLatestBlockNumber(getInstance = getWeb3Instance) {
+  const eth = getInstance().eth;
 
+  return new Promise((resolve, reject) => {
     eth.getSyncing((err, result) => {
       if (err) {
         return reject(err);
@@ -37,19 +37,21 @@ export function getLatestBlockNumber() {
   });
 }
 
-export async function getBlocks(blockNumbers = []) {
-  const eth = getWeb3Instance().eth;
+export async function getBlocks(blockNumbers = [], getInstance = getWeb3Instance) {
+  const eth = getInstance().eth;
 
   const blockRequests = blockNumbers.map(number => {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       eth.getBlock(number, (err, block) => {
         if (err) {
-          return reject(err);
+          resolve(null);
+        } else {
+          resolve(block);
         }
-        resolve(block);
       });
     });
   });
 
-  return await Promise.all(blockRequests);
+  const blocks = await Promise.all(blockRequests);
+  return blocks.filter(block => block !== null);
 }
