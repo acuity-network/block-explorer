@@ -4,10 +4,12 @@ import { connectRoutes } from 'redux-first-router';
 
 import routes from './router';
 import { initializeApp } from './actions/creators';
+import * as middlewareModules from './middleware';
 import * as reducers from './reducers';
-import * as customMiddleware from './middleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
+
+const customMiddleware = Object.values(middlewareModules);
 
 // Setup redux-first-router
 const history = createHistory();
