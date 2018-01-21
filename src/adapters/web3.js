@@ -17,21 +17,11 @@ export function getLatestBlockNumber(getInstance = getWeb3Instance) {
   const eth = getInstance().eth;
 
   return new Promise((resolve, reject) => {
-    eth.getSyncing((err, result) => {
+    eth.getBlockNumber((err, number) => {
       if (err) {
-        return reject(err);
-      }
-
-      if (!result) { // currently not syncing
-        eth.getBlockNumber((err, blockNumber) => {
-          if (err) {
-            return reject(err);
-          }
-          resolve(blockNumber);
-        });
-
+        reject(err);
       } else {
-        resolve(result.highestBlock);
+        resolve(number);
       }
     });
   });

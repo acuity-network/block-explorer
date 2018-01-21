@@ -36,30 +36,14 @@ describe('adapters/web3', () => {
   });
 
   describe('getLatestBlockNumber', () => {
-    it('should reject if syncing failed', async () => {
-      mockEth.getSyncing = callback => callback('rejected');
-
-      await expect(web3.getLatestBlockNumber(mockGetInstance))
-        .rejects.toEqual('rejected');
-    });
-
-    it('should resolve with the highest block if web3 is syncing', async () => {
-      mockEth.getSyncing = callback => callback(null, { highestBlock: 10 });
-
-      await expect(web3.getLatestBlockNumber(mockGetInstance))
-        .resolves.toEqual(10);
-    });
-
-    it('should reject if the block number could not be retrieved', async () => {
-      mockEth.getSyncing = callback => callback();
+    it('should reject if getting the block failed', async () => {
       mockEth.getBlockNumber = callback => callback('rejected');
 
       await expect(web3.getLatestBlockNumber(mockGetInstance))
         .rejects.toEqual('rejected');
     });
 
-    it('should resolve with the block number if web3 is not syncing', async () => {
-      mockEth.getSyncing = callback => callback();
+    it('should resolve with the block number', async () => {
       mockEth.getBlockNumber = callback => callback(null, 10);
 
       await expect(web3.getLatestBlockNumber(mockGetInstance))
