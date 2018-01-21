@@ -1,6 +1,6 @@
-import * as web3 from './web3';
+import * as web3 from './blocks';
 
-describe('adapters/web3', () => {
+describe('adapters/web3/blocks', () => {
   let mockGetInstance, mockEth, mockIsAddress;
 
   beforeEach(() => {
@@ -10,33 +10,6 @@ describe('adapters/web3', () => {
       eth: mockEth,
       isAddress: mockIsAddress,
     }));
-  });
-
-  describe('getWeb3Instance', () => {
-    it('should return undefined for an initial web3', () => {
-      const instance = web3.getWeb3Instance();
-
-      expect(instance).not.toBeDefined();
-    });
-  });
-
-  describe('initializeWeb3', () => {
-    it('should initialize web3 from the current provider', () => {
-      const mockWindow = {
-        web3: {
-          currentProvider: 'testProvider',
-        },
-      };
-      const mockConstructor = jest.fn();
-      class mockPackage {
-        constructor(provider) {
-          mockConstructor(provider);
-        }
-      }
-      web3.initializeWeb3(mockWindow, mockPackage);
-
-      expect(mockConstructor).toBeCalledWith('testProvider');
-    });
   });
 
   describe('getLatestBlockNumber', () => {
@@ -84,15 +57,6 @@ describe('adapters/web3', () => {
       const blocks = await web3.getBlocks(mockNumbers, mockGetInstance);
 
       expect(blocks).toEqual(expectedBlocks);
-    });
-  });
-
-  describe('isAddress', () => {
-    it('should call the isAddress method on the instance and return the result', () => {
-      mockIsAddress.mockImplementation((hex) => `A${hex}`);
-
-      const result = web3.isAddress('test', mockGetInstance);
-      expect(result).toBe('Atest');
     });
   });
 });
