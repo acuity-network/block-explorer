@@ -10,7 +10,8 @@ export function redirectAccountDetail(address) {
   return redirect({
     type: routes.ACCOUNT_DETAIL,
     payload: {
-      address,
+      // redux-first-router has issues with '0x' strings
+      address: `_${address}`,
     },
   });
 }

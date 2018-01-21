@@ -41,6 +41,24 @@ describe('router/thunks', () => {
 
       expect(mockDispatch).not.toBeCalled();
     });
+
+    it('should strip the leading _ from the account address in the location', () => {
+      const mockState = {
+        location: {
+          payload: {
+            address: '_test',
+          },
+        },
+        accounts: {},
+      };
+      const mockDispatch = jest.fn();
+      const mockGetState = jest.fn(() => mockState);
+      const expectedAction = actions.fetchAccount('test');
+
+      thunks.fetchAccount(mockDispatch, mockGetState);
+
+      expect(mockDispatch).toBeCalledWith(expectedAction);
+    });
   });
 
   describe('fetchBlocks', () => {

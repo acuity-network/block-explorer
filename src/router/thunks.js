@@ -2,7 +2,7 @@ import * as actions from '../actions/creators';
 import * as selectors from '../reducers/selectors';
 
 export function fetchAccount(dispatch, getState) {
-  const addressLocation = getState().location.payload.address;
+  const addressLocation = getState().location.payload.address || '';
   // redux-first-router has issues with '0x' strings
   const address = addressLocation.replace('_', '');
   const addressInState = selectors.getAccount(getState(), address);

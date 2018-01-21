@@ -16,7 +16,7 @@ describe('actions/creators/redirect', () => {
 
       expect(action).toHaveProperty('type', routes.ACCOUNT_DETAIL);
       expect(action).toHaveProperty('payload');
-      expect(action.payload).toHaveProperty('address', 'test');
+      expect(action.payload).toHaveProperty('address', '_test');
     });
   });
 });

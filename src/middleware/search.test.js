@@ -40,7 +40,7 @@ describe('middleware/search', () => {
     const dispatchAction = mockDispatch.mock.calls[0][0];
     expect(dispatchAction).toHaveProperty('type', routes.ACCOUNT_DETAIL);
     expect(dispatchAction).toHaveProperty('payload');
-    expect(dispatchAction.payload).toHaveProperty('address', 'test');
+    expect(dispatchAction.payload).toHaveProperty('address', '_test');
     expect(mockNext).not.toBeCalled();
   });
 });

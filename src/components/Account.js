@@ -6,7 +6,8 @@ import * as selectors from '../reducers/selectors';
 
 const mapStateToProps = (state) => {
   // redux-first-router has issues with '0x' strings
-  const address = state.location.payload.address.replace('_', '');
+  const locationAaddress = state.location.payload.address || '';
+  const address = locationAaddress.replace('_', '');
   return {
     ...selectors.getAccount(state, address),
   };
