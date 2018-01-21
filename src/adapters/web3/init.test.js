@@ -1,14 +1,12 @@
 import * as web3 from './init';
 
 describe('adapters/web3/init', () => {
-  let mockGetInstance, mockEth, mockIsAddress;
+  let mockGetInstance, mockEth;
 
   beforeEach(() => {
     mockEth = {};
-    mockIsAddress = jest.fn();
     mockGetInstance = jest.fn(() => ({
       eth: mockEth,
-      isAddress: mockIsAddress,
     }));
   });
 
