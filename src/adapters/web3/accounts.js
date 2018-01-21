@@ -18,3 +18,17 @@ export function getBalance(address, getInstance = getWeb3Instance) {
     });
   });
 }
+
+export function getTransactionCount(address, getInstance = getWeb3Instance) {
+  const eth = getInstance().eth;
+
+  return new Promise((resolve, reject) => {
+    eth.getTransactionCount(address, (err, txCount) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(txCount);
+      }
+    });
+  });
+}
