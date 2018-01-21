@@ -1,7 +1,17 @@
 import * as actions from './creators';
 import * as t from './types';
 
-describe('actions/creators', () => {
+describe('actions/creators/fetch', () => {
+  describe('fetchAccount', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.fetchAccount('test');
+
+      expect(action).toHaveProperty('type', t.FETCH_ACCOUNT);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('address', 'test');
+    });
+  });
+
   describe('fetchBlocks', () => {
     it('should return an action with the correct type and payload', () => {
       const action = actions.fetchBlocks(10, 5);

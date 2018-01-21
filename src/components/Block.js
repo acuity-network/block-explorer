@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
   block: getSingleBlock(state, state.location.payload.blockNumber),
 });
 
-const Start = ({ block = {} }) => (
+const Block = ({ block = {} }) => (
   <div>
     <h2>Single Block!</h2>
     <ul>
@@ -17,4 +17,4 @@ const Start = ({ block = {} }) => (
   </div>
 );
 
-export default connect(mapStateToProps)(Start);
+export default connect(mapStateToProps)(Block);

@@ -1,11 +1,15 @@
 import * as web3 from './web3';
 
 describe('adapters/web3', () => {
-  let mockGetInstance, mockEth;
+  let mockGetInstance, mockEth, mockIsAddress;
 
   beforeEach(() => {
     mockEth = {};
-    mockGetInstance = jest.fn(() => ({ eth: mockEth }));
+    mockIsAddress = jest.fn();
+    mockGetInstance = jest.fn(() => ({
+      eth: mockEth,
+      isAddress: mockIsAddress,
+    }));
   });
 
   describe('getWeb3Instance', () => {
@@ -80,6 +84,15 @@ describe('adapters/web3', () => {
       const blocks = await web3.getBlocks(mockNumbers, mockGetInstance);
 
       expect(blocks).toEqual(expectedBlocks);
+    });
+  });
+
+  describe('isAddress', () => {
+    it('should call the isAddress method on the instance and return the result', () => {
+      mockIsAddress.mockImplementation((hex) => `A${hex}`);
+
+      const result = web3.isAddress('test', mockGetInstance);
+      expect(result).toBe('Atest');
     });
   });
 });

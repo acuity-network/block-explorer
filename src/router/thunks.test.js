@@ -2,6 +2,21 @@ import * as actions from '../actions/creators';
 import * as thunks from './thunks';
 
 describe('router/thunks', () => {
+  describe('fetchAccount', () => {
+
+  });
+
+  describe('fetchBlocks', () => {
+    it('should dispatch an action to fetch the latest blocks', () => {
+      const mockDispatch = jest.fn();
+      const expectedAction = actions.fetchBlocks();
+
+      thunks.fetchBlocks(mockDispatch);
+
+      expect(mockDispatch).toBeCalledWith(expectedAction);
+    });
+  });
+
   describe('fetchSingleBlock', () => {
     it('should dispatch an action to fetch a block according to the location', () => {
       const mockState = {
@@ -40,17 +55,6 @@ describe('router/thunks', () => {
       thunks.fetchSingleBlock(mockDispatch, mockGetState);
 
       expect(mockDispatch).not.toBeCalled();
-    });
-  });
-
-  describe('fetchBlocks', () => {
-    it('should dispatch an action to fetch the latest blocks', () => {
-      const mockDispatch = jest.fn();
-      const expectedAction = actions.fetchBlocks();
-
-      thunks.fetchBlocks(mockDispatch);
-
-      expect(mockDispatch).toBeCalledWith(expectedAction);
     });
   });
 });

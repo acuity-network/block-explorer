@@ -1,1 +1,2 @@
-export const FETCH_BLOCKS = 'mix/FETCH_BLOCKS';
+export * from './fetch/types';
+export * from './search/types';

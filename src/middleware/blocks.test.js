@@ -6,12 +6,12 @@ describe('middleware/blocks', () => {
       mockAdapter;
 
   beforeEach(() => {
+    mockDispatch = jest.fn();
     mockStore = {
       dispatch: mockDispatch,
       getState: mockGetState,
     };
     mockNext = jest.fn();
-    mockDispatch = jest.fn();
     mockAdapter = {};
   });
 

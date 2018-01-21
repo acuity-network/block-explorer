@@ -1,11 +1,3 @@
-import * as t from './types';
-
-export function fetchBlocks(endingBlockNumber, amountBlocks) {
-  return {
-    type: t.FETCH_BLOCKS,
-    payload: {
-      endingBlockNumber,
-      amountBlocks,
-    },
-  };
-}
+export * from './fetch/creators';
+export * from './redirect/creators';
+export * from './search/creators';

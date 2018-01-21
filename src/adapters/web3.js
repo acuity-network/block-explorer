@@ -45,3 +45,8 @@ export async function getBlocks(blockNumbers = [], getInstance = getWeb3Instance
   const blocks = await Promise.all(blockRequests);
   return blocks.filter(block => block !== null);
 }
+
+export function isAddress(hex, getInstance = getWeb3Instance) {
+  const instance = getInstance();
+  return instance.isAddress(hex);
+}
