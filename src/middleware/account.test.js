@@ -25,4 +25,22 @@ describe('middleware/account', () => {
     expect(mockNext).toBeCalledWith(mockAction);
   });
 
+  it('should fetch balance and transactionCount', async () => {
+    mockAction = {
+      type: t.FETCH_ACCOUNT,
+      payload: {
+        address: 'test',
+      },
+    };
+    mockAdapter.getBalance = jest.fn(() => 100);
+    mockAdapter.getTransactionCount = jest.fn(() => 2);
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    const nextAction = mockNext.mock.calls[0][0];
+    expect(nextAction).toHaveProperty('type', t.FETCH_ACCOUNT);
+    expect(nextAction).toHaveProperty('payload');
+    expect(nextAction.payload).toHaveProperty('balance', 100);
+    expect(nextAction.payload).toHaveProperty('transactionCount', 2);
+  });
 });
