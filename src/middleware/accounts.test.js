@@ -1,7 +1,7 @@
 import * as t from '../actions/types';
-import middleware from './account';
+import middleware from './accounts';
 
-describe('middleware/account', () => {
+describe('middleware/accounts', () => {
   let mockStore, mockNext, mockAction, mockDispatch, mockGetState,
       mockAdapter;
 
