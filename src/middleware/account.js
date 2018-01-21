@@ -11,6 +11,7 @@ export default (store, adapter = web3) => next => async action => {
     ]);
 
     action.payload = {
+      address,
       balance: accountData[0],
       transactionCount: accountData[1],
     };

@@ -2,7 +2,12 @@ import * as actions from '../actions/creators';
 import * as selectors from '../reducers/selectors';
 
 export function fetchAccount(dispatch, getState) {
+  const address = getState().location.payload.address;
+  const addressInState = selectors.getAccount(getState(), address);
 
+  if (!addressInState) {
+    dispatch(actions.fetchAccount(address));
+  }
 }
 
 export function fetchBlocks(dispatch) {

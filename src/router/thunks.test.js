@@ -3,7 +3,44 @@ import * as thunks from './thunks';
 
 describe('router/thunks', () => {
   describe('fetchAccount', () => {
+    it('should dispatch an action to fetch an account according to the location', () => {
+      const mockState = {
+        location: {
+          payload: {
+            address: 'test',
+          },
+        },
+        accounts: {},
+      };
+      const mockDispatch = jest.fn();
+      const mockGetState = jest.fn(() => mockState);
+      const expectedAction = actions.fetchAccount('test');
 
+      thunks.fetchAccount(mockDispatch, mockGetState);
+
+      expect(mockDispatch).toBeCalledWith(expectedAction);
+    });
+
+    it('should not dispatch an action if the account is already in state', () => {
+      const mockState = {
+        location: {
+          payload: {
+            address: 'test',
+          },
+        },
+        accounts: {
+          test: {
+            balance: 10,
+          },
+        },
+      };
+      const mockDispatch = jest.fn();
+      const mockGetState = jest.fn(() => mockState);
+
+      thunks.fetchAccount(mockDispatch, mockGetState);
+
+      expect(mockDispatch).not.toBeCalled();
+    });
   });
 
   describe('fetchBlocks', () => {

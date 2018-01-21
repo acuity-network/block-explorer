@@ -40,6 +40,7 @@ describe('middleware/account', () => {
     const nextAction = mockNext.mock.calls[0][0];
     expect(nextAction).toHaveProperty('type', t.FETCH_ACCOUNT);
     expect(nextAction).toHaveProperty('payload');
+    expect(nextAction.payload).toHaveProperty('address', 'test');
     expect(nextAction.payload).toHaveProperty('balance', 100);
     expect(nextAction.payload).toHaveProperty('transactionCount', 2);
   });
