@@ -24,3 +24,14 @@ export function fetchSingleBlock(dispatch, getState) {
     dispatch(actions.fetchBlocks(blockNumber, 1));
   }
 }
+
+export function fetchTransaction(dispatch, getState) {
+  const hashLocation = getState().location.payload.hash || '';
+  // redux-first-router has issues with '0x' strings
+  const hash = hashLocation.replace('_', '');
+  const hashInState = selectors.getTransaction(getState(), hash);
+
+  if (!hashInState) {
+    dispatch(actions.fetchTransaction(hash));
+  }
+}

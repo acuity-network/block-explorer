@@ -18,3 +18,12 @@ export function fetchBlocks(endingBlockNumber, amountBlocks) {
     },
   };
 }
+
+export function fetchTransaction(hash) {
+  return {
+    type: t.FETCH_TRANSACTION,
+    payload: {
+      hash,
+    },
+  };
+}

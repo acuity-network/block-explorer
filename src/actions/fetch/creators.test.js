@@ -22,4 +22,14 @@ describe('actions/creators/fetch', () => {
       expect(action.payload).toHaveProperty('amountBlocks', 5);
     });
   });
+
+  describe('fetchTransaction', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.fetchTransaction('test');
+
+      expect(action).toHaveProperty('type', t.FETCH_TRANSACTION);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('hash', 'test');
+    });
+  });
 });

@@ -15,3 +15,13 @@ export function redirectAccountDetail(address) {
     },
   });
 }
+
+export function redirectTransactionDetail(hash) {
+  return redirect({
+    type: routes.TRANSACTION_DETAIL,
+    payload: {
+      // redux-first-router has issues with '0x' strings
+      hash: `_${hash}`,
+    },
+  });
+}

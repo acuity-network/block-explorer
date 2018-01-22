@@ -19,4 +19,14 @@ describe('actions/creators/redirect', () => {
       expect(action.payload).toHaveProperty('address', '_test');
     });
   });
+
+  describe('redirectTransactionDetail', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.redirectTransactionDetail('test');
+
+      expect(action).toHaveProperty('type', routes.TRANSACTION_DETAIL);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('hash', '_test');
+    });
+  });
 });

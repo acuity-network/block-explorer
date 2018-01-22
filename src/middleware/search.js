@@ -10,6 +10,11 @@ export default (store, adapter = web3) => next => action => {
     if (isAddress) {
       return store.dispatch(actions.redirectAccountDetail(query));
     }
+
+    const transaction = adapter.getTransaction(query);
+    if (transaction) {
+      return store.dispatch(actions.redirectTransactionDetail(query));
+    }
   }
   next(action);
 }
