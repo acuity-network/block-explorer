@@ -15,5 +15,5 @@ export default (state = initialState, { type, payload }) => {
 }
 
 export function getTransaction(state, hash) {
-  return state.transactions[hash] || null;
+  return state.transactions[hash] || {};
 }

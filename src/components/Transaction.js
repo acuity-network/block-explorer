@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const Transaction = ({ from, to, value }) => (
+const Transaction = ({ from = '', to = '', value = '' }) => (
   <div>
     <h2>Single Transaction!</h2>
     <ul>

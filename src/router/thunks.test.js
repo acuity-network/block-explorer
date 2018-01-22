@@ -21,27 +21,6 @@ describe('router/thunks', () => {
       expect(mockDispatch).toBeCalledWith(expectedAction);
     });
 
-    it('should not dispatch an action if the account is already in state', () => {
-      const mockState = {
-        location: {
-          payload: {
-            address: 'test',
-          },
-        },
-        accounts: {
-          test: {
-            balance: 10,
-          },
-        },
-      };
-      const mockDispatch = jest.fn();
-      const mockGetState = jest.fn(() => mockState);
-
-      thunks.fetchAccount(mockDispatch, mockGetState);
-
-      expect(mockDispatch).not.toBeCalled();
-    });
-
     it('should strip the leading _ from the account address in the location', () => {
       const mockState = {
         location: {
