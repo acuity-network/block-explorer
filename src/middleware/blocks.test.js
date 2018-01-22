@@ -7,6 +7,7 @@ describe('middleware/blocks', () => {
 
   beforeEach(() => {
     mockDispatch = jest.fn();
+    mockGetState = jest.fn(() => ({ blocks: {}}));
     mockStore = {
       dispatch: mockDispatch,
       getState: mockGetState,
@@ -29,16 +30,16 @@ describe('middleware/blocks', () => {
     mockAction = {
       type: t.FETCH_BLOCKS,
       payload: {
-        endingBlockNumber: 20,
-        amountBlocks: 4,
+        requestedBlockNumber: 20,
+        amountOfBlocks: 4,
       },
     };
     mockAdapter.getBlocks = jest.fn(numbers => numbers.map(n => ({ number: `N${n}` })));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-    const expectedBlocksLoaded = ['N20', 'N19', 'N18', 'N17'];
-    const expectedBlocksByNumber = {
+    const expectedBlockNumbers = ['N20', 'N19', 'N18', 'N17'];
+    const expectedBlocks = {
       N20: { number: 'N20' },
       N19: { number: 'N19' },
       N18: { number: 'N18' },
@@ -47,7 +48,7 @@ describe('middleware/blocks', () => {
     const dispatchedAction = mockDispatch.mock.calls[0][0];
     expect(dispatchedAction).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
     expect(dispatchedAction).toHaveProperty('payload');
-    expect(dispatchedAction.payload).toHaveProperty('blocksLoaded', expectedBlocksLoaded);
-    expect(dispatchedAction.payload).toHaveProperty('byNumber', expectedBlocksByNumber);
+    expect(dispatchedAction.payload).toHaveProperty('blockNumbers', expectedBlockNumbers);
+    expect(dispatchedAction.payload).toHaveProperty('blocks', expectedBlocks);
   });
 });

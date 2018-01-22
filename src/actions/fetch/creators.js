@@ -16,22 +16,22 @@ export function fetchAccountSuccess(account) {
   };
 }
 
-export function fetchBlocks(endingBlockNumber, amountBlocks) {
+export function fetchBlocks(requestedBlockNumber, amountOfBlocks) {
   return {
     type: t.FETCH_BLOCKS,
     payload: {
-      endingBlockNumber,
-      amountBlocks,
+      requestedBlockNumber,
+      amountOfBlocks,
     },
   };
 }
 
-export function fetchBlocksSuccess(blocksLoaded, byNumber) {
+export function fetchBlocksSuccess(blockNumbers, blocks) {
   return {
     type: t.FETCH_BLOCKS_SUCCESS,
     payload: {
-      blocksLoaded,
-      byNumber,
+      blockNumbers,
+      blocks,
     },
   };
 }

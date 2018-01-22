@@ -60,7 +60,7 @@ describe('router/thunks', () => {
           },
         },
         blocks: {
-          byNumber: {},
+          blocks: {},
         },
       };
       const mockDispatch = jest.fn();
@@ -80,7 +80,7 @@ describe('router/thunks', () => {
           },
         },
         blocks: {
-          byNumber: { 5: { number: 5 }},
+          blocks: { 5: { number: 5 }},
         },
       };
       const mockDispatch = jest.fn();

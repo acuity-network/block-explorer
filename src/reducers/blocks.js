@@ -2,40 +2,44 @@ import * as t from '../actions/types';
 import { maxBlocksPerPage } from '../constants';
 
 const initialState = {
-  blocksLoaded: [],
-  byNumber: {},
+  blockNumbers: [],
+  blocks: {},
 };
 
 export default (state = initialState, { type, payload = {} }) => {
   if (type === t.FETCH_BLOCKS_SUCCESS) {
-    const newBlocks = payload.blocksLoaded.filter(n => !state.blocksLoaded.includes(n))
     return {
-      blocksLoaded: [...state.blocksLoaded, ...newBlocks].sort((a, b) => b - a),
-      byNumber: {
-        ...state.byNumber,
-        ...payload.byNumber,
+      blockNumbers: [
+        ...state.blockNumbers,
+        ...payload.blockNumbers
+      ].sort((a, b) => b - a),
+      blocks: {
+        ...state.blocks,
+        ...payload.blocks,
       },
     };
   }
   return state;
 }
 
-export function getLatestBlocks(state, maxBlocks = maxBlocksPerPage) {
-  const blocksLoaded = state.blocks.blocksLoaded;
-  const amountBlocks = blocksLoaded.length;
-  const byNumber = state.blocks.byNumber;
+export function getLatestBlocks(state, amountOfBlocks = maxBlocksPerPage) {
+  const blockNumbers = state.blocks.blockNumbers;
+  const maxBlocks = Math.min(amountOfBlocks, blockNumbers.length);
+  const blocks = state.blocks.blocks;
   const latestBlocks = [];
 
-  for (let i = 0; i < amountBlocks; i++) {
-    const blockNumber = blocksLoaded[i];
-    latestBlocks.push(byNumber[blockNumber]);
-
-    if (latestBlocks.length === maxBlocks) break;
+  for (let i = 0; i < maxBlocks; i++) {
+    const blockNumber = blockNumbers[i];
+    latestBlocks.push(blocks[blockNumber]);
   }
 
   return latestBlocks;
 }
 
 export function getSingleBlock(state, blockNumber) {
-  return state.blocks.byNumber[blockNumber] || {};
+  return state.blocks.blocks[blockNumber] || {};
+}
+
+export function getBlockNumbers(state) {
+  return state.blocks.blockNumbers || [];
 }
