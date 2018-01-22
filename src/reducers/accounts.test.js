@@ -68,4 +68,40 @@ describe('selectors/accounts', () => {
       expect(account).toHaveProperty('balance', 10);
     });
   });
+
+  describe('getCurrentAccountForDisplay', () => {
+    const mockState = {
+      location: {
+        payload: {
+          address: '_0x12345678',
+        },
+      },
+    };
+    const mockGetAccount = jest.fn((state, address) => ({ address, balance: 235, transactionCount: 2 }));
+    const mockFromWei = jest.fn((amount) => (amount * 10));
+    const mockMethods = { getAccount: mockGetAccount, fromWei: mockFromWei };
+
+    it('should use the address from location to get the current account', () => {
+      selectors.getCurrentAccountForDisplay(mockState, mockMethods);
+
+      expect(mockGetAccount).toBeCalled();
+      expect(mockGetAccount).toBeCalledWith(mockState, '0x12345678');
+    });
+
+    it('should transform the Wei balance to Ether', () => {
+      selectors.getCurrentAccountForDisplay(mockState, mockMethods);
+
+      expect(mockFromWei).toBeCalled();
+      expect(mockFromWei).toBeCalledWith(235, 'ether');
+    });
+
+    it('should return an object with account display data', () => {
+      const value = selectors.getCurrentAccountForDisplay(mockState, mockMethods);
+
+      expect(value).toHaveProperty('address', '0x12345678');
+      expect(value).toHaveProperty('balanceInWei', '235');
+      expect(value).toHaveProperty('balanceInEther', 2350);
+      expect(value).toHaveProperty('transactionCount', 2);
+    });
+  });
 });

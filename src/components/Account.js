@@ -1,24 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fromWei } from '../adapters/web3/helpers';
 import * as selectors from '../reducers/selectors';
 
 const mapStateToProps = (state) => {
-  // redux-first-router has issues with '0x' strings
-  const locationAddress = state.location.payload.address || '';
-  const address = locationAddress.replace('_', '');
-  return {
-    ...selectors.getAccount(state, address),
-  };
+  return selectors.getCurrentAccountForDisplay(state);
 };
 
-const Account = ({ address = '', balance = '', transactionCount = 0 }) => (
+const Account = ({ address = '', balanceInEther = '', balanceInWei = '', transactionCount = 0 }) => (
   <div>
     <h2>Single Account!</h2>
     <ul>
       <li>Address: {address}</li>
-      <li>Balance: {fromWei(balance, 'ether')} Ether</li>
+      <li>Balance in Wei: {balanceInWei} Wei</li>
+      <li>Balance in Ether: {balanceInEther} Ether</li>
       <li>Transaction count: {transactionCount}</li>
     </ul>
   </div>

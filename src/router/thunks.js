@@ -5,7 +5,7 @@ export function fetchAccount(dispatch, getState) {
   const addressLocation = getState().location.payload.address || '';
   // redux-first-router has issues with '0x' strings
   const address = addressLocation.replace('_', '');
-  const addressInState = selectors.getAccount(getState(), address);
+  const addressInState = Object.keys(selectors.getAccount(getState(), address)).length > 0;
 
   if (!addressInState) {
     dispatch(actions.fetchAccount(address));
