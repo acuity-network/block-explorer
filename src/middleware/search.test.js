@@ -28,7 +28,7 @@ describe('middleware/search', () => {
 
   it('should redirect to account details if the query is an address', () => {
     mockAction = {
-      type: t.CONFIRM_SEARCH,
+      type: t.SEARCH_FOR,
       payload: {
         query: 'test',
       },
@@ -47,7 +47,7 @@ describe('middleware/search', () => {
 
   it('should fetch the transaction if the query is not an account address', async () => {
     mockAction = {
-      type: t.CONFIRM_SEARCH,
+      type: t.SEARCH_FOR,
       payload: {
         query: 'test',
       },

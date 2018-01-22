@@ -1,8 +1,8 @@
 import * as t from './types';
 
-export function confirmSearch(query) {
+export function searchFor(query) {
   return {
-    type: t.CONFIRM_SEARCH,
+    type: t.SEARCH_FOR,
     payload: {
       query,
     },
