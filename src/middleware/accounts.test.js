@@ -12,7 +12,10 @@ describe('middleware/accounts', () => {
       getState: mockGetState,
     };
     mockNext = jest.fn();
-    mockAdapter = {};
+    mockAdapter = {
+      getBalance: jest.fn(() => 100),
+      getTransactionCount: jest.fn(() => 2),
+    };
   });
 
   it('should forward unrecognized actions', () => {
@@ -32,8 +35,23 @@ describe('middleware/accounts', () => {
         address: 'test',
       },
     };
-    mockAdapter.getBalance = jest.fn(() => 100);
-    mockAdapter.getTransactionCount = jest.fn(() => 2);
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    expect(mockAdapter.getBalance).toBeCalled();
+    expect(mockAdapter.getBalance).toBeCalledWith('test');
+    expect(mockAdapter.getTransactionCount).toBeCalled();
+    expect(mockAdapter.getTransactionCount).toBeCalledWith('test');
+
+  });
+
+  it('should dispatch a success action with the fetched data', async () => {
+    mockAction = {
+      type: t.FETCH_ACCOUNT,
+      payload: {
+        address: 'test',
+      },
+    };
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 

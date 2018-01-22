@@ -13,7 +13,9 @@ describe('middleware/blocks', () => {
       getState: mockGetState,
     };
     mockNext = jest.fn();
-    mockAdapter = {};
+    mockAdapter = {
+      getBlocks: jest.fn(numbers => numbers.map(n => ({ number: `N${n}` }))),
+    };
   });
 
   it('should forward unrecognized actions', () => {
@@ -26,7 +28,7 @@ describe('middleware/blocks', () => {
     expect(mockNext).toBeCalledWith(mockAction);
   });
 
-  it('should call getBlocks for the amount of blocks specified', async () => {
+  it('should call getBlocks for the requested block numbers', async () => {
     mockAction = {
       type: t.FETCH_BLOCKS,
       payload: {
@@ -34,10 +36,14 @@ describe('middleware/blocks', () => {
         amountOfBlocks: 4,
       },
     };
-    mockAdapter.getBlocks = jest.fn(numbers => numbers.map(n => ({ number: `N${n}` })));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
+    expect(mockAdapter.getBlocks).toBeCalled();
+    expect(mockAdapter.getBlocks).toBeCalledWith([20, 19, 18, 17]);
+  });
+
+  it('should dispatch a success action with the fetched data', async () => {
     const expectedBlockNumbers = ['N20', 'N19', 'N18', 'N17'];
     const expectedBlocks = {
       N20: { number: 'N20' },
@@ -45,6 +51,16 @@ describe('middleware/blocks', () => {
       N18: { number: 'N18' },
       N17: { number: 'N17' },
     };
+    mockAction = {
+      type: t.FETCH_BLOCKS,
+      payload: {
+        requestedBlockNumber: 20,
+        amountOfBlocks: 4,
+      },
+    };
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
     const dispatchedAction = mockDispatch.mock.calls[0][0];
     expect(dispatchedAction).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
     expect(dispatchedAction).toHaveProperty('payload');
