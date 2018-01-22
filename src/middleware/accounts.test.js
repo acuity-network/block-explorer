@@ -37,11 +37,11 @@ describe('middleware/accounts', () => {
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-    const nextAction = mockNext.mock.calls[0][0];
-    expect(nextAction).toHaveProperty('type', t.FETCH_ACCOUNT);
-    expect(nextAction).toHaveProperty('payload');
-    expect(nextAction.payload).toHaveProperty('address', 'test');
-    expect(nextAction.payload).toHaveProperty('balance', 100);
-    expect(nextAction.payload).toHaveProperty('transactionCount', 2);
+    const dispatchedAction = mockDispatch.mock.calls[0][0];
+    expect(dispatchedAction).toHaveProperty('type', t.FETCH_ACCOUNT_SUCCESS);
+    expect(dispatchedAction).toHaveProperty('payload');
+    expect(dispatchedAction.payload).toHaveProperty('address', 'test');
+    expect(dispatchedAction.payload).toHaveProperty('balance', 100);
+    expect(dispatchedAction.payload).toHaveProperty('transactionCount', 2);
   });
 });

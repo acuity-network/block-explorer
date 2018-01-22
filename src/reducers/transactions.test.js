@@ -13,7 +13,7 @@ describe('reducers/transactions', () => {
 
   it('should save transactions to the store', () => {
     const mockAction = {
-      type: t.FETCH_TRANSACTION,
+      type: t.FETCH_TRANSACTION_SUCCESS,
       payload: {
         hash: 'test',
         blockNumber: 10,

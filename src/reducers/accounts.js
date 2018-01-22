@@ -3,7 +3,7 @@ import * as t from '../actions/types';
 const initialState = {};
 
 export default (state = initialState, { type, payload }) => {
-  if (type === t.FETCH_ACCOUNT) {
+  if (type === t.FETCH_ACCOUNT_SUCCESS) {
     const { address } = payload;
 
     return {

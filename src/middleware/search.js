@@ -2,7 +2,7 @@ import * as actions from '../actions/creators';
 import * as t from '../actions/types';
 import * as web3 from '../adapters/web3';
 
-export default (store, adapter = web3) => next => action => {
+export default (store, adapter = web3) => next => async action => {
   if (action.type === t.CONFIRM_SEARCH) {
     const { query } = action.payload;
 
@@ -11,10 +11,12 @@ export default (store, adapter = web3) => next => action => {
       return store.dispatch(actions.redirectAccountDetail(query));
     }
 
-    const transaction = adapter.getTransaction(query);
+    const transaction = await adapter.getTransaction(query);
     if (transaction) {
+      store.dispatch(actions.fetchTransactionSuccess(transaction));
       return store.dispatch(actions.redirectTransactionDetail(query));
     }
   }
+
   next(action);
 }

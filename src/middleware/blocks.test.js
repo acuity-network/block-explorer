@@ -44,10 +44,10 @@ describe('middleware/blocks', () => {
       N18: { number: 'N18' },
       N17: { number: 'N17' },
     };
-    const nextAction = mockNext.mock.calls[0][0];
-    expect(nextAction).toHaveProperty('type', t.FETCH_BLOCKS);
-    expect(nextAction).toHaveProperty('payload');
-    expect(nextAction.payload).toHaveProperty('blocksLoaded', expectedBlocksLoaded);
-    expect(nextAction.payload).toHaveProperty('byNumber', expectedBlocksByNumber);
+    const dispatchedAction = mockDispatch.mock.calls[0][0];
+    expect(dispatchedAction).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
+    expect(dispatchedAction).toHaveProperty('payload');
+    expect(dispatchedAction.payload).toHaveProperty('blocksLoaded', expectedBlocksLoaded);
+    expect(dispatchedAction.payload).toHaveProperty('byNumber', expectedBlocksByNumber);
   });
 });

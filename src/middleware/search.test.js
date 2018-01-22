@@ -41,6 +41,33 @@ describe('middleware/search', () => {
     expect(dispatchAction).toHaveProperty('type', routes.ACCOUNT_DETAIL);
     expect(dispatchAction).toHaveProperty('payload');
     expect(dispatchAction.payload).toHaveProperty('address', '_test');
+
+    expect(mockNext).not.toBeCalled();
+  });
+
+  it('should fetch the transaction if the query is not an account address', async () => {
+    mockAction = {
+      type: t.CONFIRM_SEARCH,
+      payload: {
+        query: 'test',
+      },
+    };
+    mockAdapter.isAddress = jest.fn(() => false);
+    mockAdapter.getTransaction = jest.fn(() => ({ test: true }));
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    const firstAction = mockDispatch.mock.calls[0][0];
+    const secondAction = mockDispatch.mock.calls[1][0];
+
+    expect(firstAction).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
+    expect(firstAction).toHaveProperty('payload');
+    expect(firstAction.payload).toHaveProperty('test', true);
+
+    expect(secondAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
+    expect(secondAction).toHaveProperty('payload');
+    expect(secondAction.payload).toHaveProperty('hash', '_test');
+
     expect(mockNext).not.toBeCalled();
   });
 });

@@ -13,7 +13,7 @@ describe('reducers/accounts', () => {
 
   it('should save accounts to the store', () => {
     const mockAction = {
-      type: t.FETCH_ACCOUNT,
+      type: t.FETCH_ACCOUNT_SUCCESS,
       payload: {
         address: 'test',
         balance: 10,
@@ -30,7 +30,7 @@ describe('reducers/accounts', () => {
 
   it('should update accounts if the data changed', () => {
     const mockAction = {
-      type: t.FETCH_ACCOUNT,
+      type: t.FETCH_ACCOUNT_SUCCESS,
       payload: {
         address: 'test',
         balance: 15,

@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload = {} }) => {
-  if (type === t.FETCH_BLOCKS) {
+  if (type === t.FETCH_BLOCKS_SUCCESS) {
     const newBlocks = payload.blocksLoaded.filter(n => !state.blocksLoaded.includes(n))
     return {
       blocksLoaded: [...state.blocksLoaded, ...newBlocks].sort((a, b) => b - a),

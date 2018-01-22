@@ -17,7 +17,7 @@ describe('reducers/blocks', () => {
       blocksLoaded: [4, 5, 6],
     };
     const mockAction = {
-      type: t.FETCH_BLOCKS,
+      type: t.FETCH_BLOCKS_SUCCESS,
       payload: {
         byNumber: { a: 1, b: 2, c: 3 },
         blocksLoaded: [1, 2, 3],
@@ -38,7 +38,7 @@ describe('reducers/blocks', () => {
       blocksLoaded: [1, 3, 5],
     };
     const mockAction = {
-      type: t.FETCH_BLOCKS,
+      type: t.FETCH_BLOCKS_SUCCESS,
       payload: {
         byNumber: {},
         blocksLoaded: [1, 2, 3],

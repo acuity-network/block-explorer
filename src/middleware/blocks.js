@@ -1,3 +1,4 @@
+import * as actions from '../actions/creators';
 import * as t from '../actions/types';
 import * as web3 from '../adapters/web3';
 import { maxBlocksPerPage } from '../constants';
@@ -31,11 +32,9 @@ export default (store, adapter = web3) => next => async action => {
       }
     });
 
-    action.payload = {
-      blocksLoaded: Object.keys(blocks),
-      byNumber: blocks,
-    };
-  }
+    store.dispatch(actions.fetchBlocksSuccess(Object.keys(blocks), blocks));
 
-  next(action);
+  } else {
+    next(action);
+  }
 }
