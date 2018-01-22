@@ -1,23 +1,13 @@
 import * as web3 from './accounts';
 
 describe('adapters/web3/accounts', () => {
-  let mockGetInstance, mockEth, mockIsAddress;
+  let mockGetInstance, mockEth;
 
   beforeEach(() => {
     mockEth = {};
     mockGetInstance = jest.fn(() => ({
-      isAddress: mockIsAddress,
       eth: mockEth,
     }));
-  });
-
-  describe('isAddress', () => {
-    it('should call the isAddress method on the instance and return the result', () => {
-      mockIsAddress = jest.fn((hex) => `A${hex}`);
-
-      const result = web3.isAddress('test', mockGetInstance);
-      expect(result).toBe('Atest');
-    });
   });
 
   describe('getBalance', () => {
