@@ -25,7 +25,22 @@ describe('middleware/transactions', () => {
     expect(mockNext).toBeCalledWith(mockAction);
   });
 
-  it('should fetch transactions', async () => {
+  it('should fetch the requested transactions', async () => {
+    mockAction = {
+      type: t.FETCH_TRANSACTION,
+      payload: {
+        hash: 'test',
+      },
+    };
+    mockAdapter.getTransaction = jest.fn(() => ({ blockNumber: 2 }));
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    expect(mockAdapter.getTransaction).toBeCalled();
+    expect(mockAdapter.getTransaction).toBeCalledWith('test');
+  });
+
+  it('should dispatch a success action with the fetched data', async () => {
     mockAction = {
       type: t.FETCH_TRANSACTION,
       payload: {

@@ -5,22 +5,19 @@ export function fetchAccount(dispatch, getState) {
   const addressLocation = getState().location.payload.address || '';
   // redux-first-router has issues with '0x' strings
   const address = addressLocation.replace('_', '');
-  const addressInState = selectors.getAccount(getState(), address);
 
-  if (!addressInState) {
-    dispatch(actions.fetchAccount(address));
-  }
+  dispatch(actions.fetchAccount(address));
 }
 
 export function fetchBlocks(dispatch) {
-  dispatch(actions.fetchBlocks())
+  dispatch(actions.fetchBlocks());
 }
 
 export function fetchSingleBlock(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
-  const blockInState = selectors.getSingleBlock(getState(), blockNumber);
+  const blockInState = selectors.getBlockInState(getState(), blockNumber);
 
-  if (!blockInState.hasOwnProperty('number')) {
+  if (!blockInState) {
     dispatch(actions.fetchBlocks(blockNumber, 1));
   }
 }
@@ -29,7 +26,7 @@ export function fetchTransaction(dispatch, getState) {
   const hashLocation = getState().location.payload.hash || '';
   // redux-first-router has issues with '0x' strings
   const hash = hashLocation.replace('_', '');
-  const hashInState = selectors.getTransaction(getState(), hash);
+  const hashInState = selectors.getTransactionInState(getState(), hash);
 
   if (!hashInState) {
     dispatch(actions.fetchTransaction(hash));

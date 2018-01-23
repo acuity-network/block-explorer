@@ -29,7 +29,7 @@ describe('reducers/transactions', () => {
 
 describe('selectors/transactions', () => {
   describe('getTransaction', () => {
-    it('should return the correct account from state', () => {
+    it('should return the correct transaction from state', () => {
       const mockState = {
         transactions: {
           test: {
@@ -41,6 +41,72 @@ describe('selectors/transactions', () => {
       const account = selectors.getTransaction(mockState, 'test');
 
       expect(account).toHaveProperty('blockNumber', 10);
+    });
+  });
+
+  describe('getCurrentTransactionForDisplay', () => {
+    const mockState = {
+      location: {
+        payload: {
+          hash: '_0x12345678',
+        },
+      },
+    };
+    const mockGetTransaction = jest.fn((state, hash) => ({ hash, from: 'alpha', to: 'beta', value: 175 }));
+    const mockFromWei = jest.fn(amount => amount * 10);
+    const mockMethods = { getTransaction: mockGetTransaction, fromWei: mockFromWei };
+
+    it('should use the hash from location to get the current transaction', () => {
+      selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
+
+      expect(mockGetTransaction).toBeCalled();
+      expect(mockGetTransaction).toBeCalledWith(mockState, '0x12345678');
+    });
+
+    it('should transform the Wei balance to Ether', () => {
+      selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
+
+      expect(mockFromWei).toBeCalled();
+      expect(mockFromWei).toBeCalledWith(175, 'ether');
+    });
+
+    it('should return an object with transaction display data', () => {
+      const value = selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
+
+      expect(value).toHaveProperty('hash', '0x12345678');
+      expect(value).toHaveProperty('to', 'beta');
+      expect(value).toHaveProperty('from', 'alpha');
+      expect(value).toHaveProperty('valueInEther', 1750);
+    });
+  });
+
+  describe('getTransactionInState', () => {
+    it('should get the specified transaction from state', () => {
+      const mockGetTransaction = jest.fn(() => ({}));
+      const mockMethods = { getTransaction: mockGetTransaction };
+
+      selectors.getTransactionInState({}, 'testTransaction', mockMethods);
+
+      expect(mockGetTransaction).toBeCalled();
+      expect(mockGetTransaction).toBeCalledWith({}, 'testTransaction');
+    });
+
+    it('should return true if the transaction exists', () => {
+      const mockGetTransaction = jest.fn(() => ({ 'testKey': 'testValue' }));
+      const mockMethods = { getTransaction: mockGetTransaction };
+
+      const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
+
+      expect(value).toBe(true);
+    });
+
+    it('should return false if the transaction does not exist', () => {
+      const mockGetTransaction = jest.fn(() => ({}));
+      const mockMethods = { getTransaction: mockGetTransaction };
+
+      const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
+
+      expect(value).toBe(false);
     });
   });
 });

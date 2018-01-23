@@ -28,8 +28,8 @@ describe('actions/creators/fetch', () => {
 
       expect(action).toHaveProperty('type', t.FETCH_BLOCKS);
       expect(action).toHaveProperty('payload');
-      expect(action.payload).toHaveProperty('endingBlockNumber', 10);
-      expect(action.payload).toHaveProperty('amountBlocks', 5);
+      expect(action.payload).toHaveProperty('requestedBlockNumber', 10);
+      expect(action.payload).toHaveProperty('amountOfBlocks', 5);
     });
   });
 
@@ -39,8 +39,8 @@ describe('actions/creators/fetch', () => {
 
       expect(action).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
       expect(action).toHaveProperty('payload');
-      expect(action.payload).toHaveProperty('blocksLoaded', { test: true });
-      expect(action.payload).toHaveProperty('byNumber', ['test']);
+      expect(action.payload).toHaveProperty('blockNumbers', { test: true });
+      expect(action.payload).toHaveProperty('blocks', ['test']);
     });
   });
 

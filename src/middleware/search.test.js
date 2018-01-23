@@ -26,48 +26,77 @@ describe('middleware/search', () => {
     expect(mockNext).toBeCalledWith(mockAction);
   });
 
-  it('should redirect to account details if the query is an address', () => {
-    mockAction = {
-      type: t.CONFIRM_SEARCH,
-      payload: {
-        query: 'test',
-      },
-    };
-    mockAdapter.isAddress = jest.fn(q => q === 'test');
+  describe('query is address', () => {
+    beforeEach(() => {
+      mockAction = {
+        type: t.SEARCH_FOR,
+        payload: {
+          query: 'test',
+        },
+      };
+      mockAdapter.isAddress = jest.fn(() => true);
+      mockAdapter.getTransaction = jest.fn();
+    });
 
-    middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+    it('should call isAddress with the given query', () => {
+      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-    const dispatchAction = mockDispatch.mock.calls[0][0];
-    expect(dispatchAction).toHaveProperty('type', routes.ACCOUNT_DETAIL);
-    expect(dispatchAction).toHaveProperty('payload');
-    expect(dispatchAction.payload).toHaveProperty('address', '_test');
+      expect(mockAdapter.isAddress).toBeCalled();
+      expect(mockAdapter.isAddress).toBeCalledWith('test');
+    });
 
-    expect(mockNext).not.toBeCalled();
+    it('should not request a transaction', () => {
+      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      expect(mockAdapter.getTransaction).not.toBeCalled();
+    });
+
+    it('should redirect to account details', () => {
+      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const dispatchAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchAction).toHaveProperty('type', routes.ACCOUNT_DETAIL);
+      expect(dispatchAction).toHaveProperty('payload');
+      expect(dispatchAction.payload).toHaveProperty('address', '_test');
+    });
   });
 
-  it('should fetch the transaction if the query is not an account address', async () => {
-    mockAction = {
-      type: t.CONFIRM_SEARCH,
-      payload: {
-        query: 'test',
-      },
-    };
-    mockAdapter.isAddress = jest.fn(() => false);
-    mockAdapter.getTransaction = jest.fn(() => ({ test: true }));
+  describe('query is transaction', () => {
+    beforeEach(() => {
+      mockAction = {
+        type: t.SEARCH_FOR,
+        payload: {
+          query: 'test',
+        },
+      };
+      mockAdapter.isAddress = jest.fn(() => false);
+      mockAdapter.getTransaction = jest.fn(() => ({ test: true }));
+    });
 
-    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+    it('should try to fetch the transaction if the query is not an account address', async () => {
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-    const firstAction = mockDispatch.mock.calls[0][0];
-    const secondAction = mockDispatch.mock.calls[1][0];
+      expect(mockAdapter.getTransaction).toBeCalled();
+      expect(mockAdapter.getTransaction).toBeCalledWith('test');
+    });
 
-    expect(firstAction).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
-    expect(firstAction).toHaveProperty('payload');
-    expect(firstAction.payload).toHaveProperty('test', true);
+    it('should dispatch a success action', async () => {
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-    expect(secondAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
-    expect(secondAction).toHaveProperty('payload');
-    expect(secondAction.payload).toHaveProperty('hash', '_test');
+      const successAction = mockDispatch.mock.calls[0][0];
+      expect(successAction).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
+      expect(successAction).toHaveProperty('payload');
+      expect(successAction.payload).toHaveProperty('test', true);
 
-    expect(mockNext).not.toBeCalled();
+    });
+
+    it('should redirect to transaction details', async () => {
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const redirectAction = mockDispatch.mock.calls[1][0];
+      expect(redirectAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
+      expect(redirectAction).toHaveProperty('payload');
+      expect(redirectAction.payload).toHaveProperty('hash', '_test');
+    });
   });
 });

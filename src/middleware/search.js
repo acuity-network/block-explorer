@@ -3,7 +3,7 @@ import * as t from '../actions/types';
 import * as web3 from '../adapters/web3';
 
 export default (store, adapter = web3) => next => async action => {
-  if (action.type === t.CONFIRM_SEARCH) {
+  if (action.type === t.SEARCH_FOR) {
     const { query } = action.payload;
 
     const isAddress = adapter.isAddress(query);
