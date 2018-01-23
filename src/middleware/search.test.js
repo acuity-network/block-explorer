@@ -35,6 +35,7 @@ describe('middleware/search', () => {
         },
       };
       mockAdapter.isAddress = jest.fn(() => true);
+      mockAdapter.getBlocks = jest.fn();
       mockAdapter.getTransaction = jest.fn();
     });
 
@@ -43,6 +44,12 @@ describe('middleware/search', () => {
 
       expect(mockAdapter.isAddress).toBeCalled();
       expect(mockAdapter.isAddress).toBeCalledWith('test');
+    });
+
+    it('should not request a block', () => {
+      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      expect(mockAdapter.getBlocks).not.toBeCalled();
     });
 
     it('should not request a transaction', () => {
@@ -61,7 +68,7 @@ describe('middleware/search', () => {
     });
   });
 
-  describe('query is transaction', () => {
+  describe('query is block number or hash', () => {
     beforeEach(() => {
       mockAction = {
         type: t.SEARCH_FOR,
@@ -70,14 +77,57 @@ describe('middleware/search', () => {
         },
       };
       mockAdapter.isAddress = jest.fn(() => false);
+      mockAdapter.getBlocks = jest.fn(() => [{ number: 1212 }]);
+    });
+
+    it('should try to fetch the block if the query is not an account', async () => {
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      expect(mockAdapter.getBlocks).toBeCalled();
+      expect(mockAdapter.getBlocks).toBeCalledWith(['test']);
+    });
+
+    it('should dispatch a success action', async () => {
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const successAction = mockDispatch.mock.calls[0][0];
+      expect(successAction).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
+      expect(successAction).toHaveProperty('payload');
+      expect(successAction.payload).toHaveProperty('blockNumbers', ['1212']);
+      expect(successAction.payload).toHaveProperty('blocks', { '1212': { number: 1212 }});
+    });
+
+    it('should redirect to block details', async () => {
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const redirectAction = mockDispatch.mock.calls[1][0];
+      expect(redirectAction).toHaveProperty('type', routes.BLOCK_DETAIL);
+      expect(redirectAction).toHaveProperty('payload');
+      expect(redirectAction.payload).toHaveProperty('blockNumber', 1212);
+    });
+  });
+
+  describe('query is transaction hash', () => {
+    // has to be in a valid transaction hash format
+    const validQuery = '0x96b9824275dfad54f054124f1c91ff1727f11d7861c1577d4d63288c796ce999';
+
+    beforeEach(() => {
+      mockAction = {
+        type: t.SEARCH_FOR,
+        payload: {
+          query: validQuery,
+        },
+      };
+      mockAdapter.isAddress = jest.fn(() => false);
+      mockAdapter.getBlocks = jest.fn(() => []);
       mockAdapter.getTransaction = jest.fn(() => ({ test: true }));
     });
 
-    it('should try to fetch the transaction if the query is not an account address', async () => {
+    it('should try to fetch the transaction if the query is not an account or block', async () => {
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
       expect(mockAdapter.getTransaction).toBeCalled();
-      expect(mockAdapter.getTransaction).toBeCalledWith('test');
+      expect(mockAdapter.getTransaction).toBeCalledWith(validQuery);
     });
 
     it('should dispatch a success action', async () => {
@@ -87,7 +137,6 @@ describe('middleware/search', () => {
       expect(successAction).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
       expect(successAction).toHaveProperty('payload');
       expect(successAction.payload).toHaveProperty('test', true);
-
     });
 
     it('should redirect to transaction details', async () => {
@@ -96,7 +145,7 @@ describe('middleware/search', () => {
       const redirectAction = mockDispatch.mock.calls[1][0];
       expect(redirectAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
       expect(redirectAction).toHaveProperty('payload');
-      expect(redirectAction.payload).toHaveProperty('hash', '_test');
+      expect(redirectAction.payload).toHaveProperty('hash', `_${validQuery}`);
     });
   });
 });

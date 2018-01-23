@@ -16,6 +16,15 @@ export function redirectAccountDetail(address) {
   });
 }
 
+export function redirectBlockDetail(blockNumber) {
+  return redirect({
+    type: routes.BLOCK_DETAIL,
+    payload: {
+      blockNumber,
+    },
+  });
+}
+
 export function redirectTransactionDetail(hash) {
   return redirect({
     type: routes.TRANSACTION_DETAIL,
