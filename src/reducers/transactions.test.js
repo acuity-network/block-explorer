@@ -53,7 +53,7 @@ describe('selectors/transactions', () => {
       },
     };
     const mockGetTransaction = jest.fn((state, hash) => ({ hash, from: 'alpha', to: 'beta', value: 175 }));
-    const mockFromWei = jest.fn((amount) => (amount * 10));
+    const mockFromWei = jest.fn(amount => amount * 10);
     const mockMethods = { getTransaction: mockGetTransaction, fromWei: mockFromWei };
 
     it('should use the hash from location to get the current transaction', () => {

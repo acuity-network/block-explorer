@@ -24,7 +24,12 @@ export function getCurrentTransactionForDisplay(state, methods = { getTransactio
   const locationHash = state.location.payload.hash || '';
   const hash = locationHash.replace('_', '');
   const transactionData = methods.getTransaction(state, hash);
-  const valueInEther = methods.fromWei(transactionData.value, 'ether');
+  let valueInWei = '';
+  let valueInEther = '';
+  if (transactionData.value) {
+    valueInWei = transactionData.value.toString(10);
+    valueInEther = methods.fromWei(transactionData.value, 'ether');
+  }
 
-  return { ...transactionData, valueInEther };
+  return { ...transactionData, valueInWei, valueInEther };
 }

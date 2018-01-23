@@ -24,8 +24,12 @@ export function getCurrentAccountForDisplay(state, methods = { getAccount, fromW
   const locationAddress = state.location.payload.address || '';
   const address = locationAddress.replace('_', '');
   const accountData = methods.getAccount(state, address);
-  const balanceInWei = accountData.balance ? accountData.balance.toString(10) : '';
-  const balanceInEther = methods.fromWei(accountData.balance, 'ether');
+  let balanceInWei = '';
+  let balanceInEther = '';
+  if (accountData.balance) {
+    balanceInWei = accountData.balance.toString(10);
+    balanceInEther = methods.fromWei(accountData.balance, 'ether');
+  }
 
   return { ...accountData, balanceInWei, balanceInEther };
 }

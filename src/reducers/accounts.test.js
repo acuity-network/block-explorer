@@ -78,7 +78,7 @@ describe('selectors/accounts', () => {
       },
     };
     const mockGetAccount = jest.fn((state, address) => ({ address, balance: 235, transactionCount: 2 }));
-    const mockFromWei = jest.fn((amount) => (amount * 10));
+    const mockFromWei = jest.fn(amount => amount * 10);
     const mockMethods = { getAccount: mockGetAccount, fromWei: mockFromWei };
 
     it('should use the address from location to get the current account', () => {
