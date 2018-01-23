@@ -11,11 +11,23 @@ export default (store, adapter = web3) => next => async action => {
       return store.dispatch(actions.redirectAccountDetail(query));
     }
 
-    const transaction = await adapter.getTransaction(query);
-    if (transaction) {
-      store.dispatch(actions.fetchTransactionSuccess(transaction));
-      return store.dispatch(actions.redirectTransactionDetail(query));
+    const blockArray = await adapter.getBlocks([query]);
+    if (blockArray.length > 0) {
+      const block = blockArray[0];
+      store.dispatch(actions.fetchBlocksSuccess([block.number.toString()], { [block.number]: block }));
+      return store.dispatch(actions.redirectBlockDetail(block.number));
     }
+
+    if (query.substring(0, 2) === '0x' && query.length === 66) {
+      const transaction = await adapter.getTransaction(query);
+      if (transaction) {
+        store.dispatch(actions.fetchTransactionSuccess(transaction));
+        return store.dispatch(actions.redirectTransactionDetail(query));
+      }
+    }
+
+    console.log('Invalid search query.'); // TODO: error handling
+
   }
 
   next(action);

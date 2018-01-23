@@ -8,10 +8,11 @@ const initialState = {
 
 export default (state = initialState, { type, payload = {} }) => {
   if (type === t.FETCH_BLOCKS_SUCCESS) {
+    const newBlockNumbers = payload.blockNumbers.filter(b => !state.blockNumbers.includes(b));
     return {
       blockNumbers: [
         ...state.blockNumbers,
-        ...payload.blockNumbers
+        ...newBlockNumbers,
       ].sort((a, b) => b - a),
       blocks: {
         ...state.blocks,

@@ -20,6 +20,16 @@ describe('actions/creators/redirect', () => {
     });
   });
 
+  describe('redirectBlockDetail', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.redirectBlockDetail('test');
+
+      expect(action).toHaveProperty('type', routes.BLOCK_DETAIL);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('blockNumber', 'test');
+    });
+  });
+
   describe('redirectTransactionDetail', () => {
     it('should return an action with the correct type and payload', () => {
       const action = actions.redirectTransactionDetail('test');

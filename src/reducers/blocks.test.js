@@ -31,6 +31,25 @@ describe('reducers/blocks', () => {
     expect(state).toHaveProperty('blocks', expectedBlocks);
     expect(state).toHaveProperty('blockNumbers', expectedBlockNumbers);
   });
+
+  it('should not add duplicate block numbers', () => {
+    const mockState = {
+      blocks: {},
+      blockNumbers: [1, 3, 5],
+    };
+    const mockAction = {
+      type: t.FETCH_BLOCKS_SUCCESS,
+      payload: {
+        blocks: {},
+        blockNumbers: [1, 2, 3],
+      },
+    };
+    const expectedBlockNumbers = [5, 3, 2, 1];
+
+    const state = reducer(mockState, mockAction);
+
+    expect(state).toHaveProperty('blockNumbers', expectedBlockNumbers);
+  });
 });
 
 describe('selectors/blocks', () => {
