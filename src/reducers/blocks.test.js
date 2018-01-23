@@ -75,4 +75,34 @@ describe('selectors/blocks', () => {
       expect(block).toEqual('a');
     });
   });
+
+  describe('getBlockInState', () => {
+    it('should get the specified block from state', () => {
+      const mockGetSingleBlock = jest.fn(() => ({}));
+      const mockMethods = { getSingleBlock: mockGetSingleBlock };
+
+      selectors.getBlockInState({}, 'testBlock', mockMethods);
+
+      expect(mockGetSingleBlock).toBeCalled();
+      expect(mockGetSingleBlock).toBeCalledWith({}, 'testBlock');
+    });
+
+    it('should return true if the block exists', () => {
+      const mockGetSingleBlock = jest.fn(() => ({ 'testKey': 'testValue' }));
+      const mockMethods = { getSingleBlock: mockGetSingleBlock };
+
+      const value = selectors.getBlockInState({}, 'testBlock', mockMethods);
+
+      expect(value).toBe(true);
+    });
+
+    it('should return false if the block does not exist', () => {
+      const mockGetSingleBlock = jest.fn(() => ({}));
+      const mockMethods = { getSingleBlock: mockGetSingleBlock };
+
+      const value = selectors.getBlockInState({}, 'testBlock', mockMethods);
+
+      expect(value).toBe(false);
+    });
+  });
 });

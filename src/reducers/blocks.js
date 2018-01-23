@@ -43,3 +43,7 @@ export function getSingleBlock(state, blockNumber) {
 export function getBlockNumbers(state) {
   return state.blocks.blockNumbers || [];
 }
+
+export function getBlockInState(state, blockNumber, methods = { getSingleBlock }) {
+  return Object.keys(methods.getSingleBlock(state, blockNumber)).length > 0;
+}

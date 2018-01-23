@@ -33,3 +33,7 @@ export function getCurrentTransactionForDisplay(state, methods = { getTransactio
 
   return { ...transactionData, valueInWei, valueInEther };
 }
+
+export function getTransactionInState(state, hash, methods = { getTransaction }) {
+  return Object.keys(methods.getTransaction(state, hash)).length > 0;
+}

@@ -79,4 +79,34 @@ describe('selectors/transactions', () => {
       expect(value).toHaveProperty('valueInEther', 1750);
     });
   });
+
+  describe('getTransactionInState', () => {
+    it('should get the specified transaction from state', () => {
+      const mockGetTransaction = jest.fn(() => ({}));
+      const mockMethods = { getTransaction: mockGetTransaction };
+
+      selectors.getTransactionInState({}, 'testTransaction', mockMethods);
+
+      expect(mockGetTransaction).toBeCalled();
+      expect(mockGetTransaction).toBeCalledWith({}, 'testTransaction');
+    });
+
+    it('should return true if the transaction exists', () => {
+      const mockGetTransaction = jest.fn(() => ({ 'testKey': 'testValue' }));
+      const mockMethods = { getTransaction: mockGetTransaction };
+
+      const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
+
+      expect(value).toBe(true);
+    });
+
+    it('should return false if the transaction does not exist', () => {
+      const mockGetTransaction = jest.fn(() => ({}));
+      const mockMethods = { getTransaction: mockGetTransaction };
+
+      const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
+
+      expect(value).toBe(false);
+    });
+  });
 });

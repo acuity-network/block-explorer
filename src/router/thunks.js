@@ -15,7 +15,7 @@ export function fetchBlocks(dispatch) {
 
 export function fetchSingleBlock(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
-  const blockInState = Object.keys(selectors.getSingleBlock(getState(), blockNumber)).length > 0;
+  const blockInState = selectors.getBlockInState(getState(), blockNumber);
 
   if (!blockInState) {
     dispatch(actions.fetchBlocks(blockNumber, 1));
@@ -26,7 +26,7 @@ export function fetchTransaction(dispatch, getState) {
   const hashLocation = getState().location.payload.hash || '';
   // redux-first-router has issues with '0x' strings
   const hash = hashLocation.replace('_', '');
-  const hashInState = Object.keys(selectors.getTransaction(getState(), hash)).length > 0;
+  const hashInState = selectors.getTransactionInState(getState(), hash);
 
   if (!hashInState) {
     dispatch(actions.fetchTransaction(hash));
