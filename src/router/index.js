@@ -4,6 +4,7 @@ import Start from '../components/Start';
 import Account from '../components/Account';
 import Block from '../components/Block';
 import Transaction from '../components/Transaction';
+import Transactions from '@/components/Transactions';
 
 export const START = 'router/START';
 export const ACCOUNT_DETAIL = 'router/ACCOUNT_DETAIL';
@@ -40,7 +41,7 @@ export default {
   },
   [TRANSACTIONS]: {
     path: '/blocks/:blockNumber/transactions',
-    component: Start,
+    component: Transactions,
     thunk: thunks.fetchTransactions,
   },
 }
