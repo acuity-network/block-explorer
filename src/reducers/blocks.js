@@ -83,3 +83,7 @@ export function getBlockNumbers(state) {
 export function getBlockInState(state, blockNumber, methods = { getSingleBlock }) {
   return Object.keys(methods.getSingleBlock(state, blockNumber)).length > 0;
 }
+
+export function getTransactionHashesForBlock(state, blockNumber, methods = { getSingleBlock }) {
+  return getSingleBlock(state, blockNumber).transactions;
+}

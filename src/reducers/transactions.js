@@ -4,26 +4,25 @@ import { fromWei } from '../adapters/web3';
 const initialState = {};
 
 export default (state = initialState, { type, payload }) => {
-  if (type === t.FETCH_TRANSACTION_SUCCESS) {
-    const { hash } = payload;
+  if (type === t.FETCH_TRANSACTIONS_SUCCESS) {
 
     return {
       ...state,
-      [hash]: payload,
+      ...payload,
     };
   }
   return state;
 }
 
-export function getTransaction(state, hash) {
+export function getSingleTransaction(state, hash) {
   return state.transactions[hash] || {};
 }
 
-export function getCurrentTransactionForDisplay(state, methods = { getTransaction, fromWei }) {
+export function getCurrentTransactionForDisplay(state, methods = { getSingleTransaction, fromWei }) {
   // redux-first-router has issues with '0x' strings
   const locationHash = state.location.payload.hash || '';
   const hash = locationHash.replace('_', '');
-  const transactionData = methods.getTransaction(state, hash);
+  const transactionData = methods.getSingleTransaction(state, hash);
   let valueInWei = '';
   let valueInEther = '';
   if (transactionData.value) {
@@ -34,6 +33,6 @@ export function getCurrentTransactionForDisplay(state, methods = { getTransactio
   return { ...transactionData, valueInWei, valueInEther };
 }
 
-export function getTransactionInState(state, hash, methods = { getTransaction }) {
-  return Object.keys(methods.getTransaction(state, hash)).length > 0;
+export function getTransactionInState(state, hash, methods = { getSingleTransaction }) {
+  return Object.keys(methods.getSingleTransaction(state, hash)).length > 0;
 }

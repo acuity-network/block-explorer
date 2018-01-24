@@ -13,10 +13,12 @@ describe('reducers/transactions', () => {
 
   it('should save transactions to the store', () => {
     const mockAction = {
-      type: t.FETCH_TRANSACTION_SUCCESS,
+      type: t.FETCH_TRANSACTIONS_SUCCESS,
       payload: {
-        hash: 'test',
-        blockNumber: 10,
+        test: {
+          hash: 'test',
+          blockNumber: 10,
+        },
       },
     };
     const state = reducer(undefined, mockAction);
@@ -38,7 +40,7 @@ describe('selectors/transactions', () => {
         },
       };
 
-      const account = selectors.getTransaction(mockState, 'test');
+      const account = selectors.getSingleTransaction(mockState, 'test');
 
       expect(account).toHaveProperty('blockNumber', 10);
     });
@@ -54,7 +56,7 @@ describe('selectors/transactions', () => {
     };
     const mockGetTransaction = jest.fn((state, hash) => ({ hash, from: 'alpha', to: 'beta', value: 175 }));
     const mockFromWei = jest.fn(amount => amount * 10);
-    const mockMethods = { getTransaction: mockGetTransaction, fromWei: mockFromWei };
+    const mockMethods = { getSingleTransaction: mockGetTransaction, fromWei: mockFromWei };
 
     it('should use the hash from location to get the current transaction', () => {
       selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
@@ -83,7 +85,7 @@ describe('selectors/transactions', () => {
   describe('getTransactionInState', () => {
     it('should get the specified transaction from state', () => {
       const mockGetTransaction = jest.fn(() => ({}));
-      const mockMethods = { getTransaction: mockGetTransaction };
+      const mockMethods = { getSingleTransaction: mockGetTransaction };
 
       selectors.getTransactionInState({}, 'testTransaction', mockMethods);
 
@@ -93,7 +95,7 @@ describe('selectors/transactions', () => {
 
     it('should return true if the transaction exists', () => {
       const mockGetTransaction = jest.fn(() => ({ 'testKey': 'testValue' }));
-      const mockMethods = { getTransaction: mockGetTransaction };
+      const mockMethods = { getSingleTransaction: mockGetTransaction };
 
       const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
 
@@ -102,7 +104,7 @@ describe('selectors/transactions', () => {
 
     it('should return false if the transaction does not exist', () => {
       const mockGetTransaction = jest.fn(() => ({}));
-      const mockMethods = { getTransaction: mockGetTransaction };
+      const mockMethods = { getSingleTransaction: mockGetTransaction };
 
       const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
 
