@@ -7,9 +7,10 @@ import Transaction from '../components/Transaction';
 
 export const START = 'router/START';
 export const ACCOUNT_DETAIL = 'router/ACCOUNT_DETAIL';
-export const BLOCKS = 'router/BLOCKS';
 export const BLOCK_DETAIL = 'router/BLOCK_DETAIL';
+export const BLOCKS = 'router/BLOCKS';
 export const TRANSACTION_DETAIL = 'router/TRANSACTION_DETAIL';
+export const TRANSACTIONS = 'router/TRANSACTIONS';
 
 export default {
   [START]: {
@@ -36,5 +37,9 @@ export default {
     path: '/transactions/:hash',
     component: Transaction,
     thunk: thunks.fetchTransaction,
+  },
+  [TRANSACTIONS]: {
+    path: '/transactions',
+    component: Start,
   },
 }

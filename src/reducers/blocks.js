@@ -1,4 +1,5 @@
 import * as t from '../actions/types';
+import * as routes from '@/router';
 import { maxBlocksPerPage } from '../constants';
 
 const initialState = {
@@ -35,6 +36,40 @@ export function getLatestBlocks(state, amountOfBlocks = maxBlocksPerPage) {
   }
 
   return latestBlocks;
+}
+
+export function getLatestBlocksForDisplay(state, amountOfBlocks) {
+  const latestBlocks = getLatestBlocks(state, amountOfBlocks);
+  const blocksForDisplay = [];
+
+  latestBlocks.forEach(block => {
+    const newBlock = {
+      key: {
+        value: block.number,
+      },
+      number: {
+        value: block.number,
+        linkType: routes.BLOCK_DETAIL,
+        linkPayload: { blockNumber: block.number },
+      },
+      time: {
+        value: block.timestamp,
+      },
+      transactions: {
+        value: block.transactions.length,
+        linkType: block.transactions.length ? routes.TRANSACTIONS : undefined,
+        linkPayload: { blockNumber: block.number },
+      },
+      miner: {
+        value: block.miner,
+        linkType: routes.ACCOUNT_DETAIL,
+        linkPayload: { address: block.miner },
+      },
+    };
+    blocksForDisplay.push(newBlock);
+  });
+
+  return blocksForDisplay;
 }
 
 export function getSingleBlock(state, blockNumber) {

@@ -1,29 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Link from 'redux-first-router-link';
 
-import { getLatestBlocks } from '../reducers/selectors';
-import { BLOCK_DETAIL } from '../router';
+import { getLatestBlocksForDisplay } from '../reducers/selectors';
+
+import BlockTable from './BlockTable';
 
 const mapStateToProps = (state) => ({
-  blocks: getLatestBlocks(state),
+  blocks: getLatestBlocksForDisplay(state),
 });
 
 const Start = ({ blocks = [] }) => (
   <div>
     <h2>Welcome!</h2>
-    <ul>
-      {blocks.map(block => block && (
-        <li key={block.number}>
-          <Link to={{ type: BLOCK_DETAIL, payload: { blockNumber: block.number}}}>
-            Block #: {block.number}<br />
-            Tx #: {block.transactions.length}<br />
-            Size: {block.size}<br />
-            Timestamp: {block.timestamp}<br />
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <BlockTable blocks={blocks} title='Latest Blocks' />
   </div>
 );
 
