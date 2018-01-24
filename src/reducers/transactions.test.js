@@ -1,4 +1,5 @@
 import * as t from '../actions/types';
+import * as routes from '@/router';
 import reducer, * as selectors from './transactions';
 
 describe('reducers/transactions', () => {
@@ -109,6 +110,87 @@ describe('selectors/transactions', () => {
       const value = selectors.getTransactionInState({}, 'testTransaction', mockMethods);
 
       expect(value).toBe(false);
+    });
+  });
+
+  describe('getTransactionsForDisplay', () => {
+    it('should return the formatted transactions', () => {
+      const transactionA = {
+        blockNumber: 123,
+        value: 10000,
+        from: '0x1111',
+        to: '0x1212',
+      };
+      const transactionB = {
+        blockNumber: 456,
+        value: 4000000,
+        from: '0x2222',
+        to: '0x3434',
+      };
+      const expectedTransactions = [
+        {
+          key: {
+            value: '0xA',
+          },
+          hash: {
+            value: '0xA',
+          },
+          block: {
+            value: 123,
+            linkType: routes.BLOCK_DETAIL,
+            linkPayload: { blockNumber: 123 },
+          },
+          amount: {
+            value: '10000',
+          },
+          sender: {
+            value: '0x1111',
+            linkType: routes.ACCOUNT_DETAIL,
+            linkPayload: { address: '0x1111' },
+          },
+          receiver: {
+            value: '0x1212',
+            linkType: routes.ACCOUNT_DETAIL,
+            linkPayload: { address: '0x1212' },
+          },
+        },
+        {
+          key: {
+            value: '0xB',
+          },
+          hash: {
+            value: '0xB',
+          },
+          block: {
+            value: 456,
+            linkType: routes.BLOCK_DETAIL,
+            linkPayload: { blockNumber: 456 },
+          },
+          amount: {
+            value: '4000000',
+          },
+          sender: {
+            value: '0x2222',
+            linkType: routes.ACCOUNT_DETAIL,
+            linkPayload: { address: '0x2222' },
+          },
+          receiver: {
+            value: '0x3434',
+            linkType: routes.ACCOUNT_DETAIL,
+            linkPayload: { address: '0x3434' },
+          },
+        },
+      ];
+      const mockGetSingleTransaction = jest.fn()
+        .mockReturnValueOnce(transactionA)
+        .mockReturnValueOnce(transactionB);
+      const mockMethods = { getSingleTransaction: mockGetSingleTransaction };
+
+      const value = selectors.getTransactionsForDisplay({}, ['0xA', '0xB'], mockMethods);
+
+      expect(mockGetSingleTransaction).toBeCalledWith({}, '0xA');
+      expect(mockGetSingleTransaction).toBeCalledWith({}, '0xB');
+      expect(value).toEqual(expectedTransactions);
     });
   });
 });
