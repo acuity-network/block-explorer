@@ -22,13 +22,20 @@ export function fetchSingleBlock(dispatch, getState) {
   }
 }
 
-export function fetchTransaction(dispatch, getState) {
+export function fetchTransactions(dispatch, getState) {
+  const blockNumber = getState().location.payload.blockNumber;
+  const blockTransactions = selectors.getTransactionHashesForBlock(getState(), blockNumber);
+
+  dispatch(actions.fetchTransactions(blockTransactions));
+}
+
+export function fetchSingleTransaction(dispatch, getState) {
   const hashLocation = getState().location.payload.hash || '';
   // redux-first-router has issues with '0x' strings
   const hash = hashLocation.replace('_', '');
   const hashInState = selectors.getTransactionInState(getState(), hash);
 
   if (!hashInState) {
-    dispatch(actions.fetchTransaction(hash));
+    dispatch(actions.fetchTransactions([hash]));
   }
 }

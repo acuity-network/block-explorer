@@ -92,7 +92,7 @@ describe('router/thunks', () => {
     });
   });
 
-  describe('fetchTransaction', () => {
+  describe('fetchSingleTransaction', () => {
     it('should dispatch an action to fetch a transaction according to the location', () => {
       const mockState = {
         location: {
@@ -104,9 +104,9 @@ describe('router/thunks', () => {
       };
       const mockDispatch = jest.fn();
       const mockGetState = jest.fn(() => mockState);
-      const expectedAction = actions.fetchTransaction('test');
+      const expectedAction = actions.fetchTransactions(['test']);
 
-      thunks.fetchTransaction(mockDispatch, mockGetState);
+      thunks.fetchSingleTransaction(mockDispatch, mockGetState);
 
       expect(mockDispatch).toBeCalledWith(expectedAction);
     });
@@ -127,7 +127,7 @@ describe('router/thunks', () => {
       const mockDispatch = jest.fn();
       const mockGetState = jest.fn(() => mockState);
 
-      thunks.fetchTransaction(mockDispatch, mockGetState);
+      thunks.fetchSingleTransaction(mockDispatch, mockGetState);
 
       expect(mockDispatch).not.toBeCalled();
     });
@@ -143,9 +143,9 @@ describe('router/thunks', () => {
       };
       const mockDispatch = jest.fn();
       const mockGetState = jest.fn(() => mockState);
-      const expectedAction = actions.fetchTransaction('test');
+      const expectedAction = actions.fetchTransactions(['test']);
 
-      thunks.fetchTransaction(mockDispatch, mockGetState);
+      thunks.fetchSingleTransaction(mockDispatch, mockGetState);
 
       expect(mockDispatch).toBeCalledWith(expectedAction);
     });
