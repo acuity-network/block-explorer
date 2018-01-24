@@ -63,12 +63,14 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         sender: {
           value: transaction.from,
           linkType: routes.ACCOUNT_DETAIL,
-          linkPayload: { address: transaction.from },
+          // redux-first-router has issues with '0x' strings
+          linkPayload: { address: `_${transaction.from}` },
         },
         receiver: {
           value: transaction.to,
           linkType: transaction.to ? routes.ACCOUNT_DETAIL : undefined,
-          linkPayload: { address: transaction.to },
+          // redux-first-router has issues with '0x' strings
+          linkPayload: { address: `_${transaction.to}` },
         },
       };
       transactionsForDisplay.push(displayTransaction);

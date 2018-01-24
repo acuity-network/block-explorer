@@ -146,12 +146,12 @@ describe('selectors/transactions', () => {
           sender: {
             value: '0x1111',
             linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '0x1111' },
+            linkPayload: { address: '_0x1111' },
           },
           receiver: {
             value: '0x1212',
             linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '0x1212' },
+            linkPayload: { address: '_0x1212' },
           },
         },
         {
@@ -172,12 +172,12 @@ describe('selectors/transactions', () => {
           sender: {
             value: '0x2222',
             linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '0x2222' },
+            linkPayload: { address: '_0x2222' },
           },
           receiver: {
             value: '0x3434',
             linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '0x3434' },
+            linkPayload: { address: '_0x3434' },
           },
         },
       ];

@@ -119,7 +119,7 @@ describe('selectors/blocks', () => {
           miner: {
             value: '0xminer1',
             linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '0xminer1' },
+            linkPayload: { address: '_0xminer1' },
           },
         },
         {
@@ -142,7 +142,7 @@ describe('selectors/blocks', () => {
           miner: {
             value: '0xminer2',
             linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '0xminer2' },
+            linkPayload: { address: '_0xminer2' },
           },
         },
       ];
