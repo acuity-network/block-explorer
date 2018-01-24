@@ -27,33 +27,33 @@ describe('middleware/transactions', () => {
 
   it('should fetch the requested transactions', async () => {
     mockAction = {
-      type: t.FETCH_TRANSACTION,
+      type: t.FETCH_TRANSACTIONS,
       payload: {
-        hash: 'test',
+        hashes: ['test'],
       },
     };
-    mockAdapter.getTransaction = jest.fn(() => ({ blockNumber: 2 }));
+    mockAdapter.getTransactions = jest.fn(() => ([{ blockNumber: 2 }]));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-    expect(mockAdapter.getTransaction).toBeCalled();
-    expect(mockAdapter.getTransaction).toBeCalledWith('test');
+    expect(mockAdapter.getTransactions).toBeCalled();
+    expect(mockAdapter.getTransactions).toBeCalledWith(['test']);
   });
 
   it('should dispatch a success action with the fetched data', async () => {
     mockAction = {
-      type: t.FETCH_TRANSACTION,
+      type: t.FETCH_TRANSACTIONS,
       payload: {
         hash: 'test',
       },
     };
-    mockAdapter.getTransaction = jest.fn(() => ({ blockNumber: 2 }));
+    mockAdapter.getTransactions = jest.fn(() => ([{ hash: 'test', blockNumber: 2 }]));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
     const dispatchedAction = mockDispatch.mock.calls[0][0];
-    expect(dispatchedAction).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
+    expect(dispatchedAction).toHaveProperty('type', t.FETCH_TRANSACTIONS_SUCCESS);
     expect(dispatchedAction).toHaveProperty('payload');
-    expect(dispatchedAction.payload).toHaveProperty('blockNumber', 2);
+    expect(dispatchedAction.payload).toHaveProperty('test', { hash: 'test', blockNumber: 2 });
   });
 });

@@ -36,7 +36,7 @@ describe('middleware/search', () => {
       };
       mockAdapter.isAddress = jest.fn(() => true);
       mockAdapter.getBlocks = jest.fn();
-      mockAdapter.getTransaction = jest.fn();
+      mockAdapter.getTransactions = jest.fn();
     });
 
     it('should call isAddress with the given query', () => {
@@ -55,7 +55,7 @@ describe('middleware/search', () => {
     it('should not request a transaction', () => {
       middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-      expect(mockAdapter.getTransaction).not.toBeCalled();
+      expect(mockAdapter.getTransactions).not.toBeCalled();
     });
 
     it('should redirect to account details', () => {
@@ -120,23 +120,23 @@ describe('middleware/search', () => {
       };
       mockAdapter.isAddress = jest.fn(() => false);
       mockAdapter.getBlocks = jest.fn(() => []);
-      mockAdapter.getTransaction = jest.fn(() => ({ test: true }));
+      mockAdapter.getTransactions = jest.fn(() => ([{ hash: validQuery, test: true }]));
     });
 
     it('should try to fetch the transaction if the query is not an account or block', async () => {
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-      expect(mockAdapter.getTransaction).toBeCalled();
-      expect(mockAdapter.getTransaction).toBeCalledWith(validQuery);
+      expect(mockAdapter.getTransactions).toBeCalled();
+      expect(mockAdapter.getTransactions).toBeCalledWith([validQuery]);
     });
 
     it('should dispatch a success action', async () => {
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
       const successAction = mockDispatch.mock.calls[0][0];
-      expect(successAction).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
+      expect(successAction).toHaveProperty('type', t.FETCH_TRANSACTIONS_SUCCESS);
       expect(successAction).toHaveProperty('payload');
-      expect(successAction.payload).toHaveProperty('test', true);
+      expect(successAction.payload).toHaveProperty(validQuery);
     });
 
     it('should redirect to transaction details', async () => {

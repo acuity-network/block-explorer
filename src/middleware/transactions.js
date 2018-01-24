@@ -3,13 +3,17 @@ import * as t from '../actions/types';
 import * as web3 from '../adapters/web3';
 
 export default (store, adapter = web3) => next => async action => {
-  if (action.type === t.FETCH_TRANSACTION) {
-    const { hash } = action.payload;
+  if (action.type === t.FETCH_TRANSACTIONS) {
+    const { hashes } = action.payload;
 
-    const transaction = await adapter.getTransaction(hash);
+    const fetchedTransactions = await adapter.getTransactions(hashes);
+    const transactions = {};
 
-    store.dispatch(actions.fetchTransactionSuccess(transaction));
+    fetchedTransactions.forEach(transaction => {
+      transactions[transaction.hash] = transaction;
+    });
 
+    store.dispatch(actions.fetchTransactionsSuccess(transactions));
   } else {
     next(action);
   }

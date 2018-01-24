@@ -12,16 +12,17 @@ export default (store, adapter = web3) => next => async action => {
     }
 
     const blockArray = await adapter.getBlocks([query]);
-    if (blockArray.length > 0) {
+    if (blockArray.length === 1) {
       const block = blockArray[0];
       store.dispatch(actions.fetchBlocksSuccess([block.number.toString()], { [block.number]: block }));
       return store.dispatch(actions.redirectBlockDetail(block.number));
     }
 
     if (query.substring(0, 2) === '0x' && query.length === 66) {
-      const transaction = await adapter.getTransaction(query);
-      if (transaction) {
-        store.dispatch(actions.fetchTransactionSuccess(transaction));
+      const transactionArray = await adapter.getTransactions([query]);
+      if (transactionArray.length === 1) {
+        const transaction = transactionArray[0];
+        store.dispatch(actions.fetchTransactionsSuccess({ [transaction.hash]: transaction }));
         return store.dispatch(actions.redirectTransactionDetail(query));
       }
     }
