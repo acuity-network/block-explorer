@@ -5,7 +5,7 @@ import { tableFields } from '@/constants';
 
 import Table from './Table';
 
-const BlockTable = ({ blocks = [], title = '' }) => (
+const BlockTable = ({ blocks = [], title = 'Blocks' }) => (
   <Table
     dataArray={blocks}
     fields={tableFields.blocks}
