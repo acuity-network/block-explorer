@@ -38,12 +38,12 @@ export function getLatestBlocks(state, amountOfBlocks = maxBlocksPerPage) {
   return latestBlocks;
 }
 
-export function getLatestBlocksForDisplay(state, amountOfBlocks) {
-  const latestBlocks = getLatestBlocks(state, amountOfBlocks);
+export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { getLatestBlocks }) {
+  const latestBlocks = methods.getLatestBlocks(state, amountOfBlocks);
   const blocksForDisplay = [];
 
   latestBlocks.forEach(block => {
-    const newBlock = {
+    const displayBlock = {
       key: {
         value: block.number,
       },
@@ -66,7 +66,7 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks) {
         linkPayload: { address: block.miner },
       },
     };
-    blocksForDisplay.push(newBlock);
+    blocksForDisplay.push(displayBlock);
   });
 
   return blocksForDisplay;
@@ -85,5 +85,5 @@ export function getBlockInState(state, blockNumber, methods = { getSingleBlock }
 }
 
 export function getTransactionHashesForBlock(state, blockNumber, methods = { getSingleBlock }) {
-  return getSingleBlock(state, blockNumber).transactions;
+  return methods.getSingleBlock(state, blockNumber).transactions;
 }

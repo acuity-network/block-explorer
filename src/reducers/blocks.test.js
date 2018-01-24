@@ -1,4 +1,5 @@
 import * as t from '../actions/types';
+import * as routes from '@/router';
 import reducer, * as selectors from './blocks';
 
 describe('reducers/blocks', () => {
@@ -81,6 +82,79 @@ describe('selectors/blocks', () => {
     });
   });
 
+  describe('getLatestBlocksForDisplay', () => {
+    it('should return the formatted blocks', () => {
+      const blocksInState = [
+        {
+          number: 2,
+          timestamp: 242424,
+          transactions: ['a', 'b', 'c'],
+          miner: '0xminer1',
+        },
+        {
+          number: 3,
+          timestamp: 3535353,
+          transactions: ['d', 'e'],
+          miner: '0xminer2',
+        },
+      ];
+      const expectedBlocks = [
+        {
+          key: {
+            value: 2,
+          },
+          number: {
+            value: 2,
+            linkType: routes.BLOCK_DETAIL,
+            linkPayload: { blockNumber: 2 },
+          },
+          time: {
+            value: 242424,
+          },
+          transactions: {
+            value: 3,
+            linkType: routes.TRANSACTIONS,
+            linkPayload: { blockNumber: 2 },
+          },
+          miner: {
+            value: '0xminer1',
+            linkType: routes.ACCOUNT_DETAIL,
+            linkPayload: { address: '0xminer1' },
+          },
+        },
+        {
+          key: {
+            value: 3,
+          },
+          number: {
+            value: 3,
+            linkType: routes.BLOCK_DETAIL,
+            linkPayload: { blockNumber: 3 },
+          },
+          time: {
+            value: 3535353,
+          },
+          transactions: {
+            value: 2,
+            linkType: routes.TRANSACTIONS,
+            linkPayload: { blockNumber: 3 },
+          },
+          miner: {
+            value: '0xminer2',
+            linkType: routes.ACCOUNT_DETAIL,
+            linkPayload: { address: '0xminer2' },
+          },
+        },
+      ];
+      const mockGetLatestBlocks = jest.fn(() => blocksInState);
+      const mockMethods = { getLatestBlocks: mockGetLatestBlocks };
+      const blocks = selectors.getLatestBlocksForDisplay({}, 10, mockMethods);
+
+      expect(mockGetLatestBlocks).toBeCalledWith({}, 10);
+      expect(blocks).toEqual(expectedBlocks);
+    });
+  });
+
   describe('getSingleBlock', () => {
     it('should return a single block by number', () => {
       const mockState = {
@@ -122,6 +196,18 @@ describe('selectors/blocks', () => {
       const value = selectors.getBlockInState({}, 'testBlock', mockMethods);
 
       expect(value).toBe(false);
+    });
+  });
+
+  describe('getTransactionHashesForBlock', () => {
+    it('should return the transaction hashes for the specified block', () => {
+      const mockGetSingleBlock = jest.fn(() => ({ transactions: ['0x1', '0x2', '0x3'] }));
+      const mockMethods = { getSingleBlock: mockGetSingleBlock };
+
+      const value = selectors.getTransactionHashesForBlock({}, 'testBlock', mockMethods);
+
+      expect(mockGetSingleBlock).toBeCalledWith({}, 'testBlock');
+      expect(value).toEqual(['0x1', '0x2', '0x3']);
     });
   });
 });
