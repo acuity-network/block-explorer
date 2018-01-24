@@ -45,6 +45,15 @@ export function fetchTransactions(hashes) {
   };
 }
 
+export function fetchTransactionsForBlock(blockNumber) {
+  return {
+    type: t.FETCH_TRANSACTIONS_FOR_BLOCK,
+    payload: {
+      blockNumber,
+    },
+  };
+}
+
 export function fetchTransactionsSuccess(transactions) {
   return {
     type: t.FETCH_TRANSACTIONS_SUCCESS,

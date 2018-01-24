@@ -54,6 +54,16 @@ describe('actions/creators/fetch', () => {
     });
   });
 
+  describe('fetchTransactionsForBlock', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.fetchTransactionsForBlock('testBlock');
+
+      expect(action).toHaveProperty('type', t.FETCH_TRANSACTIONS_FOR_BLOCK);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('blockNumber', 'testBlock');
+    });
+  });
+
   describe('fetchTransactionsSuccess', () => {
     it('should return an action with the correct type and payload', () => {
       const action = actions.fetchTransactionsSuccess({ test: true });

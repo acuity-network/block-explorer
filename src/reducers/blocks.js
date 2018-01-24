@@ -85,5 +85,5 @@ export function getBlockInState(state, blockNumber, methods = { getSingleBlock }
 }
 
 export function getTransactionHashesForBlock(state, blockNumber, methods = { getSingleBlock }) {
-  return methods.getSingleBlock(state, blockNumber).transactions;
+  return methods.getSingleBlock(state, blockNumber).transactions || [];
 }

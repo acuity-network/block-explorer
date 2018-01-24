@@ -24,9 +24,8 @@ export function fetchSingleBlock(dispatch, getState) {
 
 export function fetchTransactions(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
-  const blockTransactions = selectors.getTransactionHashesForBlock(getState(), blockNumber);
 
-  dispatch(actions.fetchTransactions(blockTransactions));
+  dispatch(actions.fetchTransactionsForBlock(blockNumber));
 }
 
 export function fetchSingleTransaction(dispatch, getState) {
