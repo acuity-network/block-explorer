@@ -10,19 +10,35 @@ describe('adapters/web3/transactions', () => {
     }));
   });
 
-  describe('getTransaction', () => {
-    it('should reject if getting the transaction failed', async () => {
-      mockEth.getTransaction = (t, callback) => callback('rejected');
+  describe('getTransactions', () => {
+    it('should return an empty array if no transaction hashes are given', async () => {
+      const transactions = await web3.getTransactions(undefined, mockGetInstance);
 
-      await expect(web3.getTransaction('test', mockGetInstance))
-        .rejects.toEqual('rejected');
+      expect(transactions).toEqual([]);
     });
 
-    it('should resolve with the transaction', async () => {
-      mockEth.getTransaction = (a, callback) => callback(null, ({ a: 3 }));
+    it('should return the transactions for all given hashes', async () => {
+      mockEth.getTransaction = (hash, callback) => callback(null, `B${hash}`);
 
-      await expect(web3.getTransaction('test', mockGetInstance))
-        .resolves.toEqual({ a: 3 });
+      const mockHashes = ['0x2', '0x5', '0x10'];
+      const expectedTransactions = ['B0x2', 'B0x5', 'B0x10'];
+      const transactions = await web3.getTransactions(mockHashes, mockGetInstance);
+
+      expect(transactions).toEqual(expectedTransactions);
+    });
+
+    it('should filter out transactions that failed to load', async () => {
+      const mockCallback = jest
+        .fn((hash, callback) => callback(null, `B${hash}`))
+        .mockImplementationOnce((hash, callback) => callback(null, `B${hash}`))
+        .mockImplementationOnce((hash, callback) => callback('error'));
+      mockEth.getTransaction = mockCallback;
+
+      const mockHashes = ['0x2', '0x5', '0x10'];
+      const expectedTransactions = ['B0x2', 'B0x5', 'B0x10'];
+      const transactions = await web3.getTransactions(mockHashes, mockGetInstance);
+
+      expect(transactions).toEqual(expectedTransactions);
     });
   });
 });

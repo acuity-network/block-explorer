@@ -1,4 +1,4 @@
-import * as t from '../actions/types';
+import * as t from '@/actions/types';
 import reducer, * as selectors from './accounts';
 
 describe('reducers/accounts', () => {

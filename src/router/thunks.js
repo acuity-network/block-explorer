@@ -1,5 +1,5 @@
-import * as actions from '../actions/creators';
-import * as selectors from '../reducers/selectors';
+import * as actions from '@/actions/creators';
+import * as selectors from '@/reducers/selectors';
 
 export function fetchAccount(dispatch, getState) {
   const addressLocation = getState().location.payload.address || '';
@@ -22,13 +22,19 @@ export function fetchSingleBlock(dispatch, getState) {
   }
 }
 
-export function fetchTransaction(dispatch, getState) {
+export function fetchTransactions(dispatch, getState) {
+  const blockNumber = getState().location.payload.blockNumber;
+
+  dispatch(actions.fetchTransactionsForBlock(blockNumber));
+}
+
+export function fetchSingleTransaction(dispatch, getState) {
   const hashLocation = getState().location.payload.hash || '';
   // redux-first-router has issues with '0x' strings
   const hash = hashLocation.replace('_', '');
   const hashInState = selectors.getTransactionInState(getState(), hash);
 
   if (!hashInState) {
-    dispatch(actions.fetchTransaction(hash));
+    dispatch(actions.fetchTransactions([hash]));
   }
 }

@@ -44,21 +44,31 @@ describe('actions/creators/fetch', () => {
     });
   });
 
-  describe('fetchTransaction', () => {
+  describe('fetchTransactions', () => {
     it('should return an action with the correct type and payload', () => {
-      const action = actions.fetchTransaction('test');
+      const action = actions.fetchTransactions(['test']);
 
-      expect(action).toHaveProperty('type', t.FETCH_TRANSACTION);
+      expect(action).toHaveProperty('type', t.FETCH_TRANSACTIONS);
       expect(action).toHaveProperty('payload');
-      expect(action.payload).toHaveProperty('hash', 'test');
+      expect(action.payload).toHaveProperty('hashes', ['test']);
     });
   });
 
-  describe('fetchTransactionSuccess', () => {
+  describe('fetchTransactionsForBlock', () => {
     it('should return an action with the correct type and payload', () => {
-      const action = actions.fetchTransactionSuccess({ test: true});
+      const action = actions.fetchTransactionsForBlock('testBlock');
 
-      expect(action).toHaveProperty('type', t.FETCH_TRANSACTION_SUCCESS);
+      expect(action).toHaveProperty('type', t.FETCH_TRANSACTIONS_FOR_BLOCK);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('blockNumber', 'testBlock');
+    });
+  });
+
+  describe('fetchTransactionsSuccess', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.fetchTransactionsSuccess({ test: true });
+
+      expect(action).toHaveProperty('type', t.FETCH_TRANSACTIONS_SUCCESS);
       expect(action).toHaveProperty('payload');
       expect(action.payload).toHaveProperty('test', true);
     });
