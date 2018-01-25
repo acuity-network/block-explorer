@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as selectors from '../reducers/selectors';
+import * as selectors from '@/reducers/selectors';
 
 const mapStateToProps = (state) => {
   return selectors.getCurrentTransactionForDisplay(state);

@@ -1,6 +1,6 @@
-import * as t from '../actions/types';
+import * as t from '@/actions/types';
 import * as routes from '@/router';
-import { maxBlocksPerPage } from '../constants';
+import { maxBlocksPerPage } from '@/constants';
 
 const initialState = {
   blockNumbers: [],
@@ -38,12 +38,12 @@ export function getLatestBlocks(state, amountOfBlocks = maxBlocksPerPage) {
   return latestBlocks;
 }
 
-export function getLatestBlocksForDisplay(state, amountOfBlocks) {
-  const latestBlocks = getLatestBlocks(state, amountOfBlocks);
+export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { getLatestBlocks }) {
+  const latestBlocks = methods.getLatestBlocks(state, amountOfBlocks);
   const blocksForDisplay = [];
 
   latestBlocks.forEach(block => {
-    const newBlock = {
+    const displayBlock = {
       key: {
         value: block.number,
       },
@@ -63,10 +63,11 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks) {
       miner: {
         value: block.miner,
         linkType: routes.ACCOUNT_DETAIL,
-        linkPayload: { address: block.miner },
+        // redux-first-router has issues with '0x' strings
+        linkPayload: { address: `_${block.miner}` },
       },
     };
-    blocksForDisplay.push(newBlock);
+    blocksForDisplay.push(displayBlock);
   });
 
   return blocksForDisplay;
@@ -82,4 +83,8 @@ export function getBlockNumbers(state) {
 
 export function getBlockInState(state, blockNumber, methods = { getSingleBlock }) {
   return Object.keys(methods.getSingleBlock(state, blockNumber)).length > 0;
+}
+
+export function getTransactionHashesForBlock(state, blockNumber, methods = { getSingleBlock }) {
+  return methods.getSingleBlock(state, blockNumber).transactions || [];
 }

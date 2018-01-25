@@ -19,4 +19,26 @@ export const tableFields = {
       label: 'Mined by',
     },
   ],
+  transactions: [
+    {
+      key: 'hash',
+      label: 'Tx Hash',
+    },
+    {
+      key: 'block',
+      label: 'Block Number',
+    },
+    {
+      key: 'amount',
+      label: 'Amount',
+    },
+    {
+      key: 'sender',
+      label: 'Sent from',
+    },
+    {
+      key: 'receiver',
+      label: 'Received by',
+    },
+  ],
 };

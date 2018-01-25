@@ -36,18 +36,27 @@ export function fetchBlocksSuccess(blockNumbers, blocks) {
   };
 }
 
-export function fetchTransaction(hash) {
+export function fetchTransactions(hashes) {
   return {
-    type: t.FETCH_TRANSACTION,
+    type: t.FETCH_TRANSACTIONS,
     payload: {
-      hash,
+      hashes,
     },
   };
 }
 
-export function fetchTransactionSuccess(transaction) {
+export function fetchTransactionsForBlock(blockNumber) {
   return {
-    type: t.FETCH_TRANSACTION_SUCCESS,
-    payload: transaction,
+    type: t.FETCH_TRANSACTIONS_FOR_BLOCK,
+    payload: {
+      blockNumber,
+    },
+  };
+}
+
+export function fetchTransactionsSuccess(transactions) {
+  return {
+    type: t.FETCH_TRANSACTIONS_SUCCESS,
+    payload: transactions,
   };
 }
