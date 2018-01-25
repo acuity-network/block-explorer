@@ -41,6 +41,7 @@
   padding: $padding-small $padding-tiny;
   padding-left: 34%;
   word-wrap: break-word;
+  word-break: break-all;
   border-bottom: 1px solid $color-accent-light;
   text-align: right;
 }
@@ -56,10 +57,44 @@
   left: $padding-tiny;
   width: 30%;
   text-align: left;
+  pointer-events: none;
 }
 
 .mix-table__link {
   display: block;
   height: 100%;
   width: 100%;
+}
+
+@media (min-width: 520px) {
+  .mix-table {
+    table-layout: auto;
+  }
+
+  .mix-table__header {
+    display: table-header-group;
+    color: $color-light;
+  }
+
+  .mix-table__row {
+    display: table-row;
+  }
+
+  .mix-table__cell {
+    display: table-cell;
+    padding: $padding-small;
+    border: none;
+    text-align: left;
+    min-width: 96px;
+  }
+  .mix-table__cell::before {
+    display: none;
+  }
+}
+
+@media (min-width: 1020px) {
+  .mix-table {
+    width: 80%;
+    margin: auto;
+  }
 }
