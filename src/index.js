@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 
 import App from './components/App';
+import '@/styles/index.scss';
 
 render(
   <Provider store={store}>
