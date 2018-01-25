@@ -9,3 +9,8 @@ body, html {
 h1 {
   margin: 0;
 }
+
+input {
+  @include mix-font-main;
+  border: none;
+}

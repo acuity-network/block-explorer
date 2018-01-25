@@ -29,8 +29,9 @@ class Search extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className='mix-search' onSubmit={this.handleSubmit}>
         <input
+          className='mix-search__input'
           value={this.state.searchQuery}
           placeholder='Block #, Transaction #, Address'
           onChange={this.handleChange}

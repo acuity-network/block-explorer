@@ -1,0 +1,12 @@
+.mix-search {
+  margin-top: $margin-small;
+}
+
+.mix-search__input {
+  height: 42px;
+  width: 80%;
+  padding: 0 $padding-input;
+  background-color: $color-light;
+  color: $color-dark;
+  box-shadow: inset 0 0 4px $color-background;
+}
