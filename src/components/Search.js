@@ -3,19 +3,42 @@ import { connect } from 'react-redux';
 
 import * as actions from '@/actions/creators';
 
-// this component needs to be rewritten – was only added for testing purposes!
 const mapDispatchToProps = (dispatch) => ({
-  onSubmitSearch: () => {
-    const query = document.getElementById('searchQuery').value;
-    dispatch(actions.searchFor(query));
-  },
+  onSubmitSearch: (query) => dispatch(actions.searchFor(query)),
 });
 
-const Search = ({ onSubmitSearch }) => (
-  <div>
-    <input id="searchQuery" placeholder="Block #, Transaction #, Address"></input>
-    <button type="button" onClick={onSubmitSearch}>Search</button>
-  </div>
-);
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ searchQuery: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmitSearch(this.state.searchQuery);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          value={this.state.searchQuery}
+          placeholder='Block #, Transaction #, Address'
+          onChange={this.handleChange}
+        />
+        <button type='submit'>Search</button>
+      </form>
+    );
+  }
+}
 
 export default connect(null, mapDispatchToProps)(Search);
