@@ -1,6 +1,6 @@
-import * as t from '../actions/types';
+import * as t from '@/actions/types';
 import * as routes from '@/router';
-import { maxBlocksPerPage } from '../constants';
+import { maxBlocksPerPage } from '@/constants';
 
 const initialState = {
   blockNumbers: [],

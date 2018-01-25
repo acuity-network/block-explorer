@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions/creators';
+import * as actions from '@/actions/creators';
 
 // this component needs to be rewritten – was only added for testing purposes!
 const mapDispatchToProps = (dispatch) => ({

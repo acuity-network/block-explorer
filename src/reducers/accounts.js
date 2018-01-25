@@ -1,5 +1,5 @@
-import * as t from '../actions/types';
-import { fromWei } from '../adapters/web3';
+import * as t from '@/actions/types';
+import { fromWei } from '@/adapters/web3';
 
 const initialState = {};
 

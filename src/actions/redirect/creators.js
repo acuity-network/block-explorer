@@ -1,6 +1,6 @@
 import { redirect } from 'redux-first-router';
 
-import * as routes from '../../router';
+import * as routes from '@/router';
 
 export function redirectStart() {
   return redirect({ type: routes.START });

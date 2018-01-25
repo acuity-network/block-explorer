@@ -1,9 +1,9 @@
 import * as thunks from './thunks';
 
-import Start from '../components/Start';
-import Account from '../components/Account';
-import Block from '../components/Block';
-import Transaction from '../components/Transaction';
+import Start from '@/components/Start';
+import Account from '@/components/Account';
+import Block from '@/components/Block';
+import Transaction from '@/components/Transaction';
 import Transactions from '@/components/Transactions';
 
 export const START = 'router/START';

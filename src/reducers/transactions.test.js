@@ -1,4 +1,4 @@
-import * as t from '../actions/types';
+import * as t from '@/actions/types';
 import * as routes from '@/router';
 import reducer, * as selectors from './transactions';
 

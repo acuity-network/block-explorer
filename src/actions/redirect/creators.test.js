@@ -1,5 +1,5 @@
 import * as actions from './creators';
-import * as routes from '../../router';
+import * as routes from '@/router';
 
 describe('actions/creators/redirect', () => {
   describe('redirectStart', () => {

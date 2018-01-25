@@ -1,5 +1,5 @@
-import * as actions from '../actions/creators';
-import * as selectors from '../reducers/selectors';
+import * as actions from '@/actions/creators';
+import * as selectors from '@/reducers/selectors';
 
 export function fetchAccount(dispatch, getState) {
   const addressLocation = getState().location.payload.address || '';

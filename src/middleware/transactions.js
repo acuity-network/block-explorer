@@ -1,7 +1,7 @@
-import * as actions from '../actions/creators'
-import * as t from '../actions/types';
+import * as actions from '@/actions/creators'
+import * as t from '@/actions/types';
 import * as selectors from '@/reducers/selectors';
-import * as web3 from '../adapters/web3';
+import * as web3 from '@/adapters/web3';
 
 export default (store, adapter = web3, getters = selectors) => next => async action => {
   if (action.type === t.FETCH_TRANSACTIONS) {

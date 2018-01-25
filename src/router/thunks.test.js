@@ -1,4 +1,4 @@
-import * as actions from '../actions/creators';
+import * as actions from '@/actions/creators';
 import * as thunks from './thunks';
 
 describe('router/thunks', () => {

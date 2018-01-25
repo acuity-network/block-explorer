@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as selectors from '../reducers/selectors';
+import * as selectors from '@/reducers/selectors';
 
 import TransactionTable from './TransactionTable';
 

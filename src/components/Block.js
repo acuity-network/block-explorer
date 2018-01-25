@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getSingleBlock } from '../reducers/selectors';
+import { getSingleBlock } from '@/reducers/selectors';
 
 const mapStateToProps = (state) => ({
   block: getSingleBlock(state, state.location.payload.blockNumber),

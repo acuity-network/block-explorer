@@ -1,5 +1,5 @@
-import * as t from '../actions/types';
-import * as routes from '../router';
+import * as t from '@/actions/types';
+import * as routes from '@/router';
 import middleware from './search';
 
 describe('middleware/search', () => {
