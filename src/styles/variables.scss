@@ -22,6 +22,7 @@ $color-cta: $mix-orange;
 
 @mixin mix-font-main {
   font-family: 'Muli', sans-serif;
+  font-weight: 300;
   font-size: 16px;
   color: $color-light;
 }

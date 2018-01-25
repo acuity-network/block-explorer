@@ -5,3 +5,7 @@
 body, html {
   @include mix-font-main;
 }
+
+h1 {
+  margin: 0;
+}

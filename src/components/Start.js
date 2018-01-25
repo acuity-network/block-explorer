@@ -12,7 +12,6 @@ const mapStateToProps = (state) => ({
 
 const Start = ({ blocks = [] }) => (
   <div>
-    <h2>Welcome!</h2>
     <BlockTable blocks={blocks} title='Latest Blocks' />
   </div>
 );
