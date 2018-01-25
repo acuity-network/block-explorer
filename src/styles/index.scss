@@ -1,3 +1,6 @@
+@import 'variables.scss';
 @import 'normalize.scss';
 @import 'reset.scss';
-@import 'variables.scss';
+
+/* COMPONENT STYLES */
+@import '../components/table.scss';

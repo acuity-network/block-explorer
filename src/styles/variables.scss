@@ -13,4 +13,29 @@ $mix-orange: rgb(241, 168, 61);
 $color-background: $mix-grey;
 $color-dark: $mix-indigo;
 $color-light: $mix-white;
+$color-accent-dark: $mix-oceanblue;
+$color-accent-medium: $mix-skyblue;
+$color-accent-light: $mix-turquoise;
 $color-cta: $mix-orange;
+
+/* FONTS */
+
+@mixin mix-font-main {
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  color: $color-light;
+}
+
+/* MEASURES */
+
+$mix-tiny-gap: 4px;
+$mix-small-gap: 12px;
+$mix-medium-gap: 24px;
+
+$padding-tiny: $mix-tiny-gap;
+$padding-small: $mix-small-gap;
+$padding-standard: $mix-medium-gap;
+
+$margin-tiny: $mix-tiny-gap;
+$margin-small: $mix-small-gap;
+$margin-standard: $mix-medium-gap;
