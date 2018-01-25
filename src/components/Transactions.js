@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 
 const Transactions = ({ transactions = [] }) => (
   <div>
-    <TransactionTable transactions={transactions} title='Transactions' />
+    <TransactionTable transactions={transactions} />
   </div>
 );
 
