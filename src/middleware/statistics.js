@@ -12,11 +12,11 @@ export default (store, adapter = web3) => next => async action => {
       adapter.getPeerCount(),
     ]);
 
-    store.dispatch(actions.fetchStatisticsSuccess({
+    store.dispatch(actions.fetchStatisticsSuccess(
       latestBlockNumber,
-      gasPrice: statistics[0],
-      peerCount: statistics[1],
-    }));
+      statistics[0],
+      statistics[1],
+    ));
   } else {
     next(action);
   }

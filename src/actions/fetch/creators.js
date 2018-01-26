@@ -42,11 +42,11 @@ export function fetchStatistics() {
   };
 }
 
-export function fetchStatisticsSuccess(latestBlock, gasPrice, peerCount) {
+export function fetchStatisticsSuccess(latestBlockNumber, gasPrice, peerCount) {
   return {
     type: t.FETCH_STATISTICS_SUCCESS,
     payload: {
-      latestBlock,
+      latestBlockNumber,
       gasPrice,
       peerCount,
     },

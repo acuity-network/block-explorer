@@ -1,3 +1,5 @@
+import * as t from '@/actions/types';
+
 const initialState = {
   latestBlockNumber: 0,
   gasPrice: 0,
@@ -5,8 +7,11 @@ const initialState = {
 };
 
 export default (state = initialState, { type, payload }) => {
-  if (type === '') {
-
+  if (type === t.FETCH_STATISTICS_SUCCESS) {
+    return {
+      ...state,
+      ...payload,
+    };
   }
   return state;
 }

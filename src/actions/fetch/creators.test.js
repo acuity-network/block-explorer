@@ -58,7 +58,7 @@ describe('actions/creators/fetch', () => {
 
       expect(action).toHaveProperty('type', t.FETCH_STATISTICS_SUCCESS);
       expect(action).toHaveProperty('payload');
-      expect(action.payload).toHaveProperty('latestBlock', 12);
+      expect(action.payload).toHaveProperty('latestBlockNumber', 12);
       expect(action.payload).toHaveProperty('gasPrice', 10);
       expect(action.payload).toHaveProperty('peerCount', 8);
     });
