@@ -1,4 +1,6 @@
 import * as t from '@/actions/types';
+import { fromWei } from '@/adapters/web3';
+import { getLatestBlocks } from '@/reducers/selectors';
 
 const initialState = {
   latestBlockNumber: 0,
@@ -14,4 +16,16 @@ export default (state = initialState, { type, payload }) => {
     };
   }
   return state;
+}
+
+export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlocks }) {
+  const { gasPrice, peerCount, latestBlockNumber } = state.statistics;
+  const latestBlocks = methods.getLatestBlocks(state);
+
+  return {
+    gasPriceInWei: gasPrice.toString(10),
+    gasPriceInGwei: methods.fromWei(gasPrice, 'gwei'),
+    latestBlockNumber: latestBlocks[0] ? latestBlocks[0].number : latestBlockNumber,
+    peerCount,
+  };
 }

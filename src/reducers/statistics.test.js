@@ -30,3 +30,37 @@ describe('reducers/statistics', () => {
     expect(state).toEqual(mockAction.payload);
   });
 });
+
+describe('selectors/statistics', () => {
+  describe('getStatisticsForDisplay', () => {
+    let mockFromWei, mockGetLatestBlocks, mockMethods, mockState;
+    beforeEach(() => {
+      mockFromWei = jest.fn(n => n * 10);
+      mockGetLatestBlocks = jest.fn(() => []);
+      mockMethods = { fromWei: mockFromWei, getLatestBlocks: mockGetLatestBlocks };
+      mockState = {
+        statistics: {
+          latestBlockNumber: 10,
+          gasPrice: 200,
+          peerCount: 3,
+        },
+      };
+    });
+    it('should return the values from its own state', () => {
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('latestBlockNumber', 10);
+      expect(statistics).toHaveProperty('peerCount', 3);
+      expect(statistics).toHaveProperty('gasPriceInWei', "200");
+      expect(statistics).toHaveProperty('gasPriceInGwei', 2000);
+    });
+
+    it('should update the latest block number, if the newest block is not in state', () => {
+      mockGetLatestBlocks.mockImplementation(() => [{ number: 9 }]);
+
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('latestBlockNumber', 9);
+    });
+  });
+});

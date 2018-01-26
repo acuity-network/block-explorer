@@ -3,6 +3,7 @@ import * as thunks from './thunks';
 import Start from '@/components/Start';
 import Account from '@/components/Account';
 import Block from '@/components/Block';
+import Blocks from '@/components/Blocks';
 import Transaction from '@/components/Transaction';
 import Transactions from '@/components/Transactions';
 
@@ -26,7 +27,7 @@ export default {
   },
   [BLOCKS]: {
     path: '/blocks',
-    component: Start,
+    component: Blocks,
     thunk: thunks.fetchBlocks,
   },
   [BLOCK_DETAIL]: {
