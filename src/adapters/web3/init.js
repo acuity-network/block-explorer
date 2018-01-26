@@ -10,11 +10,15 @@ export function getWeb3Instance() {
 export function initializeWeb3(browser = window, Web3 = pkg) {
   if (!web3) {
     let provider;
-    if (browser.web3) {
+    if (browser.web3 && browser.web3.currentProvider) {
       provider = browser.web3.currentProvider;
     } else {
       provider = new Web3.providers.HttpProvider(fallbackUrl)
     }
     web3 = new Web3(provider);
   }
+}
+
+export function resetWeb3Instance() {
+  web3 = undefined;
 }
