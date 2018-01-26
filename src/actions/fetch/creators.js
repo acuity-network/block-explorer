@@ -36,6 +36,23 @@ export function fetchBlocksSuccess(blockNumbers, blocks) {
   };
 }
 
+export function fetchStatistics() {
+  return {
+    type: t.FETCH_STATISTICS,
+  };
+}
+
+export function fetchStatisticsSuccess(latestBlock, gasPrice, peerCount) {
+  return {
+    type: t.FETCH_STATISTICS_SUCCESS,
+    payload: {
+      latestBlock,
+      gasPrice,
+      peerCount,
+    },
+  };
+}
+
 export function fetchTransactions(hashes) {
   return {
     type: t.FETCH_TRANSACTIONS,

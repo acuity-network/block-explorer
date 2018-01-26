@@ -17,7 +17,7 @@ export default {
   [START]: {
     path: '/',
     component: Start,
-    thunk: thunks.fetchBlocks,
+    thunk: thunks.fetchStatistics,
   },
   [ACCOUNT_DETAIL]: {
     path: '/accounts/:address',
