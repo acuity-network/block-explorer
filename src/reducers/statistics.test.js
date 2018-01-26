@@ -33,7 +33,15 @@ describe('reducers/statistics', () => {
 
 describe('selectors/statistics', () => {
   describe('getStatisticsForDisplay', () => {
-    let mockFromWei, mockGetLatestBlocks, mockMethods, mockState;
+    let mockFromWei, mockGetLatestBlocks, mockMethods, mockState, mockBlocks;
+    beforeAll(() => {
+      Number.prototype.toNumber = function() {
+        return this;
+      };
+    });
+    afterAll(() => {
+      Number.prototype.toNumber = undefined;
+    });
     beforeEach(() => {
       mockFromWei = jest.fn(n => n * 10);
       mockGetLatestBlocks = jest.fn(() => []);
@@ -46,6 +54,11 @@ describe('selectors/statistics', () => {
         },
       };
     });
+    mockBlocks = [
+      { number: 10, difficulty: 10 },
+      { number: 9, difficulty: 20 },
+      { number: 8, difficulty: 3 },
+    ];
     it('should return the values from its own state', () => {
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
@@ -56,11 +69,20 @@ describe('selectors/statistics', () => {
     });
 
     it('should update the latest block number, if the newest block is not in state', () => {
-      mockGetLatestBlocks.mockImplementation(() => [{ number: 9 }]);
+      mockBlocks[0].number = 9;
+      mockGetLatestBlocks.mockImplementation(() => mockBlocks);
 
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
       expect(statistics).toHaveProperty('latestBlockNumber', 9);
+    });
+
+    it('should return the average difficulty for the latest blocks', () => {
+      mockGetLatestBlocks.mockImplementation(() => mockBlocks);
+
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('averageDifficulty', 11);
     });
   });
 });
