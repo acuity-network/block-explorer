@@ -1,3 +1,4 @@
+export const fallbackUrl = 'https://rpc.mix-blockchain.org:8647';
 export const maxBlocksPerPage = 10;
 
 export const tableFields = {
