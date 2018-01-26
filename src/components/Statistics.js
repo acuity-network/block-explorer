@@ -6,7 +6,10 @@ const Statistics = ({ statistics = {} }) => (
     Peer count: {statistics.peerCount}<br />
     Gas price: {statistics.gasPriceInGwei} Gwei<br />
     Latest block number: {statistics.latestBlockNumber}<br />
-    Average Difficulty: {statistics.averageDifficulty}<br />
+    Considered blocks: {statistics.consideredBlocks}<br />
+    Average block time: {statistics.averageBlockTime}<br />
+    Average difficulty: {statistics.averageDifficulty}<br />
+    Hash rate: {statistics.hashRate}<br />
   </div>
 );
 

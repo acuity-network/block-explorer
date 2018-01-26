@@ -79,7 +79,7 @@ describe('selectors/statistics', () => {
     it('should return the average difficulty for the latest blocks', () => {
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
-      expect(statistics).toHaveProperty('averageDifficulty', 11);
+      expect(statistics).toHaveProperty('averageDifficulty', 15);
     });
 
     it('should return the block times for the latest blocks', () => {
@@ -92,6 +92,18 @@ describe('selectors/statistics', () => {
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
       expect(statistics).toHaveProperty('averageBlockTime', 150);
+    });
+
+    it('should return the amount of blocks considered', () => {
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('consideredBlocks', 2);
+    });
+
+    it('should return the hash rate', () => {
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('hashRate', 0.1);
     });
   });
 });

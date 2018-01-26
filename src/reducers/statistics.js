@@ -19,28 +19,42 @@ export default (state = initialState, { type, payload }) => {
 }
 
 export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlocks }) {
+  let averageDifficulty, averageBlockTime, blockTimes, consideredBlocks, hashRate;
   const { gasPrice, peerCount, latestBlockNumber } = state.statistics;
   const latestBlocks = methods.getLatestBlocks(state);
-  const difficultyTotal = latestBlocks.reduce(
-    (acc, block) => acc + block.difficulty.toNumber(), 0
-  );
-  const blockTimes = latestBlocks.map(
-    (block, i, allBlocks) => {
-      if (i === 0) {
-        return null;
+
+  if (latestBlocks.length > 0) {
+    // since the block times are only available for n-1 blocks,
+    // we need to adjust the statistics accordingly.
+    consideredBlocks = latestBlocks.length - 1;
+    const difficultyTotal = latestBlocks.reduce(
+      (acc, block) => acc + block.difficulty.toNumber(), 0
+    ) - latestBlocks[consideredBlocks].difficulty;
+
+    blockTimes = latestBlocks.map(
+      (block, i, allBlocks) => {
+        if (i === 0) {
+          return null;
+        }
+        return allBlocks[i - 1].timestamp - block.timestamp;
       }
-      return allBlocks[i - 1].timestamp - block.timestamp;
-    }
-  ).filter(t => t !== null);
-  const blockTimesTotal = blockTimes.reduce((a, b) => a + b);
+    ).filter(t => t !== null);
+    const blockTimesTotal = blockTimes.reduce((a, b) => a + b, 0);
+
+    averageDifficulty = difficultyTotal / consideredBlocks;
+    averageBlockTime = blockTimesTotal / consideredBlocks;
+    hashRate = difficultyTotal / blockTimesTotal;
+  }
 
   return {
     gasPriceInWei: gasPrice.toString(10),
     gasPriceInGwei: methods.fromWei(gasPrice, 'gwei'),
     latestBlockNumber: latestBlocks[0] ? latestBlocks[0].number : latestBlockNumber,
-    averageDifficulty: difficultyTotal / latestBlocks.length || 0,
-    averageBlockTime: blockTimesTotal / (latestBlocks.length - 1) || 0,
+    consideredBlocks,
+    averageDifficulty,
+    averageBlockTime,
     peerCount,
     blockTimes,
+    hashRate,
   };
 }
