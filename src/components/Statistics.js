@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import BarChart from './BarChart';
+
 const Statistics = ({ statistics = {} }) => (
   <div>
     Peer count: {statistics.peerCount}<br />
@@ -10,6 +12,9 @@ const Statistics = ({ statistics = {} }) => (
     Average block time: {statistics.averageBlockTime}<br />
     Average difficulty: {statistics.averageDifficulty}<br />
     Hash rate: {statistics.hashRate}<br />
+
+  <BarChart values={statistics.difficulties} title='Difficulties' />
+    <BarChart values={statistics.blockTimes} title='Block Times' />
   </div>
 );
 

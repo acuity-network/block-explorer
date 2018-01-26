@@ -46,7 +46,7 @@ export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlo
     averageDifficulty = difficultyTotal / consideredBlocks;
     averageBlockTime = blockTimesTotal / consideredBlocks;
     hashRate = difficultyTotal / blockTimesTotal;
-    difficulties = latestBlocks.map(block => block.difficulty);
+    difficulties = latestBlocks.map(block => (block.difficulty.toNumber()));
     difficulties.pop();
   }
 
