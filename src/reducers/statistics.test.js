@@ -76,6 +76,12 @@ describe('selectors/statistics', () => {
       expect(statistics).toHaveProperty('latestBlockNumber', 9);
     });
 
+    it('should return the difficulties for the latest blocks', () => {
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('difficulties', [10, 20]);
+    });
+
     it('should return the average difficulty for the latest blocks', () => {
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 

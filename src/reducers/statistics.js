@@ -19,7 +19,9 @@ export default (state = initialState, { type, payload }) => {
 }
 
 export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlocks }) {
-  let averageDifficulty, averageBlockTime, blockTimes, consideredBlocks, hashRate;
+  let consideredBlocks,
+      averageDifficulty, averageBlockTime,
+      blockTimes, difficulties, hashRate;
   const { gasPrice, peerCount, latestBlockNumber } = state.statistics;
   const latestBlocks = methods.getLatestBlocks(state);
 
@@ -44,17 +46,20 @@ export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlo
     averageDifficulty = difficultyTotal / consideredBlocks;
     averageBlockTime = blockTimesTotal / consideredBlocks;
     hashRate = difficultyTotal / blockTimesTotal;
+    difficulties = latestBlocks.map(block => block.difficulty);
+    difficulties.pop();
   }
 
   return {
     gasPriceInWei: gasPrice.toString(10),
     gasPriceInGwei: methods.fromWei(gasPrice, 'gwei'),
+    peerCount,
     latestBlockNumber: latestBlocks[0] ? latestBlocks[0].number : latestBlockNumber,
     consideredBlocks,
     averageDifficulty,
     averageBlockTime,
-    peerCount,
-    blockTimes,
     hashRate,
+    blockTimes,
+    difficulties,
   };
 }
