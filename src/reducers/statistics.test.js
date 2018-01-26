@@ -43,8 +43,13 @@ describe('selectors/statistics', () => {
       Number.prototype.toNumber = undefined;
     });
     beforeEach(() => {
+      mockBlocks = [
+        { number: 10, difficulty: 10, timestamp: 1000 },
+        { number: 9, difficulty: 20, timestamp: 900, },
+        { number: 8, difficulty: 3, timestamp: 700 },
+      ];
       mockFromWei = jest.fn(n => n * 10);
-      mockGetLatestBlocks = jest.fn(() => []);
+      mockGetLatestBlocks = jest.fn(() => mockBlocks);
       mockMethods = { fromWei: mockFromWei, getLatestBlocks: mockGetLatestBlocks };
       mockState = {
         statistics: {
@@ -54,35 +59,39 @@ describe('selectors/statistics', () => {
         },
       };
     });
-    mockBlocks = [
-      { number: 10, difficulty: 10 },
-      { number: 9, difficulty: 20 },
-      { number: 8, difficulty: 3 },
-    ];
+
     it('should return the values from its own state', () => {
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
       expect(statistics).toHaveProperty('latestBlockNumber', 10);
       expect(statistics).toHaveProperty('peerCount', 3);
-      expect(statistics).toHaveProperty('gasPriceInWei', "200");
+      expect(statistics).toHaveProperty('gasPriceInWei', '200');
       expect(statistics).toHaveProperty('gasPriceInGwei', 2000);
     });
 
     it('should update the latest block number, if the newest block is not in state', () => {
       mockBlocks[0].number = 9;
-      mockGetLatestBlocks.mockImplementation(() => mockBlocks);
-
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
       expect(statistics).toHaveProperty('latestBlockNumber', 9);
     });
 
     it('should return the average difficulty for the latest blocks', () => {
-      mockGetLatestBlocks.mockImplementation(() => mockBlocks);
-
       const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
 
       expect(statistics).toHaveProperty('averageDifficulty', 11);
+    });
+
+    it('should return the block times for the latest blocks', () => {
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('blockTimes', [100, 200]);
+    });
+
+    it('should return the average block time for the latest blocks', () => {
+      const statistics = selectors.getStatisticsForDisplay(mockState, mockMethods);
+
+      expect(statistics).toHaveProperty('averageBlockTime', 150);
     });
   });
 });

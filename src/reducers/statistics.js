@@ -21,13 +21,26 @@ export default (state = initialState, { type, payload }) => {
 export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlocks }) {
   const { gasPrice, peerCount, latestBlockNumber } = state.statistics;
   const latestBlocks = methods.getLatestBlocks(state);
-  const difficultyTotal = latestBlocks.reduce((acc, block) => acc + block.difficulty.toNumber(), 0);
+  const difficultyTotal = latestBlocks.reduce(
+    (acc, block) => acc + block.difficulty.toNumber(), 0
+  );
+  const blockTimes = latestBlocks.map(
+    (block, i, allBlocks) => {
+      if (i === 0) {
+        return null;
+      }
+      return allBlocks[i - 1].timestamp - block.timestamp;
+    }
+  ).filter(t => t !== null);
+  const blockTimesTotal = blockTimes.reduce((a, b) => a + b);
 
   return {
     gasPriceInWei: gasPrice.toString(10),
     gasPriceInGwei: methods.fromWei(gasPrice, 'gwei'),
     latestBlockNumber: latestBlocks[0] ? latestBlocks[0].number : latestBlockNumber,
     averageDifficulty: difficultyTotal / latestBlocks.length || 0,
+    averageBlockTime: blockTimesTotal / (latestBlocks.length - 1) || 0,
     peerCount,
+    blockTimes,
   };
 }
