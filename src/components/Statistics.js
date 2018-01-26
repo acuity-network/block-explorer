@@ -13,7 +13,7 @@ const Statistics = ({ statistics = {} }) => (
     Average difficulty: {statistics.averageDifficulty}<br />
     Hash rate: {statistics.hashRate}<br />
 
-  <BarChart values={statistics.difficulties} title='Difficulties' />
+    <BarChart values={statistics.difficulties} title='Difficulties' />
     <BarChart values={statistics.blockTimes} title='Block Times' />
   </div>
 );

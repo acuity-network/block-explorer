@@ -13,14 +13,18 @@ const BarChart = ({ values = [], title = '' }) => {
   const heights = values.map(value => (value - minValue) / difference * 100);
 
   return [
-    <h2 key='title'>{title}</h2>,
+    <h4 key='title'>{title}</h4>,
     <div className='bar-chart' key='chart'>
       {heights.map((height, index) => {
         return (
-          <div className='bar-chart__item' key={index} style={{
-            flexBasis: `${barWidth}%`,
-            height:   `${height}%`,
-          }} />
+          <div
+            key={index}
+            className='bar-chart__item'
+            style={{
+              flexBasis: `${barWidth}%`,
+              height:   `${height}%`,
+            }}
+          />
         );
       })}
     </div>
