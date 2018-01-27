@@ -3,6 +3,8 @@
 }
 
 .mix-header {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,4 +19,14 @@
 .mix-header__title {
   font-size: 22px;
   font-weight: 300;
+}
+
+@media (min-width: 520px) {
+  .mix-header {
+    width: 100%;
+    height: 80px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
