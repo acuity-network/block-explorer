@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import * as actions from '@/actions/creators';
 
+import SearchButton from '@/components/SearchButton';
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmitSearch: (query) => dispatch(actions.searchFor(query)),
 });
@@ -36,7 +38,7 @@ class Search extends React.Component {
           placeholder='Block #, Transaction #, Address'
           onChange={this.handleChange}
         />
-        <button type='submit'>Search</button>
+        <SearchButton type='submit'>Search</SearchButton>
       </form>
     );
   }

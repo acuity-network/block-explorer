@@ -1,0 +1,18 @@
+.search-button {
+  position: fixed;
+  right: $margin-tiny;
+  top: 40px;
+  background: none;
+}
+
+.search-button__svg :first-child {
+  fill: $color-light;
+}
+
+.search-button__svg :nth-child(2) {
+  fill: $color-cta;
+}
+
+.search-button__icon :first-child {
+  fill: $color-light;
+}

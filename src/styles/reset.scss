@@ -10,7 +10,7 @@ h1 {
   margin: 0;
 }
 
-input {
+input, button {
   @include mix-font-main;
   border: none;
 }
