@@ -16,3 +16,7 @@ input, button {
   @include mix-font-main;
   border: none;
 }
+
+button {
+  padding: 0;
+}

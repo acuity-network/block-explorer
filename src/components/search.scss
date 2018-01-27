@@ -1,10 +1,14 @@
 .mix-search {
-  margin-top: $margin-small;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: $margin-tiny 0 $margin-small;
 }
 
 .mix-search__input {
   height: 42px;
-  width: 80%;
+  flex-basis: 80%;
+  flex-grow: 1;
   padding: 0 $padding-input;
   background-color: $color-light;
   color: $color-dark;
