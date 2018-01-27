@@ -1,6 +1,5 @@
 .mix-app {
   padding-top: 108px;
-  background-color: $color-background;
 }
 
 .mix-header {
@@ -12,6 +11,7 @@
   z-index: 32;
   padding: $padding-small;
   background-color: $color-background;
+  box-shadow: 0 0 16px 0 $color-background;
 }
 
 .mix-header__title {
