@@ -90,4 +90,53 @@ describe('adapters/web3/init', () => {
       expect(instance2).toBe(undefined);
     });
   });
+
+  describe('getIsUsingWeb3', () => {
+    beforeEach(() => {
+      web3.resetWeb3Instance();
+    });
+
+    it('should return false if web3 exists in the browser', () => {
+      const mockWindow = {
+        web3: {
+          currentProvider: 'testProvider',
+        },
+      };
+      const mockConstructor = jest.fn();
+      class mockPackage {
+        constructor(provider) {
+          mockConstructor(provider);
+        }
+      }
+      web3.initializeWeb3(mockWindow, mockPackage);
+
+      const isUsingFallback = web3.getIsUsingFallback();
+
+      expect(isUsingFallback).toBe(false);
+    });
+
+    it('should return true for web3 does not exist the browser', () => {
+      const mockWindow = {};
+      const mockWeb3Constructor = jest.fn();
+      const mockHPConstructor = jest.fn();
+      class mockPackage {
+        constructor() {
+          mockWeb3Constructor();
+        }
+      }
+      class mockHttpProvider {
+        constructor() {
+          mockHPConstructor();
+        }
+      }
+      mockPackage.providers = {
+        HttpProvider: mockHttpProvider,
+      };
+      web3.initializeWeb3(mockWindow, mockPackage);
+
+      const isUsingFallback = web3.getIsUsingFallback();
+
+      expect(isUsingFallback).toBe(true);
+    });
+  });
 });
