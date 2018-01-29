@@ -14,6 +14,7 @@ const Search = ({
 );
 
 Search.propTypes = {
+  position: PropTypes.string,
   size: PropTypes.string,
   svgClass: PropTypes.string,
 };
