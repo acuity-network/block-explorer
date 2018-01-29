@@ -1,4 +1,4 @@
-export function getUnitPrefix(number) {
+export function transformBigNumber(number) {
   const prefixes = ['k', 'M', 'G', 'T', 'P'];
   const prefixesLength = prefixes.length;
   let prefix = '', exponent = 0;
@@ -12,8 +12,14 @@ export function getUnitPrefix(number) {
     }
   }
 
+  let transformedNumber = (number / Math.pow(10, exponent)).toFixed(3);
+  const decimals = transformedNumber.toString().split('.')[1];
+  if (parseInt(decimals, 10) === 0) {
+    transformedNumber =parseInt(transformedNumber, 10);
+  }
+
   return {
     prefix,
-    number: (number / Math.pow(10, exponent)).toFixed(3),
+    number: transformedNumber.toString(),
   };
 }

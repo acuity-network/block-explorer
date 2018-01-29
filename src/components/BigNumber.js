@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 
-import { getUnitPrefix } from '@/helpers/numbers';
+import { transformBigNumber } from '@/helpers/numbers';
 
 const BigNumber = ({ children, unit }) => {
-  const { number, prefix } = getUnitPrefix(children);
+  const { number, prefix } = transformBigNumber(children);
   return `${number} ${prefix}${unit}`;
 };
 
 BigNumber.propTypes = {
   children: PropTypes.number,
-  affix: PropTypes.string,
+  unit: PropTypes.string,
 };
 
 export default BigNumber;
