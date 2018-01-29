@@ -22,6 +22,10 @@ export function fetchSingleBlock(dispatch, getState) {
   }
 }
 
+export function fetchStatistics(dispatch) {
+  dispatch(actions.fetchStatistics());
+}
+
 export function fetchTransactions(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
 

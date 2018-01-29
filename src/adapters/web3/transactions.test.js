@@ -35,7 +35,7 @@ describe('adapters/web3/transactions', () => {
       mockEth.getTransaction = mockCallback;
 
       const mockHashes = ['0x2', '0x5', '0x10'];
-      const expectedTransactions = ['B0x2', 'B0x5', 'B0x10'];
+      const expectedTransactions = ['B0x2', 'B0x10'];
       const transactions = await web3.getTransactions(mockHashes, mockGetInstance);
 
       expect(transactions).toEqual(expectedTransactions);

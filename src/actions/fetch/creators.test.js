@@ -44,6 +44,26 @@ describe('actions/creators/fetch', () => {
     });
   });
 
+  describe('fetchStatistics', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.fetchStatistics();
+
+      expect(action).toHaveProperty('type', t.FETCH_STATISTICS);
+    });
+  });
+
+  describe('fetchStatisticsSuccess', () => {
+    it('should return an action with the correct type and payload', () => {
+      const action = actions.fetchStatisticsSuccess(12, 10, 8);
+
+      expect(action).toHaveProperty('type', t.FETCH_STATISTICS_SUCCESS);
+      expect(action).toHaveProperty('payload');
+      expect(action.payload).toHaveProperty('latestBlockNumber', 12);
+      expect(action.payload).toHaveProperty('gasPrice', 10);
+      expect(action.payload).toHaveProperty('peerCount', 8);
+    });
+  });
+
   describe('fetchTransactions', () => {
     it('should return an action with the correct type and payload', () => {
       const action = actions.fetchTransactions(['test']);
