@@ -7,8 +7,8 @@ export default (store, adapter = web3) => next => async action => {
     const { address } = action.payload;
 
     const accountData = await Promise.all([
-      await adapter.getBalance(address),
-      await adapter.getTransactionCount(address),
+      adapter.getBalance(address),
+      adapter.getTransactionCount(address),
     ]);
 
     store.dispatch(actions.fetchAccountSuccess({
