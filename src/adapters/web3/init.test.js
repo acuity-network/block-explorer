@@ -40,7 +40,7 @@ describe('adapters/web3/init', () => {
       expect(mockConstructor).toBeCalledWith('testProvider');
     });
 
-    it('should use the httpProivder is web3 is not available', () => {
+    it('should use the httpProivder if web3 is not available', () => {
       const mockWindow = {};
       const mockWeb3Constructor = jest.fn();
       const mockHPConstructor = jest.fn();
@@ -115,7 +115,7 @@ describe('adapters/web3/init', () => {
       expect(isUsingFallback).toBe(false);
     });
 
-    it('should return true for web3 does not exist the browser', () => {
+    it('should return true if web3 does not exist the browser', () => {
       const mockWindow = {};
       const mockWeb3Constructor = jest.fn();
       const mockHPConstructor = jest.fn();
