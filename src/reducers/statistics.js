@@ -34,11 +34,11 @@ export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlo
     ) - latestBlocks[consideredBlocks].difficulty;
 
     blockTimes = latestBlocks.map(
-      (block, i, allBlocks) => {
+      (block, i) => {
         if (i === 0) {
           return null;
         }
-        return allBlocks[i - 1].timestamp - block.timestamp;
+        return latestBlocks[i - 1].timestamp - block.timestamp;
       }
     ).filter(t => t !== null);
     const blockTimesTotal = blockTimes.reduce((a, b) => a + b, 0);
