@@ -6,9 +6,12 @@ const TableCell = ({
   entry = {},
   field = {},
 }) => (
-  <td data-label={field.label}>
+  <td className='mix-table__cell' data-label={field.label}>
     {entry.linkType
-      ? <Link to={{ type: entry.linkType, payload: entry.linkPayload }}>{entry.value}</Link>
+      ? <Link
+          to={{ type: entry.linkType, payload: entry.linkPayload }}
+          className='mix-table__link'
+        >{entry.value}</Link>
       : entry.value
     }
   </td>

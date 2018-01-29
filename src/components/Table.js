@@ -8,10 +8,10 @@ const Table = ({
   fields = [],
   title = '',
 }) => (
-  <table>
-    <caption>{title}</caption>
+  <table className='mix-table'>
+    <caption className='mix-table__caption'>{title}</caption>
 
-    <thead>
+    <thead className='mix-table__header'>
       <tr>
         {fields.map(field => (
           <th key={field.key}>{field.label}</th>
@@ -21,7 +21,7 @@ const Table = ({
 
     <tbody>
       {dataArray.map(dataSet => (
-        <tr key={dataSet.key.value}>
+        <tr className='mix-table__row' key={dataSet.key.value}>
           {fields.map(field => (
             <TableCell key={field.key} field={field} entry={dataSet[field.key]} />
           ))}

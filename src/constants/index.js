@@ -26,20 +26,12 @@ export const tableFields = {
       label: 'Tx Hash',
     },
     {
-      key: 'block',
-      label: 'Block Number',
-    },
-    {
       key: 'amount',
       label: 'Amount',
     },
     {
-      key: 'sender',
-      label: 'Sent from',
-    },
-    {
-      key: 'receiver',
-      label: 'Received by',
+      key: 'block',
+      label: 'Block',
     },
   ],
 };

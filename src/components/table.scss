@@ -1,0 +1,100 @@
+.mix-table {
+  table-layout: fixed;
+  width: 100%;
+  padding: $padding-small;
+  background-color: $color-dark;
+  color: $color-dark;
+}
+
+.mix-table__caption {
+  font-size: 28px;
+  text-align: left;
+  margin-left: $margin-small;
+  margin-bottom: $margin-tiny;
+}
+
+.mix-table__header {
+  display: none;
+}
+
+.mix-table__row {
+  display: block;
+  margin-top: $margin-small;
+  padding: $padding-small;
+}
+
+.mix-table__row:nth-child(odd) {
+  background-color: $color-accent-dark;
+}
+
+.mix-table__row:nth-child(even) {
+  background-color: $color-accent-medium;
+}
+
+.mix-table__row:first-of-type {
+  margin-top: 0;
+}
+
+.mix-table__cell {
+  position: relative;
+  display: block;
+  padding: $padding-small $padding-tiny;
+  padding-left: 34%;
+  word-wrap: break-word;
+  word-break: break-all;
+  border-bottom: 1px solid $color-accent-light;
+  text-align: right;
+}
+
+.mix-table__cell:last-of-type {
+  border: none;
+}
+
+.mix-table__cell::before {
+  content: attr(data-label);
+  position: absolute;
+  top: $padding-small;
+  left: $padding-tiny;
+  width: 30%;
+  text-align: left;
+  pointer-events: none;
+}
+
+.mix-table__link {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 520px) {
+  .mix-table {
+    table-layout: auto;
+  }
+
+  .mix-table__header {
+    display: table-header-group;
+    color: $color-light;
+  }
+
+  .mix-table__row {
+    display: table-row;
+  }
+
+  .mix-table__cell {
+    display: table-cell;
+    padding: $padding-small;
+    border: none;
+    text-align: left;
+    min-width: 96px;
+  }
+  .mix-table__cell::before {
+    display: none;
+  }
+}
+
+@media (min-width: 1020px) {
+  .mix-table {
+    width: 80%;
+    margin: auto;
+  }
+}

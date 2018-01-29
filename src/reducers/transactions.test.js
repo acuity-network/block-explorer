@@ -118,14 +118,10 @@ describe('selectors/transactions', () => {
       const transactionA = {
         blockNumber: 123,
         value: 10000,
-        from: '0x1111',
-        to: '0x1212',
       };
       const transactionB = {
         blockNumber: 456,
         value: 4000000,
-        from: '0x2222',
-        to: '0x3434',
       };
       const expectedTransactions = [
         {
@@ -135,23 +131,13 @@ describe('selectors/transactions', () => {
           hash: {
             value: '0xA',
           },
+          amount: {
+            value: '10 Ether',
+          },
           block: {
             value: 123,
             linkType: routes.BLOCK_DETAIL,
             linkPayload: { blockNumber: 123 },
-          },
-          amount: {
-            value: '10000',
-          },
-          sender: {
-            value: '0x1111',
-            linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '_0x1111' },
-          },
-          receiver: {
-            value: '0x1212',
-            linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '_0x1212' },
           },
         },
         {
@@ -161,30 +147,21 @@ describe('selectors/transactions', () => {
           hash: {
             value: '0xB',
           },
+          amount: {
+            value: '4000 Ether',
+          },
           block: {
             value: 456,
             linkType: routes.BLOCK_DETAIL,
             linkPayload: { blockNumber: 456 },
-          },
-          amount: {
-            value: '4000000',
-          },
-          sender: {
-            value: '0x2222',
-            linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '_0x2222' },
-          },
-          receiver: {
-            value: '0x3434',
-            linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '_0x3434' },
           },
         },
       ];
       const mockGetSingleTransaction = jest.fn()
         .mockReturnValueOnce(transactionA)
         .mockReturnValueOnce(transactionB);
-      const mockMethods = { getSingleTransaction: mockGetSingleTransaction };
+      const mockFromWei = jest.fn(amount => amount / 1000);
+      const mockMethods = { getSingleTransaction: mockGetSingleTransaction, fromWei: mockFromWei };
 
       const value = selectors.getTransactionsForDisplay({}, ['0xA', '0xB'], mockMethods);
 

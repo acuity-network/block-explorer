@@ -39,7 +39,7 @@ export function getTransactionInState(state, hash, methods = { getSingleTransact
   return Object.keys(methods.getSingleTransaction(state, hash)).length > 0;
 }
 
-export function getTransactionsForDisplay(state, hashes, methods = { getSingleTransaction }) {
+export function getTransactionsForDisplay(state, hashes, methods = { getSingleTransaction, fromWei }) {
   const transactionsForDisplay = [];
 
   hashes.forEach(hash => {
@@ -52,25 +52,13 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         hash: {
           value: hash,
         },
+        amount: {
+          value: `${methods.fromWei(transaction.value, 'ether')} Ether`,
+        },
         block: {
           value: transaction.blockNumber,
           linkType: routes.BLOCK_DETAIL,
           linkPayload: { blockNumber: transaction.blockNumber },
-        },
-        amount: {
-          value: transaction.value.toString(10),
-        },
-        sender: {
-          value: transaction.from,
-          linkType: routes.ACCOUNT_DETAIL,
-          // redux-first-router has issues with '0x' strings
-          linkPayload: { address: `_${transaction.from}` },
-        },
-        receiver: {
-          value: transaction.to,
-          linkType: transaction.to ? routes.ACCOUNT_DETAIL : undefined,
-          // redux-first-router has issues with '0x' strings
-          linkPayload: { address: `_${transaction.to}` },
         },
       };
       transactionsForDisplay.push(displayTransaction);
