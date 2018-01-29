@@ -7,8 +7,8 @@ $mix-turquoise: rgb(60, 195, 219);
 
 $mix-indigo: rgb(12, 13, 40);
 $mix-grey: rgb(15, 54, 66);
-$mix-white: rgb(204, 204, 204);
-$mix-orange: rgb(241, 168, 61);
+$mix-white: rgb(221, 221, 221);
+$mix-orange: rgb(229, 155, 43);
 
 $color-background: $mix-grey;
 $color-dark: $mix-indigo;
@@ -22,6 +22,7 @@ $color-cta: $mix-orange;
 
 @mixin mix-font-main {
   font-family: 'Muli', sans-serif;
+  font-weight: 300;
   font-size: 16px;
   color: $color-light;
 }
@@ -35,6 +36,8 @@ $mix-medium-gap: 24px;
 $padding-tiny: $mix-tiny-gap;
 $padding-small: $mix-small-gap;
 $padding-standard: $mix-medium-gap;
+
+$padding-input: $mix-tiny-gap * 2;
 
 $margin-tiny: $mix-tiny-gap;
 $margin-small: $mix-small-gap;

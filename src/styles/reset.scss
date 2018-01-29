@@ -4,4 +4,19 @@
 
 body, html {
   @include mix-font-main;
+  min-height: 100%;
+  background-color: $color-background;
+}
+
+h1 {
+  margin: 0;
+}
+
+input, button {
+  @include mix-font-main;
+  border: none;
+}
+
+button {
+  padding: 0;
 }

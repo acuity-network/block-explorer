@@ -7,10 +7,12 @@
 }
 
 .mix-table__caption {
-  font-size: 28px;
+  font-size: 16px;
   text-align: left;
-  margin-left: $margin-small;
-  margin-bottom: $margin-tiny;
+  padding-left: $padding-small;
+  padding-top: $padding-small;
+  background-color: $color-dark;
+  color: $color-light;
 }
 
 .mix-table__header {
@@ -71,9 +73,21 @@
     table-layout: auto;
   }
 
+  .mix-table__caption {
+    padding-top: 0;
+    padding-bottom: $padding-tiny;
+    background-color: $color-background;
+    font-size: 22px;
+  }
+
   .mix-table__header {
     display: table-header-group;
+    text-align: left;
     color: $color-light;
+  }
+
+  .mix-table__header th {
+    font-weight: 300;
   }
 
   .mix-table__row {

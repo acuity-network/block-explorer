@@ -1,0 +1,36 @@
+.mix-app {
+  padding-top: 108px;
+}
+
+.mix-header {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 108px;
+  z-index: 32;
+  padding: $padding-small;
+  background-color: $color-background;
+  box-shadow: 0 0 16px 0 $color-background;
+}
+
+.mix-header__title {
+  font-size: 22px;
+  font-weight: 300;
+}
+
+@media (min-width: 520px) {
+  .mix-header {
+    width: 100%;
+    height: 80px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mix-header__title {
+    font-size: 32px;
+  }
+}
