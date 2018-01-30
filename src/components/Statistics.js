@@ -27,8 +27,8 @@ const Statistics = ({ statistics = {} }) => (
     </div>
     <p className='fineprint'>* Based on the latest {statistics.consideredBlocks} Blocks</p>
 
-    <BarChart values={statistics.difficulties} title='Difficulties' />
-    <BarChart values={statistics.blockTimes} title='Block Times' />
+    <BarChart values={statistics.difficulties} title='Difficulties' unit='H' />
+    <BarChart values={statistics.blockTimes} title='Block Times' unit='s' />
   </div>
 );
 

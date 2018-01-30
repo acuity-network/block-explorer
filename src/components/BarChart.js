@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// TODO: move the css to the stylesheets after merge
-import './BarChart.scss';
+import BigNumber from './BigNumber';
 
-const BarChart = ({ values = [], title = '' }) => {
+const BarChart = ({ values = [], title = '', unit = '' }) => {
   const barWidth = 100 / values.length;
   const maxValue = Math.max.apply(null, values);
   const minValue = Math.min.apply(null, values);
@@ -13,7 +12,8 @@ const BarChart = ({ values = [], title = '' }) => {
   const heights = values.map(value => (value - minValue) / difference * 100);
 
   return [
-    <h4 key='title'>{title}</h4>,
+    <h4 key='title' className='bar-chart__title'>{title}</h4>,
+    <p key='maxValue' className='bar-chart__legend'>max: <BigNumber unit={unit}>{maxValue}</BigNumber></p>,
     <div className='bar-chart' key='chart'>
       {heights.map((height, index) => {
         return (
@@ -27,12 +27,14 @@ const BarChart = ({ values = [], title = '' }) => {
           />
         );
       })}
-    </div>
+    </div>,
+    <p key='minValue' className='bar-chart__legend'>min: <BigNumber unit={unit}>{minValue}</BigNumber></p>
   ];
 };
 
 BarChart.propTypes = {
   title: PropTypes.string,
+  unit: PropTypes.string,
   values: PropTypes.array,
 };
 
