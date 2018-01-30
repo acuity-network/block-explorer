@@ -1,0 +1,10 @@
+.text-stats__item {
+  flex-basis: 50%;
+  height: 56px;
+  text-align: center;
+}
+
+.text-stats__name {
+  margin-bottom: $margin-tiny;
+  color: $color-accent-light;
+}

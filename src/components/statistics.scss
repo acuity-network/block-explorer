@@ -1,0 +1,21 @@
+.content-block {
+  margin: $margin-small 0;
+  padding: $padding-small;
+  background-color: $color-dark;
+}
+
+.content-block__title {
+  margin-bottom: $margin-small;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.text-stats {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.fineprint {
+  font-size: 12px;
+}
