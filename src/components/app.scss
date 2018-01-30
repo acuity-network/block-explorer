@@ -44,3 +44,14 @@
     font-size: 32px;
   }
 }
+
+@media #{$xx-large} {
+  .mix-app {
+    padding-top: 106px;
+  }
+
+  .mix-header {
+    height: 106px;
+    padding: $padding-standard;
+  }
+}
