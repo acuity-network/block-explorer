@@ -15,7 +15,7 @@
   box-shadow: inset 0 0 4px $color-background;
 }
 
-@media (min-width: 520px) {
+@media #{$medium} {
   .mix-search {
     flex-basis: 50%;
     flex-grow: 1;
