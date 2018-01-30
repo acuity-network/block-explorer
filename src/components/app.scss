@@ -1,5 +1,5 @@
 .mix-app {
-  padding-top: 108px;
+  padding-top: 138px;
 }
 
 .mix-header {
@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 108px;
+  height: 138px;
   z-index: 32;
   padding: $padding-small;
   background-color: $color-background;
@@ -19,6 +19,11 @@
 .mix-header__title {
   font-size: 22px;
   font-weight: 300;
+}
+
+.connection-info {
+  margin: $margin-tiny 0;
+  font-size: 12px;
 }
 
 @media (min-width: 520px) {
