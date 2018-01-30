@@ -130,3 +130,9 @@
     padding: $padding-tiny;
   }
 }
+
+@media #{$xx-large} {
+  .mix-table__cell {
+    padding: $padding-small;
+  }
+}
