@@ -1,6 +1,6 @@
 .mix-app {
   min-height: 100vh;
-  padding-top: 138px;
+  padding: 142px 0 $padding-standard;
 }
 
 .mix-header {
@@ -29,7 +29,7 @@
 
 @media #{$medium} {
   .mix-app {
-    padding-top: 90px;
+    padding-top: 94px;
   }
 
   .mix-header {
@@ -47,7 +47,7 @@
 
 @media #{$xx-large} {
   .mix-app {
-    padding-top: 106px;
+    padding-top: 110px;
   }
 
   .mix-header {

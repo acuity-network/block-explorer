@@ -121,7 +121,12 @@
   .mix-table {
     width: calc(60% - (#{$margin-standard} * 2));
     margin: 0 $margin-standard;
+
+    &:only-child {
+      width: calc(100% - (#{$margin-standard} * 2));
+    }
   }
+
   .mix-table__caption {
     padding-left: 0;
   }
