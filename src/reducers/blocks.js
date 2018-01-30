@@ -77,11 +77,8 @@ export function getSingleBlock(state, blockNumber) {
   return state.blocks.blocks[blockNumber] || {};
 }
 
-export function getBlockForDisplay(state, blockNumber) {
-  const block = state.blocks.blocks[blockNumber];
-  if (!block) {
-    return {};
-  }
+export function getBlockForDisplay(state, blockNumber, methods = { getSingleBlock }) {
+  const block = methods.getSingleBlock(state, blockNumber);
 
   return {
     number: {
@@ -91,7 +88,7 @@ export function getBlockForDisplay(state, blockNumber) {
       value: block.timestamp,
     },
     difficulty: {
-      value: block.difficulty ? block.difficulty.toNumber() : 0,
+      value: block.difficulty,
     },
     nonce: {
       value: block.nonce,
@@ -115,12 +112,12 @@ export function getBlockForDisplay(state, blockNumber) {
       value: block.data,
     },
     transactions: {
-      value: block.transactions.length,
-      linkType: block.transactions.length ? routes.TRANSACTIONS : undefined,
+      value: block.transactions ? block.transactions.length : 0,
+      linkType: block.transactions && block.transactions.length ? routes.TRANSACTIONS : undefined,
       linkPayload: { blockNumber: block.number },
     },
     uncles: {
-      value: block.uncles.length,
+      value: block.uncles ? block.uncles.length : 0,
     },
   }
 }

@@ -11,14 +11,8 @@ const Block = ({ block = {} }) => (
   <div>
     <h2>Single Block!</h2>
     <ul>
-      {Object.keys(block).map(key => {
-        if (typeof block[key] === Object || !block[key].value) {
-          return null;
-        }
-        return (
-          <li>{key}: {block[key].value}</li>
-        );
-      })}
+      <li>Block #: {block.number.value}</li>
+      <li>Received: {block.time.value}</li>
     </ul>
   </div>
 );
