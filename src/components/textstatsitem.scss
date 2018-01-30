@@ -8,3 +8,15 @@
   margin-bottom: $margin-tiny;
   color: $color-accent-light;
 }
+
+@media #{$medium} {
+  .text-stats__item {
+    margin-bottom: $margin-standard;
+  }
+}
+
+@media #{$large} {
+  .text-stats__item {
+    flex-basis: 30%;
+  }
+}

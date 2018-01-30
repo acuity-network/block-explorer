@@ -2,3 +2,15 @@
   display: flex;
   flex-direction: column;
 }
+
+@media #{$x-large} {
+  .dashboard {
+    flex-direction: row;
+  }
+}
+
+@media #{$xx-large} {
+  .dashboard {
+    margin-top: $margin-standard;
+  }
+}
