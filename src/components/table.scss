@@ -8,6 +8,7 @@
 
 .mix-table__caption {
   font-size: 16px;
+  text-transform: uppercase;
   text-align: left;
   padding-left: $padding-small;
   padding-top: $padding-small;
@@ -46,6 +47,7 @@
   word-break: break-all;
   border-bottom: 1px solid $color-accent-light;
   text-align: right;
+  vertical-align: center;
 }
 
 .mix-table__cell:last-of-type {
@@ -64,11 +66,10 @@
 
 .mix-table__link {
   display: block;
-  height: 100%;
   width: 100%;
 }
 
-@media (min-width: 520px) {
+@media #{$medium} {
   .mix-table {
     table-layout: auto;
   }
@@ -106,9 +107,37 @@
   }
 }
 
-@media (min-width: 1020px) {
+@media #{$large} {
   .mix-table {
-    width: 80%;
-    margin: auto;
+    width: calc(100% - (#{$margin-standard} * 2));
+    margin: $margin-standard;
+  }
+  .mix-table__caption {
+    padding-left: 0;
+  }
+}
+
+@media #{$x-large} {
+  .mix-table {
+    width: calc(60% - (#{$margin-standard} * 2));
+    margin: 0 $margin-standard;
+
+    &:only-child {
+      width: calc(100% - (#{$margin-standard} * 2));
+    }
+  }
+
+  .mix-table__caption {
+    padding-left: 0;
+  }
+
+  .mix-table__cell {
+    padding: $padding-tiny;
+  }
+}
+
+@media #{$xx-large} {
+  .mix-table__cell {
+    padding: $padding-small;
   }
 }

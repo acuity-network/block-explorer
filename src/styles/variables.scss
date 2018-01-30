@@ -42,3 +42,10 @@ $padding-input: $mix-tiny-gap * 2;
 $margin-tiny: $mix-tiny-gap;
 $margin-small: $mix-small-gap;
 $margin-standard: $mix-medium-gap;
+
+/* MEDIA QUERIES */
+
+$medium: '(min-width: 526px)';
+$large: '(min-width: 680px)';
+$x-large: '(min-width: 1020px)';
+$xx-large: '(min-width: 1370px)';

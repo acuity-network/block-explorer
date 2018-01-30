@@ -1,18 +1,59 @@
 .bar-chart {
-  height: 200px;
-  width: 320px;
-  margin-bottom: 20px;
+  height: 80px;
+  margin: $margin-tiny;
   display: flex;
   align-items: flex-end;
 }
 
+.bar-chart__title {
+  margin: $margin-standard 0 $margin-small;
+  font-weight: 300;
+  font-size: 16px;
+  color: $color-accent-light;
+}
+
+.bar-chart__legend {
+  font-size: 12px;
+  color: $color-accent-dark;
+}
+
 .bar-chart__item {
   margin-left: 10px;
-  min-width: 20px;
-  background-color: blue;
-  border-bottom: 10px solid blue;
+  min-width: 10px;
+  background-color: $color-accent-dark;
+  border-bottom: 10px solid $color-accent-dark;
 }
 
 .bar-chart__item:first-child {
   margin-left: 0;
+}
+
+@media #{$medium} {
+  .bar-chart__wrapper {
+    flex-basis: calc(50% - #{$margin-small});
+
+    // margin needs to be split evenly between the two bar-chart__wrapper items
+    // to make sure the bars in both charts have the same width
+    &:first-of-type {
+      margin-right: $margin-small;
+    }
+
+    &:last-of-type {
+      margin-left: $margin-small;
+    }
+  }
+}
+
+@media #{$x-large} {
+  .bar-chart__wrapper {
+    width: 100%;
+
+    &:first-of-type {
+      margin-right: 0;
+    }
+
+    &:last-of-type {
+      margin-left: 0;
+    }
+  }
 }
