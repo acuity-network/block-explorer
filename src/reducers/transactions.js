@@ -51,14 +51,11 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         },
         hash: {
           value: hash,
+          linkType: routes.TRANSACTION_DETAIL,
+          linkPayload: { hash },
         },
         amount: {
           value: `${methods.fromWei(transaction.value, 'ether')} Ether`,
-        },
-        block: {
-          value: transaction.blockNumber,
-          linkType: routes.BLOCK_DETAIL,
-          linkPayload: { blockNumber: transaction.blockNumber },
         },
       };
       transactionsForDisplay.push(displayTransaction);

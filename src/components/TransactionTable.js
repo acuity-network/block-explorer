@@ -15,7 +15,10 @@ const TransactionTable = ({ transactions = [], title = 'Transactions' }) => (
 
 TransactionTable.propTypes = {
   blocks: PropTypes.array,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
 };
 
 export default TransactionTable;

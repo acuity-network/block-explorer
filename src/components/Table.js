@@ -34,7 +34,10 @@ const Table = ({
 Table.propTypes = {
   dataArray: PropTypes.array,
   fields: PropTypes.array,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
 };
 
 export default Table;
