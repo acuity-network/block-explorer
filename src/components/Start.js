@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 });
 
 const Start = ({ blocks = [], statistics = {} }) => (
-  <div className="dashboard">
+  <div className='dashboard'>
     <Statistics statistics={statistics} />
     <BlockTable blocks={blocks} title='Latest Blocks' />
   </div>

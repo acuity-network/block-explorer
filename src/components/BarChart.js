@@ -23,7 +23,7 @@ const BarChart = ({ values = [], title = '', unit = '' }) => {
               className='bar-chart__item'
               style={{
                 flexBasis: `${barWidth}%`,
-                height:   `${height}%`,
+                height: `${height}%`,
               }}
             />
           );
