@@ -29,9 +29,5 @@ export const tableFields = {
       key: 'amount',
       label: 'Amount',
     },
-    {
-      key: 'block',
-      label: 'Block',
-    },
   ],
 };

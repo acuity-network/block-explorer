@@ -130,14 +130,11 @@ describe('selectors/transactions', () => {
           },
           hash: {
             value: '0xA',
+            linkType: routes.TRANSACTION_DETAIL,
+            linkPayload: { hash: '0xA' },
           },
           amount: {
             value: '10 Ether',
-          },
-          block: {
-            value: 123,
-            linkType: routes.BLOCK_DETAIL,
-            linkPayload: { blockNumber: 123 },
           },
         },
         {
@@ -146,14 +143,11 @@ describe('selectors/transactions', () => {
           },
           hash: {
             value: '0xB',
+            linkType: routes.TRANSACTION_DETAIL,
+            linkPayload: { hash: '0xB' },
           },
           amount: {
             value: '4000 Ether',
-          },
-          block: {
-            value: 456,
-            linkType: routes.BLOCK_DETAIL,
-            linkPayload: { blockNumber: 456 },
           },
         },
       ];
