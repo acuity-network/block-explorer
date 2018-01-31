@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
 });
 
 const Transaction = ({ transaction }) => (
-  <div>
+  <div className='mix-content-wrapper'>
     <h2 className='content-block__title list-title'>Transaction Details</h2>
     <DetailList>
       <DetailListItem name='Hash' value={transaction.hash} />

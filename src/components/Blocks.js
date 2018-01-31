@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 });
 
 const Blocks = ({ blocks = [] }) => (
-  <div>
+  <div className='mix-content-wrapper'>
     <BlockTable blocks={blocks} title='Latest Blocks' />
   </div>
 );

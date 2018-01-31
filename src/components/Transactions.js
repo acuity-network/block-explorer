@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 };
 
 const Transactions = ({ transactions = [], title = '' }) => (
-  <div>
+  <div className='mix-content-wrapper'>
     <TransactionTable transactions={transactions} title={title} />
   </div>
 );
