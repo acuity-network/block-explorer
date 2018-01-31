@@ -147,7 +147,10 @@ describe('selectors/blocks', () => {
         },
       ];
       const mockGetLatestBlocks = jest.fn(() => blocksInState);
-      const mockMethods = { getLatestBlocks: mockGetLatestBlocks };
+      const mockMethods = {
+        getLatestBlocks: mockGetLatestBlocks,
+        timestampDistance: jest.fn((t) => t),
+      };
       const blocks = selectors.getLatestBlocksForDisplay({}, 10, mockMethods);
 
       expect(mockGetLatestBlocks).toBeCalledWith({}, 10);
