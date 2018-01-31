@@ -8,7 +8,6 @@ import * as routes from '@/router';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
-import BigNumber from './BigNumber';
 
 const mapStateToProps = (state) => ({
   transaction: selectors.getCurrentTransactionForDisplay(state),
@@ -28,7 +27,7 @@ const Transaction = ({ transaction }) => (
       <DetailListItem name='Amount' value={`${transaction.valueInEther} Ether`} />
       <DetailListItem
         name='Gas Price'
-        value={<BigNumber unit='Wei'>{transaction.gasPriceInWei}</BigNumber>}
+        value={`${transaction.gasPriceInGwei} Gwei`}
       />
       <DetailListItem
         name='Sender'

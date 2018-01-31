@@ -38,12 +38,12 @@ const Block = ({ block = {} }) => (
           payload: { address: `_${block.miner}` },
         }}>{block.miner}</Link>}
       />
+      <DetailListItem name='Gas Limit' value={block.gasLimit} />
+      <DetailListItem name='Gas used' value={block.gasUsed} />
       <DetailListItem
         name='Difficulty'
         value={<BigNumber unit='H'>{block.difficulty}</BigNumber>}
       />
-      <DetailListItem name='Gas Limit' value={block.gasLimit} />
-      <DetailListItem name='Gas used' value={block.gasUsed} />
       <DetailListItem name='Size' value={block.size} />
       <DetailListItem name='Uncles' value={block.uncles ? block.uncles.length : '0'} />
       <DetailListItem name='Nonce' value={block.nonce} />
