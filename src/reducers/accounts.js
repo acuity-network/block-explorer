@@ -27,7 +27,7 @@ export function getCurrentAccountForDisplay(state, methods = { getAccount, fromW
   let balanceInWei = 0;
   let balanceInEther = 0;
   if (accountData.balance) {
-    balanceInWei = accountData.balance.toNumber();
+    balanceInWei = accountData.balance;
     balanceInEther = methods.fromWei(accountData.balance, 'ether');
   }
 
