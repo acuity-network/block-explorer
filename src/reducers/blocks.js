@@ -1,6 +1,7 @@
 import * as t from '@/actions/types';
 import * as routes from '@/router';
 import { maxBlocksPerPage } from '@/constants';
+import { timestampDistance } from '@/helpers/dates';
 
 const initialState = {
   blockNumbers: [],
@@ -38,7 +39,7 @@ export function getLatestBlocks(state, amountOfBlocks = maxBlocksPerPage) {
   return latestBlocks;
 }
 
-export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { getLatestBlocks }) {
+export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { getLatestBlocks, timestampDistance }) {
   const latestBlocks = methods.getLatestBlocks(state, amountOfBlocks);
   const blocksForDisplay = [];
 
@@ -53,7 +54,7 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
         linkPayload: { blockNumber: block.number },
       },
       time: {
-        value: block.timestamp,
+        value: methods.timestampDistance(block.timestamp),
       },
       transactions: {
         value: block.transactions.length,
