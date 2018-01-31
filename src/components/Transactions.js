@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Link from 'redux-first-router-link';
 
 import * as selectors from '@/reducers/selectors';
 import { BLOCK_DETAIL } from '@/router';
 
-import Link from 'redux-first-router-link';
 import TransactionTable from './TransactionTable';
 
 const mapStateToProps = (state) => {
