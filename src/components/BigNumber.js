@@ -8,7 +8,10 @@ const BigNumber = ({ children, unit }) => {
 };
 
 BigNumber.propTypes = {
-  children: PropTypes.number,
+  children: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   unit: PropTypes.string,
 };
 
