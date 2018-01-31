@@ -6,8 +6,7 @@ import BarChart from './BarChart';
 import BigNumber from './BigNumber';
 
 const Statistics = ({ statistics = {} }) => (
-  <div className='stats'>
-    <p key='stats-title' className='content-block__title'>Stats</p>
+  <div className='content-block'>
     <div key='stats-body' className='content-block'>
       <div className='text-stats'>
         <TextStatsItem name='Peer Count' value={statistics.peerCount} />
@@ -26,7 +25,7 @@ const Statistics = ({ statistics = {} }) => (
           value={<BigNumber unit='H/s'>{statistics.hashRate}</BigNumber>}
         />
       </div>
-      <p className='fineprint'>* Based on the latest {statistics.consideredBlocks} Blocks</p>
+      <p className='content__fineprint'>* Based on the latest {statistics.consideredBlocks} Blocks</p>
       <div className='chart-stats'>
         <BarChart values={statistics.difficulties} title='Difficulties' unit='H' />
         <BarChart values={statistics.blockTimes} title='Block Times' unit='s' />

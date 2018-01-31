@@ -6,9 +6,10 @@ import {
   getStatisticsForDisplay,
   getLatestBlocksForDisplay,
 } from '@/reducers/selectors';
+import { tableFields } from '@/constants';
 
-import BlockTable from './BlockTable';
 import Statistics from './Statistics';
+import Table from './Table';
 
 const mapStateToProps = (state) => ({
   statistics: getStatisticsForDisplay(state),
@@ -17,8 +18,14 @@ const mapStateToProps = (state) => ({
 
 const Start = ({ blocks = [], statistics = {} }) => (
   <div className='mix-content-wrapper dashboard'>
-    <Statistics statistics={statistics} />
-    <BlockTable blocks={blocks} title='Latest Blocks' />
+    <div className='dashboard__element'>
+      <h2 className='content-block__title'>Stats</h2>
+      <Statistics statistics={statistics} />
+    </div>
+    <div className='dashboard__element'>
+      <h2 className='content-block__title'>Latest Blocks</h2>
+      <Table dataArray={blocks} fields={tableFields.blocks} />
+      </div>
   </div>
 );
 

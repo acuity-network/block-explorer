@@ -48,6 +48,10 @@
   text-transform: uppercase;
 }
 
+.content__fineprint {
+  font-size: $font-tiny;
+}
+
 @media #{$medium} {
   .mix-app {
     padding-top: calc(#{$header-height-medium-screen} + #{$padding-tiny});
@@ -69,7 +73,7 @@
   /* CONTENT */
 
   .mix-content-wrapper {
-    padding: $padding-small;
+    padding: $padding-small $padding-small 0;
   }
 
   .content-block__title {

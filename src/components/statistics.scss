@@ -1,7 +1,3 @@
-.stats {
-  width: 100%;
-}
-
 .text-stats {
   display: flex;
   flex-wrap: wrap;
@@ -12,10 +8,6 @@
 .chart-stats {
   display: flex;
   flex-direction: column;
-}
-
-.fineprint {
-  font-size: 12px;
 }
 
 @media #{$medium} {

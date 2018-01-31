@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 
 const Block = ({ block = {} }) => (
   <div className='mix-content-wrapper'>
-    <h2 className='content-block__title list-title'>Block # {block.number}</h2>
+    <h2 className='content-block__title'>Block # {block.number}</h2>
     <DetailList>
       <DetailListItem name='Hash' value={block.hash} />
       {block.transactions && block.transactions.length > 0

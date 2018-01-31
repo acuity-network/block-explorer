@@ -3,14 +3,24 @@
   flex-direction: column;
 }
 
+.dashboard__element {
+  width: 100%;
+}
+
+.dashboard__element:first-child {
+  margin-bottom: $margin-standard;
+}
+
 @media #{$x-large} {
   .dashboard {
     flex-direction: row;
   }
-}
 
-@media #{$xx-large} {
-  .dashboard {
-    margin-top: $margin-standard;
+  .dashboard__element {
+    width: 50%;
+  }
+
+  .dashboard__element:first-child {
+    margin-right: $margin-standard;
   }
 }
