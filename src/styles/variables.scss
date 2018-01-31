@@ -43,6 +43,21 @@ $margin-tiny: $mix-tiny-gap;
 $margin-small: $mix-small-gap;
 $margin-standard: $mix-medium-gap;
 
+$header-height-small-screen: 138px;
+$header-height-medium-screen: 90px;
+$header-height-large-screen: 106px;
+
+/* FONT SIZES */
+
+$font-tiny: 12px;
+$font-standard: 16px;
+$font-title-small: 22px;
+$font-title-large: 32px;
+
+/* Z INDEX */
+
+$header-z: 20;
+
 /* MEDIA QUERIES */
 
 $medium: '(min-width: 526px)';

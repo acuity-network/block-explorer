@@ -1,6 +1,7 @@
 .mix-app {
   min-height: 100vh;
-  padding: 142px 0 $padding-standard;
+  padding-top: calc(#{$header-height-small-screen} + #{$padding-tiny});
+  padding-bottom: $padding-standard;
 }
 
 .mix-header {
@@ -10,48 +11,46 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 138px;
-  z-index: 32;
+  height: $header-height-small-screen;
+  z-index: $header-z;
   padding: $padding-small;
   background-color: $color-background;
   box-shadow: 0 0 16px 0 $color-background;
 }
 
 .mix-header__title {
-  font-size: 22px;
-  font-weight: 300;
+  font-size: $font-title-small;
 }
 
-.connection-info {
+.mix-header__fineprint {
   margin: $margin-tiny 0;
-  font-size: 12px;
+  font-size: $font-tiny;
 }
 
 @media #{$medium} {
   .mix-app {
-    padding-top: 94px;
+    padding-top: calc(#{$header-height-medium-screen} + #{$padding-tiny});
   }
 
   .mix-header {
-    width: 100%;
-    height: 90px;
+    height: $header-height-medium-screen;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
   .mix-header__title {
-    font-size: 32px;
+    font-size: $font-title-large;
   }
 }
 
 @media #{$xx-large} {
   .mix-app {
-    padding-top: 110px;
+    padding-top: calc(#{$header-height-large-screen} + #{$padding-tiny});
   }
 
   .mix-header {
-    height: 106px;
+    height: $header-height-large-screen;
     padding: $padding-standard;
   }
 }

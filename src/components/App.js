@@ -10,7 +10,7 @@ const App = () => (
     <header className='mix-header'>
       <div>
         <h1 className='mix-header__title'>Block Explorer</h1>
-        <p className='connection-info'>Connected to {getIsUsingFallback()
+        <p className='mix-header__fineprint'>Connected to {getIsUsingFallback()
           ? 'MIX (rpc.mix-blockchain.org)'
           : 'your Web3 browser extension (e.g. Metamask)'}
         </p>
