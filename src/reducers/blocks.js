@@ -84,11 +84,14 @@ export function getBlockForDisplay(state, blockNumber, methods = { getSingleBloc
     number: {
       value: block.number,
     },
+    hash: {
+      value: block.hash,
+    },
     time: {
       value: block.timestamp,
     },
     difficulty: {
-      value: block.difficulty,
+      value: block.difficulty ? block.difficulty.toNumber() : 0,
     },
     nonce: {
       value: block.nonce,
