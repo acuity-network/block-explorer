@@ -17,6 +17,11 @@
   box-shadow: 0 0 16px 0 $color-background;
 }
 
+.mix-header__link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .mix-header__title {
   font-size: 22px;
   font-weight: 300;
