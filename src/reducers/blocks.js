@@ -77,54 +77,6 @@ export function getSingleBlock(state, blockNumber) {
   return state.blocks.blocks[blockNumber] || {};
 }
 
-export function getBlockForDisplay(state, blockNumber, methods = { getSingleBlock }) {
-  const block = methods.getSingleBlock(state, blockNumber);
-
-  return {
-    number: {
-      value: block.number,
-    },
-    hash: {
-      value: block.hash,
-    },
-    time: {
-      value: block.timestamp,
-    },
-    difficulty: {
-      value: block.difficulty ? block.difficulty.toNumber() : 0,
-    },
-    nonce: {
-      value: block.nonce,
-    },
-    size: {
-      value: block.size,
-    },
-    miner: {
-      value: block.miner,
-      linkType: routes.ACCOUNT_DETAIL,
-      // redux-first-router has issues with '0x' strings
-      linkPayload: { address: `_${block.miner}` },
-    },
-    gasLimit: {
-      value: block.gasLimit,
-    },
-    gasUsed: {
-      value: block.gasUsed,
-    },
-    data: {
-      value: block.data,
-    },
-    transactions: {
-      value: block.transactions ? block.transactions.length : 0,
-      linkType: block.transactions && block.transactions.length ? routes.TRANSACTIONS : undefined,
-      linkPayload: { blockNumber: block.number },
-    },
-    uncles: {
-      value: block.uncles ? block.uncles.length : 0,
-    },
-  }
-}
-
 export function getBlockNumbers(state) {
   return state.blocks.blockNumbers || [];
 }
