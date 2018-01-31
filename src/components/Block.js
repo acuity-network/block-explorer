@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
@@ -44,5 +45,9 @@ const Block = ({ block = {} }) => (
     </DetailList>
   </div>
 );
+
+Block.propTypes = {
+  block: PropTypes.object,
+};
 
 export default connect(mapStateToProps)(Block);

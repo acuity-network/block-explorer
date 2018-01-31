@@ -27,12 +27,17 @@ export function getCurrentTransactionForDisplay(state, methods = { getSingleTran
   const transactionData = methods.getSingleTransaction(state, hash);
   let valueInWei = '';
   let valueInEther = '';
+  let gasPriceInWei = 0;
   if (transactionData.value) {
     valueInWei = transactionData.value.toString(10);
     valueInEther = methods.fromWei(transactionData.value, 'ether');
   }
 
-  return { ...transactionData, valueInWei, valueInEther };
+  if (transactionData.gasPrice) {
+    gasPriceInWei = transactionData.gasPrice.toNumber();
+  }
+
+  return { ...transactionData, valueInWei, valueInEther, gasPriceInWei };
 }
 
 export function getTransactionInState(state, hash, methods = { getSingleTransaction }) {
