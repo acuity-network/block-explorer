@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DetailListItem = ({ name = '', value = '' }) => (
-  <div>
-    <dt>{name}</dt>
-    <dd>{value}</dd>
+  <div className='list__item'>
+    <dt className='list__key'>{name}</dt>
+    <dd className='list__value'>{value}</dd>
   </div>
 );
 

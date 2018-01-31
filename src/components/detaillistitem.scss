@@ -1,0 +1,25 @@
+.list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $padding-small;
+}
+
+.list__item:nth-child(odd) {
+  background-color: $color-accent-dark;
+}
+
+.list__item:nth-child(even) {
+  background-color: $color-accent-medium;
+}
+
+.list__key {
+  display: block;
+  min-width: 80px;
+}
+
+.list__value {
+  text-align: right;
+  word-wrap: break-word;
+  word-break: break-all;
+}
