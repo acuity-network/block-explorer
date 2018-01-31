@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DetailList = ({ children = [] }) => (
-  <dl className='content-block'>
+  <dl className='content-block detail-list'>
     {children}
   </dl>
 );
