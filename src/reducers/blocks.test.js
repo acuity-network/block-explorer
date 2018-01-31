@@ -170,8 +170,17 @@ describe('selectors/blocks', () => {
   });
 
   describe('getBlockForDisplay', () => {
+    beforeAll(() => {
+      Number.prototype.toNumber = function() {
+        return this;
+      };
+    });
+    afterAll(() => {
+      Number.prototype.toNumber = undefined;
+    });
     it('should return the formatted block', () => {
       const blockInState = {
+        hash: '0xabc',
         number: 10,
         timestamp: 200,
         difficulty: 5,
@@ -187,6 +196,9 @@ describe('selectors/blocks', () => {
       const expectedBlock = {
         number: {
           value: 10,
+        },
+        hash: {
+          value: '0xabc',
         },
         time: {
           value: 200,
