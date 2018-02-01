@@ -12,8 +12,8 @@ import Statistics from './Statistics';
 import Table from './Table';
 
 const mapStateToProps = (state) => ({
-  statistics: getStatisticsForDisplay(state),
   blocks: getLatestBlocksForDisplay(state),
+  statistics: getStatisticsForDisplay(state),
 });
 
 const Start = ({ blocks = [], statistics = {} }) => (
@@ -31,6 +31,7 @@ const Start = ({ blocks = [], statistics = {} }) => (
 
 Start.propTypes = {
   blocks: PropTypes.array,
+  statistics: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Start);
