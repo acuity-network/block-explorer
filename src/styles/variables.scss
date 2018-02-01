@@ -33,15 +33,48 @@ $mix-tiny-gap: 4px;
 $mix-small-gap: 12px;
 $mix-medium-gap: 24px;
 
+// padding
 $padding-tiny: $mix-tiny-gap;
 $padding-small: $mix-small-gap;
 $padding-standard: $mix-medium-gap;
 
-$padding-input: $mix-tiny-gap * 2;
-
+// margin
 $margin-tiny: $mix-tiny-gap;
 $margin-small: $mix-small-gap;
 $margin-standard: $mix-medium-gap;
+
+// header
+$header-height-small-screen: 138px;
+$header-height-medium-screen: 90px;
+$header-height-large-screen: 106px;
+
+// input fields
+$input-height: 42px;
+$input-width: 420px;
+$padding-input: $mix-tiny-gap * 2;
+
+// buttons
+$button-height: 60px;
+
+// special elements
+$bar-chart-height: 80px;
+$bar-chart-width: $mix-small-gap;
+
+$list-item-width: 630px;
+$list-key-width: 80px;
+
+$table-cell-width: 92px;
+
+/* FONT SIZES */
+
+$font-tiny: 12px;
+$font-standard: 16px;
+$font-title-small: 22px;
+$font-title-large: 32px;
+
+/* Z INDEX */
+
+$header-z: 20;
 
 /* MEDIA QUERIES */
 

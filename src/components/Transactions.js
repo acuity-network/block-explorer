@@ -5,8 +5,9 @@ import Link from 'redux-first-router-link';
 
 import * as selectors from '@/reducers/selectors';
 import { BLOCK_DETAIL } from '@/router';
+import { tableFields } from '@/constants';
 
-import TransactionTable from './TransactionTable';
+import Table from './Table';
 
 const mapStateToProps = (state) => {
   const blockNumber = state.location.payload.blockNumber;
@@ -18,9 +19,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const Transactions = ({ transactions = [], title = '' }) => (
-  <div>
-    <TransactionTable transactions={transactions} title={title} />
+const Transactions = ({ transactions = [], title = 'Transactions' }) => (
+  <div className='mix-content-wrapper'>
+    <h2 className='content-block__title'>{title}</h2>
+    <Table dataArray={transactions} fields={tableFields.transactions} />
   </div>
 );
 

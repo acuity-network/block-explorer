@@ -12,8 +12,8 @@ const mapStateToProps = (state) => ({
 });
 
 const Account = ({ account = {} }) => (
-  <div>
-    <h2 className='content-block__title list-title'>Account Details</h2>
+  <div className='mix-content-wrapper'>
+    <h2 className='content-block__title'>Account Details</h2>
     <DetailList>
       <DetailListItem name='Address' value={account.address} />
       <DetailListItem name='Tx Count' value={account.transactionCount} />

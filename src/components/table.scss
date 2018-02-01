@@ -1,19 +1,7 @@
 .mix-table {
   table-layout: fixed;
   width: 100%;
-  padding: $padding-small;
-  background-color: $color-dark;
   color: $color-dark;
-}
-
-.mix-table__caption {
-  font-size: 16px;
-  text-transform: uppercase;
-  text-align: left;
-  padding-left: $padding-small;
-  padding-top: $padding-small;
-  background-color: $color-dark;
-  color: $color-light;
 }
 
 .mix-table__header {
@@ -42,9 +30,8 @@
   position: relative;
   display: block;
   padding: $padding-small $padding-tiny;
-  padding-left: 34%;
-  word-wrap: break-word;
-  word-break: break-all;
+  // needed to make space for the ::before element
+  padding-left: calc(30% + #{$padding-small});
   border-bottom: 1px solid $color-accent-light;
   text-align: right;
   vertical-align: center;
@@ -67,6 +54,13 @@
 .mix-table__link {
   display: block;
   width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: $color-dark;
+}
+
+.mix-table__link:hover {
+  text-decoration: none;
 }
 
 @media #{$medium} {
@@ -74,21 +68,10 @@
     table-layout: auto;
   }
 
-  .mix-table__caption {
-    padding-top: 0;
-    padding-bottom: $padding-tiny;
-    background-color: $color-background;
-    font-size: 22px;
-  }
-
   .mix-table__header {
     display: table-header-group;
     text-align: left;
     color: $color-light;
-  }
-
-  .mix-table__header th {
-    font-weight: 300;
   }
 
   .mix-table__row {
@@ -100,37 +83,14 @@
     padding: $padding-small;
     border: none;
     text-align: left;
-    min-width: 96px;
+    min-width: $table-cell-width;
   }
   .mix-table__cell::before {
     display: none;
   }
 }
 
-@media #{$large} {
-  .mix-table {
-    width: calc(100% - (#{$margin-standard} * 2));
-    margin: $margin-standard;
-  }
-  .mix-table__caption {
-    padding-left: 0;
-  }
-}
-
 @media #{$x-large} {
-  .mix-table {
-    width: calc(60% - (#{$margin-standard} * 2));
-    margin: 0 $margin-standard;
-
-    &:only-child {
-      width: calc(100% - (#{$margin-standard} * 2));
-    }
-  }
-
-  .mix-table__caption {
-    padding-left: 0;
-  }
-
   .mix-table__cell {
     padding: $padding-tiny;
   }

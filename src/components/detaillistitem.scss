@@ -3,8 +3,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 630px;
+  max-width: $list-item-width;
   padding: $padding-small;
+  color: $color-dark;
+}
+
+.list__item a {
+  color: $color-dark;
+}
+
+.list__item a:hover {
+  text-decoration: none;
 }
 
 .list__item:nth-child(odd) {
@@ -17,7 +26,7 @@
 
 .list__key {
   display: block;
-  min-width: 80px;
+  min-width: $list-key-width;
 }
 
 .list__value {
@@ -28,11 +37,11 @@
 
 @media #{$large} {
   .list__item {
-    flex-basis: calc(50% - #{$margin-small});
+    flex-basis: calc(50% - (#{$margin-small} / 2));
   }
 
   .list__item:nth-child(even) {
-    margin-left: $margin-standard;
+    margin-left: $margin-small;
   }
 
   .list__item:nth-child(4n+1) {

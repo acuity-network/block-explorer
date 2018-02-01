@@ -6,11 +6,8 @@ import TableCell from './TableCell';
 const Table = ({
   dataArray = [],
   fields = [],
-  title = '',
 }) => (
-  <table className='mix-table'>
-    <caption className='mix-table__caption'>{title}</caption>
-
+  <table className='content-block mix-table'>
     <thead className='mix-table__header'>
       <tr>
         {fields.map(field => (
@@ -18,7 +15,6 @@ const Table = ({
         ))}
       </tr>
     </thead>
-
     <tbody>
       {dataArray.map(dataSet => (
         <tr className='mix-table__row' key={dataSet.key.value}>
@@ -34,10 +30,6 @@ const Table = ({
 Table.propTypes = {
   dataArray: PropTypes.array,
   fields: PropTypes.array,
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
 };
 
 export default Table;

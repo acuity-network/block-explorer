@@ -3,15 +3,3 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-// TODO: move !important margin and padding settings to outer wrapper
-@media #{$x-large} {
-  .detail-list {
-    margin: 0 $margin-standard !important;
-    padding: $padding-standard !important;
-  }
-
-  .list-title {
-    margin-left: $margin-standard !important;
-  }
-}

@@ -6,7 +6,7 @@
 }
 
 .mix-search__input {
-  height: 42px;
+  height: $input-height;
   flex-basis: 80%;
   flex-grow: 1;
   padding: 0 $padding-input;
@@ -19,8 +19,7 @@
   .mix-search {
     flex-basis: 50%;
     flex-grow: 1;
-    max-width: 420px;
-    margin: 0;
-    margin-left: $margin-small;
+    max-width: $input-width;
+    margin: 0 0 0 $margin-small;
   }
 }

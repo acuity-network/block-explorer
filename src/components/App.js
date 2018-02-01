@@ -13,7 +13,7 @@ const App = () => (
         <Link to='/' className='mix-header__link'>
           <h1 className='mix-header__title'>Block Explorer</h1>
         </Link>
-        <p className='connection-info'>Connected to {getIsUsingFallback()
+        <p className='mix-header__fineprint'>Connected to {getIsUsingFallback()
           ? 'MIX (rpc.mix-blockchain.org)'
           : 'your Web3 browser extension (e.g. Metamask)'}
         </p>
