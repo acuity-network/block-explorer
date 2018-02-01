@@ -1,7 +1,13 @@
 .search-button {
-  height: 60px;
+  height: $button-height;
   margin-left: $margin-small;
-  background: transparent;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  .search-button__svg :nth-child(2) {
+    transform: rotate(45deg);
+  }
 }
 
 .search-button__svg :first-child {
@@ -10,6 +16,8 @@
 
 .search-button__svg :nth-child(2) {
   fill: $color-accent-dark;
+  transform-origin: center;
+  transition: transform .7s;
 }
 
 .search-button__icon :first-child {

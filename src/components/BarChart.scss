@@ -1,27 +1,26 @@
 .bar-chart {
-  height: 80px;
-  margin: $margin-tiny;
   display: flex;
   align-items: flex-end;
+  height: $bar-chart-height;
+  margin: $margin-tiny;
 }
 
 .bar-chart__title {
   margin: $margin-standard 0 $margin-small;
-  font-weight: 300;
-  font-size: 16px;
+  font-size: $font-standard;
   color: $color-accent-light;
 }
 
 .bar-chart__legend {
-  font-size: 12px;
+  font-size: $font-tiny;
   color: $color-accent-dark;
 }
 
 .bar-chart__item {
-  margin-left: 10px;
-  min-width: 10px;
+  margin-left: $margin-small;
+  min-width: $bar-chart-width;
   background-color: $color-accent-dark;
-  border-bottom: 10px solid $color-accent-dark;
+  border-bottom: $bar-chart-width solid $color-accent-dark;
 }
 
 .bar-chart__item:first-child {

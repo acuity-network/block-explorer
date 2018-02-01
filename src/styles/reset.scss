@@ -14,7 +14,8 @@ h3,
 h4,
 h5,
 p,
-dl {
+dl,
+th {
   margin: 0;
   font-weight: 300;
 }
@@ -26,4 +27,5 @@ input, button {
 
 button {
   padding: 0;
+  background: transparent;
 }

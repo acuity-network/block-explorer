@@ -30,9 +30,8 @@
   position: relative;
   display: block;
   padding: $padding-small $padding-tiny;
-  padding-left: 34%;
-  word-wrap: break-word;
-  word-break: break-all;
+  // needed to make space for the ::before element
+  padding-left: calc(30% + #{$padding-small});
   border-bottom: 1px solid $color-accent-light;
   text-align: right;
   vertical-align: center;
@@ -55,6 +54,13 @@
 .mix-table__link {
   display: block;
   width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: $color-dark;
+}
+
+.mix-table__link:hover {
+  text-decoration: none;
 }
 
 @media #{$medium} {
@@ -68,10 +74,6 @@
     color: $color-light;
   }
 
-  .mix-table__header th {
-    font-weight: 300;
-  }
-
   .mix-table__row {
     display: table-row;
   }
@@ -81,7 +83,7 @@
     padding: $padding-small;
     border: none;
     text-align: left;
-    min-width: 96px;
+    min-width: $table-cell-width;
   }
   .mix-table__cell::before {
     display: none;
