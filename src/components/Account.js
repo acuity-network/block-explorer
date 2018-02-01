@@ -6,7 +6,6 @@ import * as selectors from '@/reducers/selectors';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
-import BigNumber from './BigNumber';
 
 const mapStateToProps = (state) => ({
   account: selectors.getCurrentAccountForDisplay(state),
@@ -20,7 +19,7 @@ const Account = ({ account = {} }) => (
       <DetailListItem name='Tx Count' value={account.transactionCount} />
       <DetailListItem
         name='Balance (ETH)'
-        value={<BigNumber unit='Ether'>{account.balanceInEther}</BigNumber>}
+        value={account.balanceInEther}
       />
       <DetailListItem name='Balance (Wei)' value={`${account.balanceInWei} Wei`} />
     </DetailList>

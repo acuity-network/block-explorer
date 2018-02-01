@@ -27,17 +27,17 @@ export function getCurrentTransactionForDisplay(state, methods = { getSingleTran
   const transactionData = methods.getSingleTransaction(state, hash);
   let valueInWei = '';
   let valueInEther = '';
-  let gasPriceInWei = 0;
+  let gasPriceInGwei = 0;
   if (transactionData.value) {
     valueInWei = transactionData.value.toString(10);
     valueInEther = methods.fromWei(transactionData.value, 'ether');
   }
 
   if (transactionData.gasPrice) {
-    gasPriceInWei = transactionData.gasPrice.toNumber();
+    gasPriceInGwei = methods.fromWei(transactionData.gasPrice, 'gwei');
   }
 
-  return { ...transactionData, valueInWei, valueInEther, gasPriceInWei };
+  return { ...transactionData, valueInWei, valueInEther, gasPriceInGwei };
 }
 
 export function getTransactionInState(state, hash, methods = { getSingleTransaction }) {
@@ -49,6 +49,14 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
 
   hashes.forEach(hash => {
     const transaction = methods.getSingleTransaction(state, hash);
+    const parsedValue = parseFloat(methods.fromWei(transaction.value, 'ether'), 10).toFixed(3);
+    const valueParts = parsedValue.toString().split('.');
+    let value = parsedValue;
+
+    if (valueParts[1] === '000') {
+      value = valueParts[0];
+    }
+
     if (Object.keys(transaction).length > 0) {
       const displayTransaction = {
         key: {
@@ -57,10 +65,10 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         hash: {
           value: hash,
           linkType: routes.TRANSACTION_DETAIL,
-          linkPayload: { hash },
+          linkPayload: { hash: `_${hash}` },
         },
         amount: {
-          value: `${methods.fromWei(transaction.value, 'ether')} Ether`,
+          value: `${value} Ether`,
         },
       };
       transactionsForDisplay.push(displayTransaction);
