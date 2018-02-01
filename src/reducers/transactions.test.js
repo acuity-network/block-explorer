@@ -131,7 +131,7 @@ describe('selectors/transactions', () => {
           hash: {
             value: '0xA',
             linkType: routes.TRANSACTION_DETAIL,
-            linkPayload: { hash: '0xA' },
+            linkPayload: { hash: '_0xA' },
           },
           amount: {
             value: '10 Ether',
@@ -144,7 +144,7 @@ describe('selectors/transactions', () => {
           hash: {
             value: '0xB',
             linkType: routes.TRANSACTION_DETAIL,
-            linkPayload: { hash: '0xB' },
+            linkPayload: { hash: '_0xB' },
           },
           amount: {
             value: '4000 Ether',

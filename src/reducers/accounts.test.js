@@ -99,8 +99,8 @@ describe('selectors/accounts', () => {
       const value = selectors.getCurrentAccountForDisplay(mockState, mockMethods);
 
       expect(value).toHaveProperty('address', '0x12345678');
-      expect(value).toHaveProperty('balanceInWei', 235);
-      expect(value).toHaveProperty('balanceInEther', 2350);
+      expect(value).toHaveProperty('balanceInWei', '235');
+      expect(value).toHaveProperty('balanceInEther', '2350.000');
       expect(value).toHaveProperty('transactionCount', 2);
     });
   });
