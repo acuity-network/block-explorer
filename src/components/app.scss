@@ -48,6 +48,14 @@
   text-transform: uppercase;
 }
 
+.content-block__title a {
+  color: $color-light;
+}
+
+.content-block__title a:hover {
+  text-decoration: none;
+}
+
 .content__fineprint {
   font-size: $font-tiny;
 }
