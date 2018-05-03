@@ -18,7 +18,7 @@ const Account = ({ account = {} }) => (
       <DetailListItem name='Address' value={account.address} />
       <DetailListItem name='Tx Count' value={account.transactionCount} />
       <DetailListItem
-        name='Balance (ETH)'
+        name='Balance (MIX)'
         value={account.balanceInEther}
       />
       <DetailListItem name='Balance (Wei)' value={`${account.balanceInWei} Wei`} />
