@@ -10,8 +10,7 @@ export function redirectAccountDetail(address) {
   return redirect({
     type: routes.ACCOUNT_DETAIL,
     payload: {
-      // redux-first-router has issues with '0x' strings
-      address: `_${address}`,
+      address,
     },
   });
 }
@@ -29,8 +28,7 @@ export function redirectTransactionDetail(hash) {
   return redirect({
     type: routes.TRANSACTION_DETAIL,
     payload: {
-      // redux-first-router has issues with '0x' strings
-      hash: `_${hash}`,
+      hash,
     },
   });
 }

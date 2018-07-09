@@ -33,14 +33,14 @@ const Transaction = ({ transaction }) => (
         name='Sender'
         value={<Link to={{
           type: routes.ACCOUNT_DETAIL,
-          payload: { address: `_${transaction.from}` }
+          payload: { address: transaction.from }
         }}>{transaction.from}</Link>}
       />
       <DetailListItem
         name='Receiver'
         value={<Link to={{
           type: routes.ACCOUNT_DETAIL,
-          payload: { address: `_${transaction.to}` }
+          payload: { address: transaction.to }
         }}>{transaction.to}</Link>}
       />
     </DetailList>

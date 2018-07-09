@@ -35,7 +35,7 @@ const Block = ({ block = {} }) => (
         name='Mined by'
         value={<Link to={{
           type: routes.ACCOUNT_DETAIL,
-          payload: { address: `_${block.miner}` },
+          payload: { address: block.miner },
         }}>{block.miner}</Link>}
       />
       <DetailListItem name='Gas Limit' value={block.gasLimit} />

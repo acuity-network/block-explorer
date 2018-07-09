@@ -65,7 +65,7 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         hash: {
           value: hash,
           linkType: routes.TRANSACTION_DETAIL,
-          linkPayload: { hash: `_${hash}` },
+          linkPayload: { hash },
         },
         amount: {
           value: `${value} Ether`,
