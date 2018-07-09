@@ -5500,11 +5500,11 @@ redux-first-router-link@^1.4.2:
     prop-types "15.5.10"
     rudy-match-path "^0.3.0"
 
-redux-first-router@^0.0.16-next:
-  version "0.0.16-next"
-  resolved "https://registry.yarnpkg.com/redux-first-router/-/redux-first-router-0.0.16-next.tgz#493c344dd92b4c20a318a024d4dfa7d948d87d86"
+redux-first-router@^1.9.19:
+  version "1.9.19"
+  resolved "https://registry.yarnpkg.com/redux-first-router/-/redux-first-router-1.9.19.tgz#6f670e40837efcefdcc117361b9d20628e33c097"
   dependencies:
-    rudy-match-path "^0.3.0"
+    path-to-regexp "^1.7.0"
 
 redux@^3.7.2:
   version "3.7.2"
