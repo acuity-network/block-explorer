@@ -49,7 +49,8 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
 
   hashes.forEach(hash => {
     const transaction = methods.getSingleTransaction(state, hash);
-    const parsedValue = parseFloat(methods.fromWei(transaction.value.toString(10), 'ether'), 10).toFixed(3);
+    const originalValue = transaction.value ? transaction.value.toString(10) : '';
+    const parsedValue = parseFloat(methods.fromWei(originalValue, 'ether'), 10).toFixed(3);
     const valueParts = parsedValue.toString().split('.');
     let value = parsedValue;
 
