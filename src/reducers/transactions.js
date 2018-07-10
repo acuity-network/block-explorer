@@ -30,11 +30,11 @@ export function getCurrentTransactionForDisplay(state, methods = { getSingleTran
   let gasPriceInGwei = 0;
   if (transactionData.value) {
     valueInWei = transactionData.value.toString(10);
-    valueInEther = methods.fromWei(transactionData.value, 'ether');
+    valueInEther = methods.fromWei(valueInWei, 'ether');
   }
 
   if (transactionData.gasPrice) {
-    gasPriceInGwei = methods.fromWei(transactionData.gasPrice, 'gwei');
+    gasPriceInGwei = methods.fromWei(transactionData.gasPrice.toString(10), 'gwei');
   }
 
   return { ...transactionData, valueInWei, valueInEther, gasPriceInGwei };
@@ -49,7 +49,7 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
 
   hashes.forEach(hash => {
     const transaction = methods.getSingleTransaction(state, hash);
-    const parsedValue = parseFloat(methods.fromWei(transaction.value, 'ether'), 10).toFixed(3);
+    const parsedValue = parseFloat(methods.fromWei(transaction.value.toString(10), 'ether'), 10).toFixed(3);
     const valueParts = parsedValue.toString().split('.');
     let value = parsedValue;
 

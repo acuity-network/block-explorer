@@ -70,7 +70,7 @@ describe('selectors/transactions', () => {
       selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
 
       expect(mockFromWei).toBeCalled();
-      expect(mockFromWei).toBeCalledWith(175, 'ether');
+      expect(mockFromWei).toBeCalledWith('175', 'ether');
     });
 
     it('should return an object with transaction display data', () => {

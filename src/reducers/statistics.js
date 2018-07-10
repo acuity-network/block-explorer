@@ -52,7 +52,7 @@ export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlo
 
   return {
     gasPriceInWei: gasPrice.toString(10),
-    gasPriceInGwei: methods.fromWei(gasPrice, 'gwei'),
+    gasPriceInGwei: methods.fromWei(gasPrice.toString(10), 'gwei'),
     peerCount,
     latestBlockNumber: latestBlocks[0] ? latestBlocks[0].number : latestBlockNumber,
     consideredBlocks,
