@@ -4,11 +4,12 @@ describe('adapters/web3/statistics', () => {
   let mockGetInstance, mockEth, mockNet;
 
   beforeEach(() => {
-    mockEth = {};
     mockNet = {};
+    mockEth = {
+      net: mockNet,
+    };
     mockGetInstance = jest.fn(() => ({
       eth: mockEth,
-      net: mockNet,
     }));
   });
 

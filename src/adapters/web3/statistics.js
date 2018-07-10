@@ -15,7 +15,7 @@ export function getGasPrice(getInstance = getWeb3Instance) {
 }
 
 export function getPeerCount(getInstance = getWeb3Instance) {
-  const net = getInstance().net;
+  const net = getInstance().eth.net;
 
   return new Promise((resolve, reject) => {
     net.getPeerCount((err, peerCount) => {
