@@ -6,7 +6,8 @@ export function getLatestBlockNumber(getInstance = getWeb3Instance) {
 
 export async function getBlocks(blockNumbers = [], getInstance = getWeb3Instance) {
   const eth = getInstance().eth;
-  const blocks = blockNumbers.map(number => eth.getBlock(number));
+  const blockRequests = blockNumbers.map(number => eth.getBlock(number));
+  const blocks = await Promise.all(blockRequests);
 
   return blocks.filter(block => block !== null);
 }
