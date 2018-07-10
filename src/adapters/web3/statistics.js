@@ -1,29 +1,9 @@
 import { getWeb3Instance } from './init';
 
 export function getGasPrice(getInstance = getWeb3Instance) {
-  const eth = getInstance().eth;
-
-  return new Promise((resolve, reject) => {
-    eth.getGasPrice((err, gasPrice) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(gasPrice);
-      }
-    });
-  });
+  return getInstance().eth.getGasPrice();
 }
 
 export function getPeerCount(getInstance = getWeb3Instance) {
-  const net = getInstance().eth.net;
-
-  return new Promise((resolve, reject) => {
-    net.getPeerCount((err, peerCount) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(peerCount);
-      }
-    });
-  });
+  return getInstance().eth.net.getPeerCount();
 }
