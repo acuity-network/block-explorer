@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getSingleBlock } from '@/reducers/selectors';
-import * as routes from '@/router';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as selectors from '@/reducers/selectors';
-import { BLOCK_DETAIL } from '@/router';
 import { tableFields } from '@/constants';
 
 import Table from './Table';

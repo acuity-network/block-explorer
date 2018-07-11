@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as selectors from '@/reducers/selectors';
-import * as routes from '@/router';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
@@ -20,7 +19,7 @@ const Transaction = ({ transaction }) => (
       <DetailListItem name='Hash' value={transaction.hash} />
       <DetailListItem
         name='Block Number'
-        value={<Link to={`/blocks/${block.number}`}>{transaction.blockNumber}</Link>} />
+        value={<Link to={`/blocks/${transaction.blockNumber}`}>{transaction.blockNumber}</Link>} />
       <DetailListItem name='Amount' value={`${transaction.valueInEther} Ether`} />
       <DetailListItem
         name='Gas Price'
