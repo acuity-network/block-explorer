@@ -52,6 +52,7 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
         value: block.number,
         linkType: routes.BLOCK_DETAIL,
         linkPayload: { blockNumber: block.number },
+        linkReactRouter: `/blocks/${block.number}`,
       },
       time: {
         value: methods.timestampDistance(block.timestamp),
@@ -60,12 +61,14 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
         value: block.transactions.length,
         linkType: block.transactions.length ? routes.TRANSACTIONS : undefined,
         linkPayload: { blockNumber: block.number },
+        linkReactRouter: `/blocks/${block.number}/transactions`,
       },
       miner: {
         value: block.miner,
         linkType: routes.ACCOUNT_DETAIL,
         // redux-first-router has issues with '0x' strings
         linkPayload: { address: `_${block.miner}` },
+        linkReactRouter: `/accounts/${block.miner}`,
       },
     };
     blocksForDisplay.push(displayBlock);

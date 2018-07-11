@@ -107,6 +107,7 @@ describe('selectors/blocks', () => {
             value: 2,
             linkType: routes.BLOCK_DETAIL,
             linkPayload: { blockNumber: 2 },
+            linkReactRouter: '/blocks/2',
           },
           time: {
             value: 242424,
@@ -115,11 +116,13 @@ describe('selectors/blocks', () => {
             value: 3,
             linkType: routes.TRANSACTIONS,
             linkPayload: { blockNumber: 2 },
+            linkReactRouter: '/blocks/2/transactions',
           },
           miner: {
             value: '0xminer1',
             linkType: routes.ACCOUNT_DETAIL,
             linkPayload: { address: '_0xminer1' },
+            linkReactRouter: '/accounts/0xminer1',
           },
         },
         {
@@ -130,6 +133,7 @@ describe('selectors/blocks', () => {
             value: 3,
             linkType: routes.BLOCK_DETAIL,
             linkPayload: { blockNumber: 3 },
+            linkReactRouter: '/blocks/3',
           },
           time: {
             value: 3535353,
@@ -138,11 +142,13 @@ describe('selectors/blocks', () => {
             value: 2,
             linkType: routes.TRANSACTIONS,
             linkPayload: { blockNumber: 3 },
+            linkReactRouter: '/blocks/3/transactions',
           },
           miner: {
             value: '0xminer2',
             linkType: routes.ACCOUNT_DETAIL,
             linkPayload: { address: '_0xminer2' },
+            linkReactRouter: '/accounts/0xminer2',
           },
         },
       ];

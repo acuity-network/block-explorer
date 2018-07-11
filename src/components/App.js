@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'redux-first-router-link';
+import { Link } from 'react-router-dom';
 
 import { getIsUsingFallback } from '@/adapters/web3/init';
 

@@ -66,7 +66,9 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         hash: {
           value: hash,
           linkType: routes.TRANSACTION_DETAIL,
+          // redux-first-router has issues with '0x' strings
           linkPayload: { hash: `_${hash}` },
+          linkReactRouter: `/transactions/${hash}`,
         },
         amount: {
           value: `${value} Ether`,
