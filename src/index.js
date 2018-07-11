@@ -5,12 +5,14 @@ import { Router } from 'react-router-dom';
 
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
+import redirectCoinomiUrls from '@/adapters/url';
 import { initializeWeb3 } from '@/adapters/web3';
 import { initializeHistory, getHistoryInstance } from '@/adapters/history';
 
 import App from './components/App';
 import '@/styles/index.scss';
 
+redirectCoinomiUrls();
 initializeWeb3();
 initializeHistory();
 
