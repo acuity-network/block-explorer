@@ -2,8 +2,14 @@ import * as t from '@/actions/types';
 import middleware from './search';
 
 describe('middleware/search', () => {
-  let mockStore, mockNext, mockAction, mockDispatch, mockGetState,
-      mockAdapter;
+  let mockStore,
+      mockNext,
+      mockAction,
+      mockDispatch,
+      mockGetState,
+      mockAdapter,
+      mockHistory,
+      mockGetHistory;
 
   beforeEach(() => {
     mockDispatch = jest.fn();
@@ -13,6 +19,10 @@ describe('middleware/search', () => {
     };
     mockNext = jest.fn();
     mockAdapter = {};
+    mockHistory = {
+      push: jest.fn(),
+    };
+    mockGetHistory = jest.fn(() => mockHistory);
   });
 
   it('should forward unrecognized actions', () => {
@@ -39,33 +49,30 @@ describe('middleware/search', () => {
     });
 
     it('should call isAddress with the given query', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.isAddress).toBeCalled();
       expect(mockAdapter.isAddress).toBeCalledWith('test');
     });
 
     it('should not request a block', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getBlocks).not.toBeCalled();
     });
 
     it('should not request a transaction', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getTransactions).not.toBeCalled();
     });
 
-    // TODO: redirect with react-router
-    // it('should redirect to account details', () => {
-    //   middleware(mockStore, mockAdapter)(mockNext)(mockAction);
-    //
-    //   const dispatchAction = mockDispatch.mock.calls[0][0];
-    //   expect(dispatchAction).toHaveProperty('type', routes.ACCOUNT_DETAIL);
-    //   expect(dispatchAction).toHaveProperty('payload');
-    //   expect(dispatchAction.payload).toHaveProperty('address', '_test');
-    // });
+    it('should redirect to account details', () => {
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
+
+      expect(mockHistory.push).toBeCalled();
+      expect(mockHistory.push).toBeCalledWith('/accounts/test');
+    });
   });
 
   describe('query is block number or hash', () => {
@@ -81,14 +88,14 @@ describe('middleware/search', () => {
     });
 
     it('should try to fetch the block if the query is not an account', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getBlocks).toBeCalled();
       expect(mockAdapter.getBlocks).toBeCalledWith(['test']);
     });
 
     it('should dispatch a success action', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       const successAction = mockDispatch.mock.calls[0][0];
       expect(successAction).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
@@ -97,15 +104,12 @@ describe('middleware/search', () => {
       expect(successAction.payload).toHaveProperty('blocks', { '1212': { number: 1212 }});
     });
 
-    // TODO: redirect with react-router
-    // it('should redirect to block details', async () => {
-    //   await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
-    //
-    //   const redirectAction = mockDispatch.mock.calls[1][0];
-    //   expect(redirectAction).toHaveProperty('type', routes.BLOCK_DETAIL);
-    //   expect(redirectAction).toHaveProperty('payload');
-    //   expect(redirectAction.payload).toHaveProperty('blockNumber', 1212);
-    // });
+    it('should redirect to block details', async () => {
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
+
+      expect(mockHistory.push).toBeCalled();
+      expect(mockHistory.push).toBeCalledWith('/blocks/1212');
+    });
   });
 
   describe('query is transaction hash', () => {
@@ -125,14 +129,14 @@ describe('middleware/search', () => {
     });
 
     it('should try to fetch the transaction if the query is not an account or block', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getTransactions).toBeCalled();
       expect(mockAdapter.getTransactions).toBeCalledWith([validQuery]);
     });
 
     it('should dispatch a success action', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       const successAction = mockDispatch.mock.calls[0][0];
       expect(successAction).toHaveProperty('type', t.FETCH_TRANSACTIONS_SUCCESS);
@@ -140,14 +144,11 @@ describe('middleware/search', () => {
       expect(successAction.payload).toHaveProperty(validQuery);
     });
 
-    // TODO: redirect with react-router
-    // it('should redirect to transaction details', async () => {
-    //   await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
-    //
-    //   const redirectAction = mockDispatch.mock.calls[1][0];
-    //   expect(redirectAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
-    //   expect(redirectAction).toHaveProperty('payload');
-    //   expect(redirectAction.payload).toHaveProperty('hash', `_${validQuery}`);
-    // });
+    it('should redirect to transaction details', async () => {
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
+
+      expect(mockHistory.push).toBeCalled();
+      expect(mockHistory.push).toBeCalledWith(`/transactions/${validQuery}`);
+    });
   });
 });
