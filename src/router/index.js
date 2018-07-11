@@ -18,12 +18,10 @@ export default {
   [START]: {
     path: '/',
     component: Start,
-    thunk: thunks.fetchStatistics,
   },
   [ACCOUNT_DETAIL]: {
     path: '/accounts/:address',
     component: Account,
-    thunk: thunks.fetchAccount,
   },
   [BLOCKS]: {
     path: '/blocks',

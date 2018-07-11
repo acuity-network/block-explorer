@@ -2,44 +2,6 @@ import * as actions from '@/actions/creators';
 import * as thunks from './thunks';
 
 describe('router/thunks', () => {
-  describe('fetchAccount', () => {
-    it('should dispatch an action to fetch an account according to the location', () => {
-      const mockState = {
-        location: {
-          payload: {
-            address: 'test',
-          },
-        },
-        accounts: {},
-      };
-      const mockDispatch = jest.fn();
-      const mockGetState = jest.fn(() => mockState);
-      const expectedAction = actions.fetchAccount('test');
-
-      thunks.fetchAccount(mockDispatch, mockGetState);
-
-      expect(mockDispatch).toBeCalledWith(expectedAction);
-    });
-
-    it('should strip the leading _ from the account address in the location', () => {
-      const mockState = {
-        location: {
-          payload: {
-            address: '_test',
-          },
-        },
-        accounts: {},
-      };
-      const mockDispatch = jest.fn();
-      const mockGetState = jest.fn(() => mockState);
-      const expectedAction = actions.fetchAccount('test');
-
-      thunks.fetchAccount(mockDispatch, mockGetState);
-
-      expect(mockDispatch).toBeCalledWith(expectedAction);
-    });
-  });
-
   describe('fetchBlocks', () => {
     it('should dispatch an action to fetch the latest blocks', () => {
       const mockDispatch = jest.fn();

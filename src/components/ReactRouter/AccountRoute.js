@@ -6,16 +6,18 @@ import * as actions from '@/actions/creators'
 import Account from '@/components/Account';
 
 const mapDispatchToProps = (dispatch) => ({
-  // template
+  fetchAccount: (address) => dispatch(actions.fetchAccount(address))
 });
 
 class AccountRoute extends React.Component {
   componentDidMount() {
-    // template
+    const address = this.props.match.params.address;
+    this.props.fetchAccount(address);
   }
 
   render() {
-    return (<Account />);
+    const address = this.props.match.params.address;
+    return (<Account address={address} />);
   }
 }
 
