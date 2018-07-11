@@ -2,17 +2,6 @@ import * as actions from '@/actions/creators';
 import * as thunks from './thunks';
 
 describe('router/thunks', () => {
-  describe('fetchBlocks', () => {
-    it('should dispatch an action to fetch the latest blocks', () => {
-      const mockDispatch = jest.fn();
-      const expectedAction = actions.fetchBlocks();
-
-      thunks.fetchBlocks(mockDispatch);
-
-      expect(mockDispatch).toBeCalledWith(expectedAction);
-    });
-  });
-
   describe('fetchSingleTransaction', () => {
     it('should dispatch an action to fetch a transaction according to the location', () => {
       const mockState = {

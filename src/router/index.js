@@ -26,7 +26,6 @@ export default {
   [BLOCKS]: {
     path: '/blocks',
     component: Blocks,
-    thunk: thunks.fetchBlocks,
   },
   [BLOCK_DETAIL]: {
     path: '/blocks/:blockNumber',

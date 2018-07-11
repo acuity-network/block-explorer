@@ -6,12 +6,12 @@ import * as actions from '@/actions/creators';
 import Blocks from '@/components/Blocks';
 
 const mapDispatchToProps = (dispatch) => ({
-  // template
+  fetchBlocks: () => dispatch(actions.fetchBlocks()),
 });
 
 class BlocksRoute extends React.Component {
   componentDidMount() {
-    // template
+    this.props.fetchBlocks();
   }
 
   render() {

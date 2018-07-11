@@ -1,10 +1,6 @@
 import * as actions from '@/actions/creators';
 import * as selectors from '@/reducers/selectors';
 
-export function fetchBlocks(dispatch) {
-  dispatch(actions.fetchBlocks());
-}
-
 export function fetchTransactions(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
 
