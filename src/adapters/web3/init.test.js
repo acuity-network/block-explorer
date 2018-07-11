@@ -39,29 +39,6 @@ describe('adapters/web3/init', () => {
 
       expect(mockConstructor).toBeCalledWith('testProvider');
     });
-
-    it('should use the httpProivder if web3 is not available', () => {
-      const mockWindow = {};
-      const mockWeb3Constructor = jest.fn();
-      const mockHPConstructor = jest.fn();
-      class mockPackage {
-        constructor(provider) {
-          mockWeb3Constructor(provider);
-        }
-      }
-      class mockHttpProvider {
-        constructor(url) {
-          mockHPConstructor(url);
-        }
-      }
-      mockPackage.providers = {
-        HttpProvider: mockHttpProvider,
-      };
-      web3.initializeWeb3(mockWindow, mockPackage);
-
-      expect(mockHPConstructor).toBeCalled();
-      expect(mockWeb3Constructor).toBeCalled();
-    });
   });
 
 

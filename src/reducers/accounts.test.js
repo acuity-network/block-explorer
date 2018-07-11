@@ -92,7 +92,7 @@ describe('selectors/accounts', () => {
       selectors.getCurrentAccountForDisplay(mockState, mockMethods);
 
       expect(mockFromWei).toBeCalled();
-      expect(mockFromWei).toBeCalledWith(235, 'ether');
+      expect(mockFromWei).toBeCalledWith('235', 'ether');
     });
 
     it('should return an object with account display data', () => {

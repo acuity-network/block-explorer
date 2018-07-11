@@ -14,10 +14,9 @@ export function initializeWeb3(browser = window, Web3 = pkg) {
     if (browser.web3 && browser.web3.currentProvider) {
       provider = browser.web3.currentProvider;
     } else {
-      provider = new Web3.providers.HttpProvider(fallbackUrl)
       isUsingFallback = true;
     }
-    web3 = new Web3(provider);
+    web3 = new Web3(provider || fallbackUrl);
   }
 }
 

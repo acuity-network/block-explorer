@@ -30,7 +30,7 @@ export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlo
     // we need to adjust the statistics accordingly.
     consideredBlocks = latestBlocks.length - 1;
     const difficultyTotal = latestBlocks.reduce(
-      (acc, block) => acc + block.difficulty.toNumber(), 0
+      (acc, block) => acc + parseInt(block.difficulty, 10), 0
     ) - latestBlocks[consideredBlocks].difficulty;
 
     blockTimes = latestBlocks.map(
@@ -46,13 +46,13 @@ export function getStatisticsForDisplay(state, methods = { fromWei, getLatestBlo
     averageDifficulty = difficultyTotal / consideredBlocks;
     averageBlockTime = blockTimesTotal / consideredBlocks;
     hashRate = difficultyTotal / blockTimesTotal;
-    difficulties = latestBlocks.map(block => (block.difficulty.toNumber()));
+    difficulties = latestBlocks.map(block => parseInt(block.difficulty, 10));
     difficulties.pop();
   }
 
   return {
     gasPriceInWei: gasPrice.toString(10),
-    gasPriceInGwei: methods.fromWei(gasPrice, 'gwei'),
+    gasPriceInGwei: methods.fromWei(gasPrice.toString(10), 'gwei'),
     peerCount,
     latestBlockNumber: latestBlocks[0] ? latestBlocks[0].number : latestBlockNumber,
     consideredBlocks,
