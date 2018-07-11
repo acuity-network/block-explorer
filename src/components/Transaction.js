@@ -8,8 +8,8 @@ import * as selectors from '@/reducers/selectors';
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
 
-const mapStateToProps = (state) => ({
-  transaction: selectors.getCurrentTransactionForDisplay(state),
+const mapStateToProps = (state, ownProps) => ({
+  transaction: selectors.getTransactionForDisplay(state, ownProps.hash),
 });
 
 const Transaction = ({ transaction }) => (

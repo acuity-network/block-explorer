@@ -34,7 +34,6 @@ export default {
   [TRANSACTION_DETAIL]: {
     path: '/transactions/:hash',
     component: Transaction,
-    thunk: thunks.fetchSingleTransaction,
   },
   [TRANSACTIONS]: {
     path: '/blocks/:blockNumber/transactions',

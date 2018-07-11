@@ -47,11 +47,12 @@ describe('selectors/transactions', () => {
     });
   });
 
-  describe('getCurrentTransactionForDisplay', () => {
+  describe('getTransactionForDisplay', () => {
+    const mockHash = '0x12345678';
     const mockState = {
       location: {
         payload: {
-          hash: '_0x12345678',
+          hash: mockHash,
         },
       },
     };
@@ -60,21 +61,21 @@ describe('selectors/transactions', () => {
     const mockMethods = { getSingleTransaction: mockGetTransaction, fromWei: mockFromWei };
 
     it('should use the hash from location to get the current transaction', () => {
-      selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
+      selectors.getTransactionForDisplay(mockState, mockHash, mockMethods);
 
       expect(mockGetTransaction).toBeCalled();
       expect(mockGetTransaction).toBeCalledWith(mockState, '0x12345678');
     });
 
     it('should transform the Wei balance to Ether', () => {
-      selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
+      selectors.getTransactionForDisplay(mockState, mockHash, mockMethods);
 
       expect(mockFromWei).toBeCalled();
       expect(mockFromWei).toBeCalledWith('175', 'ether');
     });
 
     it('should return an object with transaction display data', () => {
-      const value = selectors.getCurrentTransactionForDisplay(mockState, mockMethods);
+      const value = selectors.getTransactionForDisplay(mockState, mockHash, mockMethods);
 
       expect(value).toHaveProperty('hash', '0x12345678');
       expect(value).toHaveProperty('to', 'beta');

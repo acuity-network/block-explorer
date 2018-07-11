@@ -20,10 +20,7 @@ export function getSingleTransaction(state, hash) {
   return state.transactions[hash] || {};
 }
 
-export function getCurrentTransactionForDisplay(state, methods = { getSingleTransaction, fromWei }) {
-  // redux-first-router has issues with '0x' strings
-  const locationHash = state.location.payload.hash || '';
-  const hash = locationHash.replace('_', '');
+export function getTransactionForDisplay(state, hash, methods = { getSingleTransaction, fromWei }) {
   const transactionData = methods.getSingleTransaction(state, hash);
   let valueInWei = '';
   let valueInEther = '';
