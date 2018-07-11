@@ -8,14 +8,14 @@ export default (store, adapter = web3) => next => async action => {
 
     const isAddress = adapter.isAddress(query);
     if (isAddress) {
-      return store.dispatch(actions.redirectAccountDetail(query));
+      // TODO: return store.dispatch(actions.redirectAccountDetail(query));
     }
 
     const blockArray = await adapter.getBlocks([query]);
     if (blockArray.length === 1) {
       const block = blockArray[0];
       store.dispatch(actions.fetchBlocksSuccess([block.number.toString()], { [block.number]: block }));
-      return store.dispatch(actions.redirectBlockDetail(block.number));
+      // TODO: return store.dispatch(actions.redirectBlockDetail(block.number));
     }
 
     if (query.substring(0, 2) === '0x' && query.length === 66) {
@@ -23,7 +23,7 @@ export default (store, adapter = web3) => next => async action => {
       if (transactionArray.length === 1) {
         const transaction = transactionArray[0];
         store.dispatch(actions.fetchTransactionsSuccess({ [transaction.hash]: transaction }));
-        return store.dispatch(actions.redirectTransactionDetail(query));
+        // TODO: return store.dispatch(actions.redirectTransactionDetail(query));
       }
     }
 

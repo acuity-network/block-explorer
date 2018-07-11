@@ -1,5 +1,4 @@
 import * as t from '@/actions/types';
-import * as routes from '@/router';
 import { maxBlocksPerPage } from '@/constants';
 import { timestampDistance } from '@/helpers/dates';
 
@@ -50,8 +49,6 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
       },
       number: {
         value: block.number,
-        linkType: routes.BLOCK_DETAIL,
-        linkPayload: { blockNumber: block.number },
         linkReactRouter: `/blocks/${block.number}`,
       },
       time: {
@@ -59,15 +56,10 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
       },
       transactions: {
         value: block.transactions.length,
-        linkType: block.transactions.length ? routes.TRANSACTIONS : undefined,
-        linkPayload: { blockNumber: block.number },
         linkReactRouter: `/blocks/${block.number}/transactions`,
       },
       miner: {
         value: block.miner,
-        linkType: routes.ACCOUNT_DETAIL,
-        // redux-first-router has issues with '0x' strings
-        linkPayload: { address: `_${block.miner}` },
         linkReactRouter: `/accounts/${block.miner}`,
       },
     };

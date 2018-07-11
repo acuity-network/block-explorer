@@ -16,7 +16,8 @@ class TransactionsRoute extends React.Component {
   }
 
   render() {
-    return (<Transactions />);
+    const blockNumber = this.props.match.params.blockNumber;
+    return (<Transactions blockNumber={blockNumber} />);
   }
 }
 

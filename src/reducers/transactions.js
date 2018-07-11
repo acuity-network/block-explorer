@@ -1,8 +1,6 @@
 import * as t from '@/actions/types';
 import { fromWei } from '@/adapters/web3';
 
-import * as routes from '@/router';
-
 const initialState = {};
 
 export default (state = initialState, { type, payload }) => {
@@ -62,9 +60,6 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         },
         hash: {
           value: hash,
-          linkType: routes.TRANSACTION_DETAIL,
-          // redux-first-router has issues with '0x' strings
-          linkPayload: { hash: `_${hash}` },
           linkReactRouter: `/transactions/${hash}`,
         },
         amount: {
