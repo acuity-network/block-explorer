@@ -1,5 +1,3 @@
-import * as thunks from './thunks';
-
 import Start from '@/components/Start';
 import Account from '@/components/Account';
 import Block from '@/components/Block';
@@ -38,6 +36,5 @@ export default {
   [TRANSACTIONS]: {
     path: '/blocks/:blockNumber/transactions',
     component: Transactions,
-    thunk: thunks.fetchTransactions,
   },
 }

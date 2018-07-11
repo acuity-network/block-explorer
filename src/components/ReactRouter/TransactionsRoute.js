@@ -6,12 +6,13 @@ import * as actions from '@/actions/creators';
 import Transactions from '@/components/Transactions';
 
 const mapDispatchToProps = (dispatch) => ({
-  // template
+  fetchTransactions: (blockNumber) => dispatch(actions.fetchTransactionsForBlock(blockNumber)),
 });
 
 class TransactionsRoute extends React.Component {
   componentDidMount() {
-    // template
+    const blockNumber = this.props.match.params.blockNumber;
+    this.props.fetchTransactions(blockNumber);
   }
 
   render() {

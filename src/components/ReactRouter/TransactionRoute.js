@@ -23,7 +23,8 @@ class TransactionRoute extends React.Component {
   }
 
   render() {
-    return (<Transaction />);
+    const hash = this.props.match.params.hash;
+    return (<Transaction hash={hash} />);
   }
 }
 
