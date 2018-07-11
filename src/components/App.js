@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getIsUsingFallback } from '@/adapters/web3/init';
 
 import Search from './Search';
-import Switcher from './Switcher';
+import Switcher from './ReactRouter/Switcher';
 
 const App = () => (
   <div className='mix-app'>
