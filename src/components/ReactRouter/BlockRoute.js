@@ -1,22 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '@/actions/creators'
+import * as actions from '@/actions/creators';
+import * as selectors from '@/reducers/selectors';
 
 import Block from '@/components/Block';
 
+const mapStateToProps = (state, ownProps) => ({
+  blockInState: selectors.getBlockInState(state, ownProps.match.params.blockNumber),
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  // template
+  fetchSingleBlock: (blockNumber) => dispatch(actions.fetchBlocks(blockNumber, 1)),
 });
 
 class BlockRoute extends React.Component {
   componentDidMount() {
-    // template
+    if (!this.props.blockInState) {
+      const blockNumber = this.props.match.params.blockNumber;
+      this.props.fetchSingleBlock(blockNumber);
+    }
   }
 
   render() {
-    return (<Block />);
+    const blockNumber = this.props.match.params.blockNumber;
+    return (<Block blockNumber={blockNumber} />);
   }
 }
 
-export default connect(null, mapDispatchToProps)(BlockRoute);
+export default connect(mapStateToProps, mapDispatchToProps)(BlockRoute);

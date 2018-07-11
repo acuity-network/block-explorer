@@ -9,8 +9,8 @@ import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
 import BigNumber from './BigNumber';
 
-const mapStateToProps = (state) => ({
-  block: getSingleBlock(state, state.location.payload.blockNumber),
+const mapStateToProps = (state, ownProps) => ({
+  block: getSingleBlock(state, ownProps.blockNumber),
 });
 
 const Block = ({ block = {} }) => (

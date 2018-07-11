@@ -5,15 +5,6 @@ export function fetchBlocks(dispatch) {
   dispatch(actions.fetchBlocks());
 }
 
-export function fetchSingleBlock(dispatch, getState) {
-  const blockNumber = getState().location.payload.blockNumber;
-  const blockInState = selectors.getBlockInState(getState(), blockNumber);
-
-  if (!blockInState) {
-    dispatch(actions.fetchBlocks(blockNumber, 1));
-  }
-}
-
 export function fetchTransactions(dispatch, getState) {
   const blockNumber = getState().location.payload.blockNumber;
 
