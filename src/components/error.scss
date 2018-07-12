@@ -1,0 +1,50 @@
+.error__popup {
+  position: fixed;
+  top: 50vh;
+  left: 0;
+  transform: translate(0, -50%);
+  z-index: $popup-z;
+
+  width: 100vw;
+  padding: $padding-standard;
+
+  background-color: $color-cta;
+  color: $color-dark;
+  border: $mix-small-gap solid;
+}
+
+.error__title {
+  margin-bottom: $margin-standard;
+  font-size: $font-title-large;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.error__message {
+  margin-bottom: $margin-standard;
+  text-align: center;
+}
+
+.error__button {
+  display: block;
+  height: $button-height-small;
+  width: $button-width;
+
+  margin: auto;
+
+  background-color: $color-dark;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-cta;
+  }
+}
+
+@media #{$medium} {
+  .error__popup {
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: auto;
+  }
+}
