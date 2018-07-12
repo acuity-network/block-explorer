@@ -1,5 +1,4 @@
 import * as t from '@/actions/types';
-import * as routes from '@/router';
 import reducer, * as selectors from './transactions';
 
 describe('reducers/transactions', () => {
@@ -131,8 +130,6 @@ describe('selectors/transactions', () => {
           },
           hash: {
             value: '0xA',
-            linkType: routes.TRANSACTION_DETAIL,
-            linkPayload: { hash: '_0xA' },
             linkReactRouter: '/transactions/0xA',
           },
           amount: {
@@ -145,8 +142,6 @@ describe('selectors/transactions', () => {
           },
           hash: {
             value: '0xB',
-            linkType: routes.TRANSACTION_DETAIL,
-            linkPayload: { hash: '_0xB' },
             linkReactRouter: '/transactions/0xB',
           },
           amount: {
