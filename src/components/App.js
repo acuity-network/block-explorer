@@ -3,7 +3,7 @@ import Link from 'redux-first-router-link';
 
 import { getIsUsingFallback } from '@/adapters/web3/init';
 
-import Logo from './Logo';
+import Logo from '@/svgs/Logo';
 import Search from './Search';
 import Switcher from './Switcher';
 
