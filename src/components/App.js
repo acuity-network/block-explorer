@@ -22,11 +22,13 @@ const App = () => (
       <Search />
     </header>
     <Switcher />
-    <footer>
-      <p>powered by</p>
-      <Logo />
-      <p>MIX Blockchain</p>
-    </footer>
+    <a href='https://www.mix-blockchain.org/'>
+      <footer className='mix-footer'>
+        <p>powered by</p>
+        <Logo className='mix-footer__logo' />
+        <p>MIX Blockchain</p>
+      </footer>
+    </a>
   </div>
 );
 

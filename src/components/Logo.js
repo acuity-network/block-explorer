@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Logo = () => (
+const Logo = ({ className }) => (
   <svg
     version="1.1"
     viewBox="0 0 820.47 783.14"
+    className={className}
   >
     <g transform="translate(-149.02 -151.91)" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="20.537">
       <g stroke="#4294d1">
