@@ -3,12 +3,19 @@ import { connect } from 'react-redux';
 
 import * as actions from '@/actions/creators';
 import * as selectors from '@/reducers/selectors';
+import { isHexString } from '@/adapters/web3';
 
 import Block from '@/components/Block';
 
-const mapStateToProps = (state, ownProps) => ({
-  blockInState: selectors.getBlockInState(state, ownProps.match.params.blockNumber),
-});
+const mapStateToProps = (state, ownProps) => {
+  const blockAddress = ownProps.match.params.blockNumber;
+  const isBlockNumber = !isHexString(blockAddress);
+
+  return {
+    blockInState: selectors.getBlockInState(state, ownProps.match.params.blockNumber),
+    blockNumber: isBlockNumber ? blockAddress : selectors.getBlockNumberFromHash(state, blockAddress),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   fetchSingleBlock: (blockNumber) => dispatch(actions.fetchBlocks(blockNumber, 1)),
@@ -23,8 +30,7 @@ class BlockRoute extends React.Component {
   }
 
   render() {
-    const blockNumber = this.props.match.params.blockNumber;
-    return (<Block blockNumber={blockNumber} />);
+    return (<Block blockNumber={this.props.blockNumber} />);
   }
 }
 

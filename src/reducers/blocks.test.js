@@ -1,5 +1,4 @@
 import * as t from '@/actions/types';
-import * as routes from '@/router';
 import reducer, * as selectors from './blocks';
 
 describe('reducers/blocks', () => {
@@ -105,8 +104,6 @@ describe('selectors/blocks', () => {
           },
           number: {
             value: 2,
-            linkType: routes.BLOCK_DETAIL,
-            linkPayload: { blockNumber: 2 },
             linkReactRouter: '/blocks/2',
           },
           time: {
@@ -114,14 +111,10 @@ describe('selectors/blocks', () => {
           },
           transactions: {
             value: 3,
-            linkType: routes.TRANSACTIONS,
-            linkPayload: { blockNumber: 2 },
             linkReactRouter: '/blocks/2/transactions',
           },
           miner: {
             value: '0xminer1',
-            linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '_0xminer1' },
             linkReactRouter: '/accounts/0xminer1',
           },
         },
@@ -131,8 +124,6 @@ describe('selectors/blocks', () => {
           },
           number: {
             value: 3,
-            linkType: routes.BLOCK_DETAIL,
-            linkPayload: { blockNumber: 3 },
             linkReactRouter: '/blocks/3',
           },
           time: {
@@ -140,14 +131,10 @@ describe('selectors/blocks', () => {
           },
           transactions: {
             value: 2,
-            linkType: routes.TRANSACTIONS,
-            linkPayload: { blockNumber: 3 },
             linkReactRouter: '/blocks/3/transactions',
           },
           miner: {
             value: '0xminer2',
-            linkType: routes.ACCOUNT_DETAIL,
-            linkPayload: { address: '_0xminer2' },
             linkReactRouter: '/accounts/0xminer2',
           },
         },
@@ -217,6 +204,29 @@ describe('selectors/blocks', () => {
 
       expect(mockGetSingleBlock).toBeCalledWith({}, 'testBlock');
       expect(value).toEqual(['0x1', '0x2', '0x3']);
+    });
+  });
+
+  describe('getBlockNumberFromHash', () => {
+    it('should return the block number for the given block hash', () => {
+      const mockState = {
+        blocks: {
+          blocks: {
+            123456: {
+              hash: '0x1234567890',
+              number: 123456,
+            },
+            481516: {
+              hash: '0x4815162342',
+              number: 481516,
+            },
+          },
+        },
+      };
+
+      const value = selectors.getBlockNumberFromHash(mockState, '0x4815162342');
+
+      expect(value).toBe(481516);
     });
   });
 });

@@ -1,14 +1,16 @@
 import * as web3 from './helpers';
 
 describe('adapters/web3/helpers', () => {
-  let mockGetInstance, mockFromWei, mockIsAddress, mockUtils;
+  let mockGetInstance, mockFromWei, mockIsAddress, mockIsHexStrict, mockUtils;
 
   beforeEach(() => {
     mockFromWei = jest.fn(() => '42');
     mockIsAddress = jest.fn((hex) => `A${hex}`);
+    mockIsHexStrict = jest.fn(() => true);
     mockUtils = {
       fromWei: mockFromWei,
       isAddress: mockIsAddress,
+      isHexStrict: mockIsHexStrict,
     };
     mockGetInstance = jest.fn(() => ({
       utils: mockUtils,
@@ -28,7 +30,18 @@ describe('adapters/web3/helpers', () => {
   describe('isAddress', () => {
     it('should call the isAddress method on the instance and return the result', () => {
       const result = web3.isAddress('test', mockGetInstance);
+
+      expect(mockIsAddress).toBeCalledWith('test');
       expect(result).toBe('Atest');
+    });
+  });
+
+  describe('isHexStrict', () => {
+    it('should call the isHexStrict method on the instance and return the result', () => {
+      const result = web3.isHexString('0x481516', mockGetInstance);
+
+      expect(mockIsHexStrict).toBeCalledWith('0x481516');
+      expect(result).toBe(true);
     });
   });
 });
