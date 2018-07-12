@@ -67,4 +67,23 @@ describe('middleware/blocks', () => {
     expect(dispatchedAction.payload).toHaveProperty('blockNumbers', expectedBlockNumbers);
     expect(dispatchedAction.payload).toHaveProperty('blocks', expectedBlocks);
   });
+
+  it('should dispatch an error if the request fails', async () => {
+    mockAction = {
+      type: t.FETCH_BLOCKS,
+      payload: {
+        requestedBlockNumber: 20,
+        amountOfBlocks: 4,
+      },
+    };
+
+    mockAdapter.getBlocks = jest.fn(() => new Promise((resolve, reject) => reject([{}, { ok: false }])));
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    const dispatchedAction = mockDispatch.mock.calls[0][0];
+    expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+    expect(dispatchedAction).toHaveProperty('payload');
+    expect(dispatchedAction.payload).toHaveProperty('error');
+  });
 });

@@ -62,4 +62,22 @@ describe('middleware/accounts', () => {
     expect(dispatchedAction.payload).toHaveProperty('balance', 100);
     expect(dispatchedAction.payload).toHaveProperty('transactionCount', 2);
   });
+
+  it('should dispatch an error if the request fails', async () => {
+    mockAction = {
+      type: t.FETCH_ACCOUNT,
+      payload: {
+        address: 'test',
+      },
+    };
+
+    mockAdapter.getBalance = jest.fn(() => new Promise((resolve, reject) => reject([{}, { ok: false }])));
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    const dispatchedAction = mockDispatch.mock.calls[0][0];
+    expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+    expect(dispatchedAction).toHaveProperty('payload');
+    expect(dispatchedAction.payload).toHaveProperty('error');
+  });
 });

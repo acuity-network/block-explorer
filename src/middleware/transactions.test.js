@@ -58,6 +58,26 @@ describe('middleware/transactions', () => {
       expect(dispatchedAction).toHaveProperty('payload');
       expect(dispatchedAction.payload).toHaveProperty('test', { hash: 'test', blockNumber: 2 });
     });
+
+    it('should dispatch an error if the request fails', async () => {
+      mockAction = {
+        type: t.FETCH_TRANSACTIONS,
+        payload: {
+          hashes: ['test'],
+        },
+      };
+
+      mockAdapter.getTransactions = jest.fn(() =>
+        new Promise((resolve, reject) => reject([{}, { ok: false }]))
+      );
+
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const dispatchedAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+      expect(dispatchedAction).toHaveProperty('payload');
+      expect(dispatchedAction.payload).toHaveProperty('error');
+    });
   });
 
   describe('FETCH_TRANSACTIONS_FOR_BLOCK', () => {
@@ -132,6 +152,19 @@ describe('middleware/transactions', () => {
       expect(dispatchedAction).toHaveProperty('type', t.FETCH_TRANSACTIONS);
       expect(dispatchedAction).toHaveProperty('payload');
       expect(dispatchedAction.payload).toHaveProperty('hashes', ['0xA', '0xB']);
+    });
+
+    it('should dispatch an error if the request fails', async () => {
+      mockAdapter.getBlocks = jest.fn(() =>
+        new Promise((resolve, reject) => reject([{}, { ok: false }]))
+      );
+
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const dispatchedAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+      expect(dispatchedAction).toHaveProperty('payload');
+      expect(dispatchedAction.payload).toHaveProperty('error');
     });
   });
 });

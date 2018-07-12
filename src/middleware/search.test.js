@@ -105,6 +105,19 @@ describe('middleware/search', () => {
       expect(redirectAction).toHaveProperty('payload');
       expect(redirectAction.payload).toHaveProperty('blockNumber', 1212);
     });
+
+    it('should dispatch an error if the request fails', async () => {
+      mockAdapter.getBlocks = jest.fn(() =>
+        new Promise((resolve, reject) => reject([{}, { ok: false }]))
+      );
+
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const dispatchedAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+      expect(dispatchedAction).toHaveProperty('payload');
+      expect(dispatchedAction.payload).toHaveProperty('error');
+    });
   });
 
   describe('query is transaction hash', () => {
@@ -146,6 +159,19 @@ describe('middleware/search', () => {
       expect(redirectAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
       expect(redirectAction).toHaveProperty('payload');
       expect(redirectAction.payload).toHaveProperty('hash', `_${validQuery}`);
+    });
+
+    it('should dispatch an error if the request fails', async () => {
+      mockAdapter.getTransactions = jest.fn(() =>
+        new Promise((resolve, reject) => reject([{}, { ok: false }]))
+      );
+
+      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+      const dispatchedAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+      expect(dispatchedAction).toHaveProperty('payload');
+      expect(dispatchedAction.payload).toHaveProperty('error');
     });
   });
 });

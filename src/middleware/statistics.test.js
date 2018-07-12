@@ -63,11 +63,25 @@ describe('middleware/statistics', () => {
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
     const dispatchAction = mockDispatch.mock.calls[1][0];
-
     expect(dispatchAction).toHaveProperty('type', t.FETCH_STATISTICS_SUCCESS);
     expect(dispatchAction).toHaveProperty('payload');
     expect(dispatchAction.payload).toHaveProperty('latestBlockNumber', 10);
     expect(dispatchAction.payload).toHaveProperty('gasPrice', 200);
     expect(dispatchAction.payload).toHaveProperty('peerCount', 3);
+  });
+
+  it('should dispatch an error if the request fails', async () => {
+    mockAction = {
+      type: t.FETCH_STATISTICS,
+    };
+
+    mockAdapter.getPeerCount = jest.fn(() => new Promise((resolve, reject) => reject([{}, { ok: false }])));
+
+    await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+
+    const dispatchedAction = mockDispatch.mock.calls[1][0];
+    expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+    expect(dispatchedAction).toHaveProperty('payload');
+    expect(dispatchedAction.payload).toHaveProperty('error');
   });
 });
