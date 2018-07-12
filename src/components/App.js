@@ -3,6 +3,7 @@ import Link from 'redux-first-router-link';
 
 import { getIsUsingFallback } from '@/adapters/web3/init';
 
+import Logo from './Logo';
 import Search from './Search';
 import Switcher from './Switcher';
 
@@ -21,6 +22,11 @@ const App = () => (
       <Search />
     </header>
     <Switcher />
+    <footer>
+      <p>powered by</p>
+      <Logo />
+      <p>MIX Blockchain</p>
+    </footer>
   </div>
 );
 
