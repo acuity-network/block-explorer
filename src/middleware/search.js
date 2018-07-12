@@ -13,24 +13,31 @@ export default (store, adapter = web3, getHistory = getHistoryInstance) => next 
       return history.push(`/accounts/${query}`);
     }
 
-    const blockArray = await adapter.getBlocks([query]);
-    if (blockArray.length === 1) {
-      const block = blockArray[0];
-      store.dispatch(actions.fetchBlocksSuccess([block.number.toString()], { [block.number]: block }));
-      return history.push(`/blocks/${block.number}`);
+    try {
+      const blockArray = await adapter.getBlocks([query]);
+      if (blockArray.length === 1) {
+        const block = blockArray[0];
+        store.dispatch(actions.fetchBlocksSuccess([block.number.toString()], { [block.number]: block }));
+        return history.push(`/blocks/${block.number}`);
+      }
+    } catch(e) {
+      // handled after trying all data types
     }
 
     if (query.substring(0, 2) === '0x' && query.length === 66) {
-      const transactionArray = await adapter.getTransactions([query]);
-      if (transactionArray.length === 1) {
-        const transaction = transactionArray[0];
-        store.dispatch(actions.fetchTransactionsSuccess({ [transaction.hash]: transaction }));
-        return history.push(`/transactions/${transaction.hash}`);
+      try {
+        const transactionArray = await adapter.getTransactions([query]);
+        if (transactionArray.length === 1) {
+          const transaction = transactionArray[0];
+          store.dispatch(actions.fetchTransactionsSuccess({ [transaction.hash]: transaction }));
+          return history.push(`/transactions/${transaction.hash}`);
+        }
+      } catch(e) {
+        // handled after trying all data types
       }
     }
 
-    console.log('Invalid search query.'); // TODO: error handling
-
+    store.dispatch(actions.showError('Invalid search query. Please try a different input.'));
   }
 
   next(action);
