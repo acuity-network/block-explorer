@@ -67,6 +67,8 @@ $list-key-width: 80px;
 
 $table-cell-width: 92px;
 
+$footer-height: calc(2 * #{$mix-small-gap} + #{$mix-medium-gap});
+
 /* FONT SIZES */
 
 $font-tiny: 12px;
