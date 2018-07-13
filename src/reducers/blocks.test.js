@@ -206,4 +206,27 @@ describe('selectors/blocks', () => {
       expect(value).toEqual(['0x1', '0x2', '0x3']);
     });
   });
+
+  describe('getBlockNumberFromHash', () => {
+    it('should return the block number for the given block hash', () => {
+      const mockState = {
+        blocks: {
+          blocks: {
+            123456: {
+              hash: '0x1234567890',
+              number: 123456,
+            },
+            481516: {
+              hash: '0x4815162342',
+              number: 481516,
+            },
+          },
+        },
+      };
+
+      const value = selectors.getBlockNumberFromHash(mockState, '0x4815162342');
+
+      expect(value).toBe(481516);
+    });
+  });
 });

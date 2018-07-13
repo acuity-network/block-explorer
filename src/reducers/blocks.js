@@ -84,3 +84,9 @@ export function getBlockInState(state, blockNumber, methods = { getSingleBlock }
 export function getTransactionHashesForBlock(state, blockNumber, methods = { getSingleBlock }) {
   return methods.getSingleBlock(state, blockNumber).transactions || [];
 }
+
+export function getBlockNumberFromHash(state, blockHash) {
+  const blockArray = Object.values(state.blocks.blocks);
+  const block = blockArray.find(b => b.hash === blockHash) || {};
+  return block.number;
+}
