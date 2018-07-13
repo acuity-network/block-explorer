@@ -28,3 +28,7 @@ export function resetWeb3Instance() {
 export function getIsUsingFallback() {
   return isUsingFallback;
 }
+
+export function getCurrency() {
+  return isUsingFallback ? 'MIX' : 'ETH';
+}

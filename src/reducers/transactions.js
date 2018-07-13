@@ -1,5 +1,5 @@
 import * as t from '@/actions/types';
-import { fromWei } from '@/adapters/web3';
+import { fromWei, getCurrency } from '@/adapters/web3';
 
 import * as routes from '@/router';
 
@@ -69,7 +69,7 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
           linkPayload: { hash },
         },
         amount: {
-          value: `${value} Ether`,
+          value: `${value} ${getCurrency()}`,
         },
       };
       transactionsForDisplay.push(displayTransaction);

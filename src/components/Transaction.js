@@ -5,6 +5,7 @@ import Link from 'redux-first-router-link';
 
 import * as selectors from '@/reducers/selectors';
 import * as routes from '@/router';
+import { getCurrency } from '@/adapters/web3';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
@@ -24,7 +25,7 @@ const Transaction = ({ transaction }) => (
           type: routes.BLOCK_DETAIL,
           payload: { blockNumber: transaction.blockNumber }
         }}>{transaction.blockNumber}</Link>} />
-      <DetailListItem name='Amount' value={`${transaction.valueInEther} Ether`} />
+      <DetailListItem name='Amount' value={`${transaction.valueInEther} ${getCurrency()}`} />
       <DetailListItem
         name='Gas Price'
         value={`${transaction.gasPriceInGwei} Gwei`}
