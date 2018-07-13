@@ -6,8 +6,8 @@ import * as selectors from '@/reducers/selectors';
 
 import Transaction from '@/components/Transaction';
 
-const mapStateToProps = (state, ownProps) => ({
-  transactionInState: selectors.getTransactionInState(state, ownProps.match.params.hash),
+const mapStateToProps = (state, { match }) => ({
+  transactionInState: selectors.getTransactionInState(state, match.params.hash),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,7 +24,7 @@ class TransactionRoute extends React.Component {
 
   render() {
     const hash = this.props.match.params.hash;
-    return (<Transaction hash={hash} />);
+    return <Transaction hash={hash} />;
   }
 }
 

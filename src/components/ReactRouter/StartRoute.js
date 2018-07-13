@@ -15,7 +15,7 @@ class StartRoute extends React.Component {
   }
 
   render() {
-    return (<Start />);
+    return <Start />;
   }
 }
 

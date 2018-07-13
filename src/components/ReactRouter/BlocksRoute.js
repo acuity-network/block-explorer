@@ -15,7 +15,7 @@ class BlocksRoute extends React.Component {
   }
 
   render() {
-    return (<Blocks />);
+    return <Blocks />;
   }
 }
 

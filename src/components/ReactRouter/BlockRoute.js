@@ -7,12 +7,12 @@ import { isHexString } from '@/adapters/web3';
 
 import Block from '@/components/Block';
 
-const mapStateToProps = (state, ownProps) => {
-  const blockAddress = ownProps.match.params.blockNumber;
+const mapStateToProps = (state, { match }) => {
+  const blockAddress = match.params.blockNumber;
   const isBlockNumber = !isHexString(blockAddress);
 
   return {
-    blockInState: selectors.getBlockInState(state, ownProps.match.params.blockNumber),
+    blockInState: selectors.getBlockInState(state, blockAddress),
     blockNumber: isBlockNumber ? blockAddress : selectors.getBlockNumberFromHash(state, blockAddress),
   };
 };
@@ -30,7 +30,7 @@ class BlockRoute extends React.Component {
   }
 
   render() {
-    return (<Block blockNumber={this.props.blockNumber} />);
+    return <Block blockNumber={this.props.blockNumber} />;
   }
 }
 
