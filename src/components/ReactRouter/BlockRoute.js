@@ -6,8 +6,8 @@ import * as selectors from '@/reducers/selectors';
 
 import Block from '@/components/Block';
 
-const mapStateToProps = (state, ownProps) => ({
-  blockInState: selectors.getBlockInState(state, ownProps.match.params.blockNumber),
+const mapStateToProps = (state, { match }) => ({
+  blockInState: selectors.getBlockInState(state, match.params.blockNumber),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,7 +24,7 @@ class BlockRoute extends React.Component {
 
   render() {
     const blockNumber = this.props.match.params.blockNumber;
-    return (<Block blockNumber={blockNumber} />);
+    return <Block blockNumber={blockNumber} />;
   }
 }
 

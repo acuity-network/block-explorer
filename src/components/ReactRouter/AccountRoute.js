@@ -17,7 +17,7 @@ class AccountRoute extends React.Component {
 
   render() {
     const address = this.props.match.params.address;
-    return (<Account address={address} />);
+    return <Account address={address} />;
   }
 }
 

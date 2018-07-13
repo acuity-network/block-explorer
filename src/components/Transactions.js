@@ -8,8 +8,7 @@ import { tableFields } from '@/constants';
 
 import Table from './Table';
 
-const mapStateToProps = (state, ownProps) => {
-  const blockNumber = ownProps.blockNumber;
+const mapStateToProps = (state, { blockNumber }) => {
   const transactionHashes = selectors.getTransactionHashesForBlock(state, blockNumber);
   const blockLink = (<Link to={`/blocks/${blockNumber}`}>{blockNumber}</Link>);
   return {
