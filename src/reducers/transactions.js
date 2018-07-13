@@ -1,8 +1,6 @@
 import * as t from '@/actions/types';
 import { fromWei } from '@/adapters/web3';
 
-import * as routes from '@/router';
-
 const initialState = {};
 
 export default (state = initialState, { type, payload }) => {
@@ -20,10 +18,7 @@ export function getSingleTransaction(state, hash) {
   return state.transactions[hash] || {};
 }
 
-export function getCurrentTransactionForDisplay(state, methods = { getSingleTransaction, fromWei }) {
-  // redux-first-router has issues with '0x' strings
-  const locationHash = state.location.payload.hash || '';
-  const hash = locationHash.replace('_', '');
+export function getTransactionForDisplay(state, hash, methods = { getSingleTransaction, fromWei }) {
   const transactionData = methods.getSingleTransaction(state, hash);
   let valueInWei = '';
   let valueInEther = '';
@@ -65,8 +60,7 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         },
         hash: {
           value: hash,
-          linkType: routes.TRANSACTION_DETAIL,
-          linkPayload: { hash: `_${hash}` },
+          linkReactRouter: `/transactions/${hash}`,
         },
         amount: {
           value: `${value} Ether`,

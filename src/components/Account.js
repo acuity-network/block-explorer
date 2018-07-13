@@ -7,8 +7,8 @@ import * as selectors from '@/reducers/selectors';
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
 
-const mapStateToProps = (state) => ({
-  account: selectors.getCurrentAccountForDisplay(state),
+const mapStateToProps = (state, { address }) => ({
+  account: selectors.getAccountForDisplay(state, address),
 });
 
 const Account = ({ account = {} }) => (

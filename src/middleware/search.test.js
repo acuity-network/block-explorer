@@ -1,10 +1,15 @@
 import * as t from '@/actions/types';
-import * as routes from '@/router';
 import middleware from './search';
 
 describe('middleware/search', () => {
-  let mockStore, mockNext, mockAction, mockDispatch, mockGetState,
-      mockAdapter;
+  let mockStore,
+      mockNext,
+      mockAction,
+      mockDispatch,
+      mockGetState,
+      mockAdapter,
+      mockHistory,
+      mockGetHistory;
 
   beforeEach(() => {
     mockDispatch = jest.fn();
@@ -14,6 +19,10 @@ describe('middleware/search', () => {
     };
     mockNext = jest.fn();
     mockAdapter = {};
+    mockHistory = {
+      push: jest.fn(),
+    };
+    mockGetHistory = jest.fn(() => mockHistory);
   });
 
   it('should forward unrecognized actions', () => {
@@ -40,31 +49,29 @@ describe('middleware/search', () => {
     });
 
     it('should call isAddress with the given query', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.isAddress).toBeCalled();
       expect(mockAdapter.isAddress).toBeCalledWith('test');
     });
 
     it('should not request a block', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getBlocks).not.toBeCalled();
     });
 
     it('should not request a transaction', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getTransactions).not.toBeCalled();
     });
 
     it('should redirect to account details', () => {
-      middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
-      const dispatchAction = mockDispatch.mock.calls[0][0];
-      expect(dispatchAction).toHaveProperty('type', routes.ACCOUNT_DETAIL);
-      expect(dispatchAction).toHaveProperty('payload');
-      expect(dispatchAction.payload).toHaveProperty('address', '_test');
+      expect(mockHistory.push).toBeCalled();
+      expect(mockHistory.push).toBeCalledWith('/accounts/test');
     });
   });
 
@@ -81,14 +88,14 @@ describe('middleware/search', () => {
     });
 
     it('should try to fetch the block if the query is not an account', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getBlocks).toBeCalled();
       expect(mockAdapter.getBlocks).toBeCalledWith(['test']);
     });
 
     it('should dispatch a success action', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       const successAction = mockDispatch.mock.calls[0][0];
       expect(successAction).toHaveProperty('type', t.FETCH_BLOCKS_SUCCESS);
@@ -98,12 +105,23 @@ describe('middleware/search', () => {
     });
 
     it('should redirect to block details', async () => {
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
+
+      expect(mockHistory.push).toBeCalled();
+      expect(mockHistory.push).toBeCalledWith('/blocks/1212');
+    });
+
+    it('should dispatch an error if the request fails', async () => {
+      mockAdapter.getBlocks = jest.fn(() =>
+        new Promise((resolve, reject) => reject())
+      );
+
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-      const redirectAction = mockDispatch.mock.calls[1][0];
-      expect(redirectAction).toHaveProperty('type', routes.BLOCK_DETAIL);
-      expect(redirectAction).toHaveProperty('payload');
-      expect(redirectAction.payload).toHaveProperty('blockNumber', 1212);
+      const dispatchedAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+      expect(dispatchedAction).toHaveProperty('payload');
+      expect(dispatchedAction.payload).toHaveProperty('error');
     });
   });
 
@@ -124,14 +142,14 @@ describe('middleware/search', () => {
     });
 
     it('should try to fetch the transaction if the query is not an account or block', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getTransactions).toBeCalled();
       expect(mockAdapter.getTransactions).toBeCalledWith([validQuery]);
     });
 
     it('should dispatch a success action', async () => {
-      await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       const successAction = mockDispatch.mock.calls[0][0];
       expect(successAction).toHaveProperty('type', t.FETCH_TRANSACTIONS_SUCCESS);
@@ -140,12 +158,23 @@ describe('middleware/search', () => {
     });
 
     it('should redirect to transaction details', async () => {
+      await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
+
+      expect(mockHistory.push).toBeCalled();
+      expect(mockHistory.push).toBeCalledWith(`/transactions/${validQuery}`);
+    });
+
+    it('should dispatch an error if the request fails', async () => {
+      mockAdapter.getTransactions = jest.fn(() =>
+        new Promise((resolve, reject) => reject())
+      );
+
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
-      const redirectAction = mockDispatch.mock.calls[1][0];
-      expect(redirectAction).toHaveProperty('type', routes.TRANSACTION_DETAIL);
-      expect(redirectAction).toHaveProperty('payload');
-      expect(redirectAction.payload).toHaveProperty('hash', `_${validQuery}`);
+      const dispatchedAction = mockDispatch.mock.calls[0][0];
+      expect(dispatchedAction).toHaveProperty('type', t.SHOW_ERROR);
+      expect(dispatchedAction).toHaveProperty('payload');
+      expect(dispatchedAction.payload).toHaveProperty('error');
     });
   });
 });

@@ -7,3 +7,7 @@ export function fromWei(numberAsString, unit, getInstance = getWeb3Instance) {
 export function isAddress(hex, getInstance = getWeb3Instance) {
   return getInstance().utils.isAddress(hex);
 }
+
+export function isHexString(string, getInstance = getWeb3Instance) {
+  return getInstance().utils.isHexStrict(string);
+}

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'redux-first-router-link';
+import { Link } from 'react-router-dom';
 
 const TableCell = ({
   entry = {},
   field = {},
 }) => (
   <td className='mix-table__cell' data-label={field.label}>
-    {entry.linkType
+    {entry.linkReactRouter
       ? <Link
-          to={{ type: entry.linkType, payload: entry.linkPayload }}
+          to={entry.linkReactRouter}
           className='mix-table__link'
         >{entry.value}</Link>
       : entry.value

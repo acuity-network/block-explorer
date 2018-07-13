@@ -1,5 +1,4 @@
 import * as t from '@/actions/types';
-import * as routes from '@/router';
 import { maxBlocksPerPage } from '@/constants';
 import { timestampDistance } from '@/helpers/dates';
 
@@ -50,22 +49,18 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
       },
       number: {
         value: block.number,
-        linkType: routes.BLOCK_DETAIL,
-        linkPayload: { blockNumber: block.number },
+        linkReactRouter: `/blocks/${block.number}`,
       },
       time: {
         value: methods.timestampDistance(block.timestamp),
       },
       transactions: {
         value: block.transactions.length,
-        linkType: block.transactions.length ? routes.TRANSACTIONS : undefined,
-        linkPayload: { blockNumber: block.number },
+        linkReactRouter: `/blocks/${block.number}/transactions`,
       },
       miner: {
         value: block.miner,
-        linkType: routes.ACCOUNT_DETAIL,
-        // redux-first-router has issues with '0x' strings
-        linkPayload: { address: `_${block.miner}` },
+        linkReactRouter: `/accounts/${block.miner}`,
       },
     };
     blocksForDisplay.push(displayBlock);
@@ -88,4 +83,10 @@ export function getBlockInState(state, blockNumber, methods = { getSingleBlock }
 
 export function getTransactionHashesForBlock(state, blockNumber, methods = { getSingleBlock }) {
   return methods.getSingleBlock(state, blockNumber).transactions || [];
+}
+
+export function getBlockNumberFromHash(state, blockHash) {
+  const blockArray = Object.values(state.blocks.blocks);
+  const block = blockArray.find(b => b.hash === blockHash) || {};
+  return block.number;
 }

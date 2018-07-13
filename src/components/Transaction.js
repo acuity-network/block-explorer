@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Link from 'redux-first-router-link';
+import { Link } from 'react-router-dom';
 
 import * as selectors from '@/reducers/selectors';
-import * as routes from '@/router';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
 
-const mapStateToProps = (state) => ({
-  transaction: selectors.getCurrentTransactionForDisplay(state),
+const mapStateToProps = (state, { hash }) => ({
+  transaction: selectors.getTransactionForDisplay(state, hash),
 });
 
 const Transaction = ({ transaction }) => (
@@ -20,10 +19,7 @@ const Transaction = ({ transaction }) => (
       <DetailListItem name='Hash' value={transaction.hash} />
       <DetailListItem
         name='Block Number'
-        value={<Link to={{
-          type: routes.BLOCK_DETAIL,
-          payload: { blockNumber: transaction.blockNumber }
-        }}>{transaction.blockNumber}</Link>} />
+        value={<Link to={`/blocks/${transaction.blockNumber}`}>{transaction.blockNumber}</Link>} />
       <DetailListItem name='Amount' value={`${transaction.valueInEther} Ether`} />
       <DetailListItem
         name='Gas Price'
@@ -31,17 +27,11 @@ const Transaction = ({ transaction }) => (
       />
       <DetailListItem
         name='Sender'
-        value={<Link to={{
-          type: routes.ACCOUNT_DETAIL,
-          payload: { address: `_${transaction.from}` }
-        }}>{transaction.from}</Link>}
+        value={<Link to={`/accounts/${transaction.from}`}>{transaction.from}</Link>}
       />
       <DetailListItem
         name='Receiver'
-        value={<Link to={{
-          type: routes.ACCOUNT_DETAIL,
-          payload: { address: `_${transaction.to}` }
-        }}>{transaction.to}</Link>}
+        value={<Link to={`/accounts/${transaction.to}`}>{transaction.to}</Link>}
       />
     </DetailList>
   </div>

@@ -69,11 +69,12 @@ describe('selectors/accounts', () => {
     });
   });
 
-  describe('getCurrentAccountForDisplay', () => {
+  describe('getAccountForDisplay', () => {
+    const mockAddress = '0x12345678';
     const mockState = {
       location: {
         payload: {
-          address: '_0x12345678',
+          address: mockAddress,
         },
       },
     };
@@ -82,21 +83,21 @@ describe('selectors/accounts', () => {
     const mockMethods = { getAccount: mockGetAccount, fromWei: mockFromWei };
 
     it('should use the address from location to get the current account', () => {
-      selectors.getCurrentAccountForDisplay(mockState, mockMethods);
+      selectors.getAccountForDisplay(mockState, mockAddress, mockMethods);
 
       expect(mockGetAccount).toBeCalled();
       expect(mockGetAccount).toBeCalledWith(mockState, '0x12345678');
     });
 
     it('should transform the Wei balance to Ether', () => {
-      selectors.getCurrentAccountForDisplay(mockState, mockMethods);
+      selectors.getAccountForDisplay(mockState, mockAddress, mockMethods);
 
       expect(mockFromWei).toBeCalled();
       expect(mockFromWei).toBeCalledWith('235', 'ether');
     });
 
     it('should return an object with account display data', () => {
-      const value = selectors.getCurrentAccountForDisplay(mockState, mockMethods);
+      const value = selectors.getAccountForDisplay(mockState, mockAddress, mockMethods);
 
       expect(value).toHaveProperty('address', '0x12345678');
       expect(value).toHaveProperty('balanceInWei', '235');
