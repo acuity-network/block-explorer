@@ -20,7 +20,7 @@ export default (store, adapter = web3) => next => async action => {
       ));
 
     } catch(e) {
-      store.dispatch(actions.showError('Can\'t fetch statistics. Please try again.'));
+      store.dispatch(actions.showError(`Can't fetch statistics. Please try again.`));
     }
 
   } else {

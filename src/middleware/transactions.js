@@ -19,7 +19,7 @@ export default (store, adapter = web3, getters = selectors) => next => async act
       store.dispatch(actions.fetchTransactionsSuccess(transactions));
 
     } catch(e) {
-      store.dispatch(actions.showError('Can\'t fetch transaction(s). Please try again.'));
+      store.dispatch(actions.showError(`Can't fetch transaction(s). Please try again.`));
     }
   }
 
@@ -38,7 +38,7 @@ export default (store, adapter = web3, getters = selectors) => next => async act
       store.dispatch(actions.fetchTransactions(hashes));
 
     } catch(e) {
-      store.dispatch(actions.showError('Can\'t fetch transactions for this block. Please try again.'));
+      store.dispatch(actions.showError(`Can't fetch transactions for this block. Please try again.`));
     }
   }
 

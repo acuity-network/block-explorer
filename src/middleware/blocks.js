@@ -38,7 +38,7 @@ export default (store, adapter = web3) => next => async action => {
       store.dispatch(actions.fetchBlocksSuccess(Object.keys(blocks), blocks));
 
     } catch(e) {
-      store.dispatch(actions.showError('Can\'t fetch block(s). Please try again.'));
+      store.dispatch(actions.showError(`Can't fetch block(s). Please try again.`));
     }
 
   } else {

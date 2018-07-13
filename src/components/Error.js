@@ -14,12 +14,13 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Error = ({ error, onDismissError }) => (
-  error &&
+  error && (
     <aside className='error__popup'>
       <h1 className='error__title'>Error</h1>
       <p className='error__message'>{error}</p>
       <button onClick={onDismissError} className='error__button'>Ok</button>
     </aside>
+  )
 );
 
 Error.propTypes = {

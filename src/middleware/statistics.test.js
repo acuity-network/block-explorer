@@ -75,7 +75,7 @@ describe('middleware/statistics', () => {
       type: t.FETCH_STATISTICS,
     };
 
-    mockAdapter.getPeerCount = jest.fn(() => new Promise((resolve, reject) => reject([{}, { ok: false }])));
+    mockAdapter.getPeerCount = jest.fn(() => new Promise((resolve, reject) => reject()));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
