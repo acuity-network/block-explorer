@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as selectors from '@/reducers/selectors';
+import { getCurrency } from '@/adapters/web3';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
@@ -20,7 +21,7 @@ const Transaction = ({ transaction }) => (
       <DetailListItem
         name='Block Number'
         value={<Link to={`/blocks/${transaction.blockNumber}`}>{transaction.blockNumber}</Link>} />
-      <DetailListItem name='Amount' value={`${transaction.valueInEther} Ether`} />
+      <DetailListItem name='Amount' value={`${transaction.valueInEther} ${getCurrency()}`} />
       <DetailListItem
         name='Gas Price'
         value={`${transaction.gasPriceInGwei} Gwei`}
