@@ -77,7 +77,7 @@ describe('middleware/blocks', () => {
       },
     };
 
-    mockAdapter.getBlocks = jest.fn(() => new Promise((resolve, reject) => reject([{}, { ok: false }])));
+    mockAdapter.getBlocks = jest.fn(() => new Promise((resolve, reject) => reject()));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 

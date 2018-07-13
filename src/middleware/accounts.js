@@ -18,7 +18,7 @@ export default (store, adapter = web3) => next => async action => {
         transactionCount: accountData[1],
       }));
     } catch(e) {
-      store.dispatch(actions.showError('Can\'t fetch account. Please try again.'));
+      store.dispatch(actions.showError(`Can't fetch account. Please try again.`));
     }
 
   } else {

@@ -71,7 +71,7 @@ describe('middleware/accounts', () => {
       },
     };
 
-    mockAdapter.getBalance = jest.fn(() => new Promise((resolve, reject) => reject([{}, { ok: false }])));
+    mockAdapter.getBalance = jest.fn(() => new Promise((resolve, reject) => reject()));
 
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 

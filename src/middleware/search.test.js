@@ -108,7 +108,7 @@ describe('middleware/search', () => {
 
     it('should dispatch an error if the request fails', async () => {
       mockAdapter.getBlocks = jest.fn(() =>
-        new Promise((resolve, reject) => reject([{}, { ok: false }]))
+        new Promise((resolve, reject) => reject())
       );
 
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
@@ -163,7 +163,7 @@ describe('middleware/search', () => {
 
     it('should dispatch an error if the request fails', async () => {
       mockAdapter.getTransactions = jest.fn(() =>
-        new Promise((resolve, reject) => reject([{}, { ok: false }]))
+        new Promise((resolve, reject) => reject())
       );
 
       await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
