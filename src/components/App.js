@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getIsUsingFallback } from '@/adapters/web3/init';
 
 import Error from './Error';
+import Logo from '@/svgs/Logo';
 import Search from './Search';
 import Switcher from './ReactRouter/Switcher';
 
@@ -23,6 +24,13 @@ const App = () => (
     </header>
     <Switcher />
     <Error />
+    <a href='https://www.mix-blockchain.org/'>
+      <footer className='mix-footer'>
+        <p>powered by</p>
+        <Logo className='mix-footer__logo' />
+        <p>MIX Blockchain</p>
+      </footer>
+    </a>
   </div>
 );
 
