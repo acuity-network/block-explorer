@@ -6,16 +6,20 @@ export default (store, adapter = web3) => next => async action => {
   if (action.type === t.FETCH_ACCOUNT) {
     const { address } = action.payload;
 
-    const accountData = await Promise.all([
-      adapter.getBalance(address),
-      adapter.getTransactionCount(address),
-    ]);
+    try {
+      const accountData = await Promise.all([
+        adapter.getBalance(address),
+        adapter.getTransactionCount(address),
+      ]);
 
-    store.dispatch(actions.fetchAccountSuccess({
-      address,
-      balance: accountData[0],
-      transactionCount: accountData[1],
-    }));
+      store.dispatch(actions.fetchAccountSuccess({
+        address,
+        balance: accountData[0],
+        transactionCount: accountData[1],
+      }));
+    } catch(e) {
+      store.dispatch(actions.showError(`Can't fetch account. Please try again.`));
+    }
 
   } else {
     next(action);

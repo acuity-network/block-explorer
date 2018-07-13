@@ -20,9 +20,7 @@ export function getAccount(state, address) {
 }
 
 export function getCurrentAccountForDisplay(state, methods = { getAccount, fromWei }) {
-  // redux-first-router has issues with '0x' strings
-  const locationAddress = state.location.payload.address || '';
-  const address = locationAddress.replace('_', '');
+  const address = state.location.payload.address || '';
   const accountData = methods.getAccount(state, address);
   let balanceInWei = 0;
   let balanceInEther = 0;

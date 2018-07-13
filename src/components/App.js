@@ -3,6 +3,7 @@ import Link from 'redux-first-router-link';
 
 import { getIsUsingFallback } from '@/adapters/web3/init';
 
+import Error from './Error';
 import Search from './Search';
 import Switcher from './Switcher';
 
@@ -21,6 +22,7 @@ const App = () => (
       <Search />
     </header>
     <Switcher />
+    <Error />
   </div>
 );
 

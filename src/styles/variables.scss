@@ -55,6 +55,8 @@ $padding-input: $mix-tiny-gap * 2;
 
 // buttons
 $button-height: 60px;
+$button-height-small: 40px;
+$button-width: 100px;
 
 // special elements
 $bar-chart-height: 80px;
@@ -75,6 +77,7 @@ $font-title-large: 32px;
 /* Z INDEX */
 
 $header-z: 20;
+$popup-z: 30;
 
 /* MEDIA QUERIES */
 

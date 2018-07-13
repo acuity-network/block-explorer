@@ -64,8 +64,7 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
       miner: {
         value: block.miner,
         linkType: routes.ACCOUNT_DETAIL,
-        // redux-first-router has issues with '0x' strings
-        linkPayload: { address: `_${block.miner}` },
+        linkPayload: { address: block.miner },
       },
     };
     blocksForDisplay.push(displayBlock);
