@@ -8,7 +8,7 @@ The MIX block explorer works with any Ethereum-based blockchains. It is built in
 3. `yarn start` runs the app on `localhost:3000`
 4. To run the test suite enter `yarn test`
 
-There is no blockchain setup needed as this block explorer connects to the [MIX blockchain](rpc.mix-blockchain.org) as fallback. If you want you can use a Web3 browser extension (such as [Metamask](https://metamask.io/)) to connect to other blockchains.
+There is no blockchain setup needed as this block explorer connects to the [MIX blockchain](https://www.mix-blockchain.org) as fallback. If you want you can use a Web3 browser extension (such as [Metamask](https://metamask.io/)) to connect to other blockchains.
 
 ## Contributions
 Contributions and feedback are always welcome!
