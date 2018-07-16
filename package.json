@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/mix-blockchain/block-explorer"
   },
-  "homepage": "http://mix-blockchain.org/",
+  "homepage": "https://blocks.mix-blockchain.org",
   "bugs": {
     "url": "https://github.com/mix-blockchain/block-explorer/issues"
   },
