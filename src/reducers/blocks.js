@@ -49,18 +49,18 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
       },
       number: {
         value: block.number,
-        linkReactRouter: `/blocks/${block.number}`,
+        linkReactRouter: `/block/${block.number}`,
       },
       time: {
         value: methods.timestampDistance(block.timestamp),
       },
       transactions: {
         value: block.transactions.length,
-        linkReactRouter: `/blocks/${block.number}/transactions`,
+        linkReactRouter: `/block/${block.number}/transactions`,
       },
       miner: {
         value: block.miner,
-        linkReactRouter: `/accounts/${block.miner}`,
+        linkReactRouter: `/address/${block.miner}`,
       },
     };
     blocksForDisplay.push(displayBlock);

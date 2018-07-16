@@ -60,7 +60,7 @@ export function getTransactionsForDisplay(state, hashes, methods = { getSingleTr
         },
         hash: {
           value: hash,
-          linkReactRouter: `/transactions/${hash}`,
+          linkReactRouter: `/transaction/${hash}`,
         },
         amount: {
           value: `${value} ${getCurrency()}`,

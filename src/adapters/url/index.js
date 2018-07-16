@@ -1,7 +1,7 @@
 const redirects = {
-  '#/address/': 'accounts/',
-  '#/block/': 'blocks/',
-  '#/transaction/': 'transactions/',
+  '#/address/': 'address/',
+  '#/block/': 'block/',
+  '#/transaction/': 'transaction/',
 };
 
 export default () => {

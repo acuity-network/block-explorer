@@ -10,7 +10,7 @@ import Table from './Table';
 
 const mapStateToProps = (state, { blockNumber }) => {
   const transactionHashes = selectors.getTransactionHashesForBlock(state, blockNumber);
-  const blockLink = (<Link to={`/blocks/${blockNumber}`}>{blockNumber}</Link>);
+  const blockLink = (<Link to={`/block/${blockNumber}`}>{blockNumber}</Link>);
   return {
     transactions: selectors.getTransactionsForDisplay(state, transactionHashes),
     title: <span>Transactions for Block # {blockLink}</span>,

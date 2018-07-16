@@ -2,21 +2,21 @@ import * as actions from './creators';
 import * as t from './types';
 
 describe('actions/creators/fetch', () => {
-  describe('fetchAccount', () => {
+  describe('fetchAddress', () => {
     it('should return an action with the correct type and payload', () => {
-      const action = actions.fetchAccount('test');
+      const action = actions.fetchAddress('test');
 
-      expect(action).toHaveProperty('type', t.FETCH_ACCOUNT);
+      expect(action).toHaveProperty('type', t.FETCH_ADDRESS);
       expect(action).toHaveProperty('payload');
       expect(action.payload).toHaveProperty('address', 'test');
     });
   });
 
-  describe('fetchAccountSuccess', () => {
+  describe('fetchAddressSuccess', () => {
     it('should return an action with the correct type and payload', () => {
-      const action = actions.fetchAccountSuccess({ test: true });
+      const action = actions.fetchAddressSuccess({ test: true });
 
-      expect(action).toHaveProperty('type', t.FETCH_ACCOUNT_SUCCESS);
+      expect(action).toHaveProperty('type', t.FETCH_ADDRESS_SUCCESS);
       expect(action).toHaveProperty('payload');
       expect(action.payload).toHaveProperty('test', true);
     });

@@ -21,7 +21,7 @@ const Block = ({ block = {} }) => (
       {block.transactions && block.transactions.length > 0
         ? <DetailListItem
             name='Transactions'
-            value={<Link to={`/blocks/${block.number}/transactions`}>{block.transactions.length}</Link>}
+            value={<Link to={`/block/${block.number}/transactions`}>{block.transactions.length}</Link>}
           />
         : <DetailListItem name='Transactions' value='0' />
       }
@@ -29,7 +29,7 @@ const Block = ({ block = {} }) => (
       <DetailListItem name='Timestamp' value={block.timestamp} />
       <DetailListItem
         name='Mined by'
-        value={<Link to={`/accounts/${block.miner}`}>{block.miner}</Link>}
+        value={<Link to={`/address/${block.miner}`}>{block.miner}</Link>}
       />
       <DetailListItem name='Gas Limit' value={block.gasLimit} />
       <DetailListItem name='Gas used' value={block.gasUsed} />

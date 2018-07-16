@@ -1,4 +1,4 @@
-export * from './accounts';
+export * from './addresses';
 export * from './blocks';
 export * from './error';
 export * from './statistics';

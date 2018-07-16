@@ -1,7 +1,7 @@
 import * as t from '@/actions/types';
-import reducer, * as selectors from './accounts';
+import reducer, * as selectors from './addresses';
 
-describe('reducers/accounts', () => {
+describe('reducers/addresses', () => {
   it('should ignore unrecognized actions', () => {
     const mockAction = {
       type: 'test/TEST_ACTION',
@@ -11,9 +11,9 @@ describe('reducers/accounts', () => {
     expect(state).toEqual('test');
   });
 
-  it('should save accounts to the store', () => {
+  it('should save addresses to the store', () => {
     const mockAction = {
-      type: t.FETCH_ACCOUNT_SUCCESS,
+      type: t.FETCH_ADDRESS_SUCCESS,
       payload: {
         address: 'test',
         balance: 10,
@@ -28,9 +28,9 @@ describe('reducers/accounts', () => {
     expect(state.test).toHaveProperty('transactionCount', 2);
   });
 
-  it('should update accounts if the data changed', () => {
+  it('should update addresses if the data changed', () => {
     const mockAction = {
-      type: t.FETCH_ACCOUNT_SUCCESS,
+      type: t.FETCH_ADDRESS_SUCCESS,
       payload: {
         address: 'test',
         balance: 15,
@@ -52,24 +52,24 @@ describe('reducers/accounts', () => {
   });
 });
 
-describe('selectors/accounts', () => {
-  describe('getAccount', () => {
-    it('should return the correct account from state', () => {
+describe('selectors/addresses', () => {
+  describe('getAddress', () => {
+    it('should return the correct address from state', () => {
       const mockState = {
-        accounts: {
+        addresses: {
           test: {
             balance: 10,
           },
         },
       };
 
-      const account = selectors.getAccount(mockState, 'test');
+      const address = selectors.getAddress(mockState, 'test');
 
-      expect(account).toHaveProperty('balance', 10);
+      expect(address).toHaveProperty('balance', 10);
     });
   });
 
-  describe('getAccountForDisplay', () => {
+  describe('getAddressForDisplay', () => {
     const mockAddress = '0x12345678';
     const mockState = {
       location: {
@@ -78,26 +78,26 @@ describe('selectors/accounts', () => {
         },
       },
     };
-    const mockGetAccount = jest.fn((state, address) => ({ address, balance: 235, transactionCount: 2 }));
+    const mockGetAddress = jest.fn((state, address) => ({ address, balance: 235, transactionCount: 2 }));
     const mockFromWei = jest.fn(amount => amount * 10);
-    const mockMethods = { getAccount: mockGetAccount, fromWei: mockFromWei };
+    const mockMethods = { getAddress: mockGetAddress, fromWei: mockFromWei };
 
-    it('should use the address from location to get the current account', () => {
-      selectors.getAccountForDisplay(mockState, mockAddress, mockMethods);
+    it('should use the address from location to get the current address', () => {
+      selectors.getAddressForDisplay(mockState, mockAddress, mockMethods);
 
-      expect(mockGetAccount).toBeCalled();
-      expect(mockGetAccount).toBeCalledWith(mockState, '0x12345678');
+      expect(mockGetAddress).toBeCalled();
+      expect(mockGetAddress).toBeCalledWith(mockState, '0x12345678');
     });
 
     it('should transform the Wei balance to Ether', () => {
-      selectors.getAccountForDisplay(mockState, mockAddress, mockMethods);
+      selectors.getAddressForDisplay(mockState, mockAddress, mockMethods);
 
       expect(mockFromWei).toBeCalled();
       expect(mockFromWei).toBeCalledWith('235', 'ether');
     });
 
-    it('should return an object with account display data', () => {
-      const value = selectors.getAccountForDisplay(mockState, mockAddress, mockMethods);
+    it('should return an object with address display data', () => {
+      const value = selectors.getAddressForDisplay(mockState, mockAddress, mockMethods);
 
       expect(value).toHaveProperty('address', '0x12345678');
       expect(value).toHaveProperty('balanceInWei', '235');

@@ -40,9 +40,9 @@ describe('selectors/transactions', () => {
         },
       };
 
-      const account = selectors.getSingleTransaction(mockState, 'test');
+      const address = selectors.getSingleTransaction(mockState, 'test');
 
-      expect(account).toHaveProperty('blockNumber', 10);
+      expect(address).toHaveProperty('blockNumber', 10);
     });
   });
 
@@ -130,7 +130,7 @@ describe('selectors/transactions', () => {
           },
           hash: {
             value: '0xA',
-            linkReactRouter: '/transactions/0xA',
+            linkReactRouter: '/transaction/0xA',
           },
           amount: {
             value: '10 ETH',
@@ -142,7 +142,7 @@ describe('selectors/transactions', () => {
           },
           hash: {
             value: '0xB',
-            linkReactRouter: '/transactions/0xB',
+            linkReactRouter: '/transaction/0xB',
           },
           amount: {
             value: '4000 ETH',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import StartRoute from '@/components/ReactRouter/StartRoute';
-import AccountRoute from '@/components/ReactRouter/AccountRoute';
+import AddressRoute from '@/components/ReactRouter/AddressRoute';
 import BlockRoute from '@/components/ReactRouter/BlockRoute';
 import BlocksRoute from '@/components/ReactRouter/BlocksRoute';
 import TransactionRoute from '@/components/ReactRouter/TransactionRoute';
@@ -16,8 +16,8 @@ const Switcher = () => (
       exact
     />
     <Route
-      path='/accounts/:address'
-      component={AccountRoute}
+      path='/address/:address'
+      component={AddressRoute}
     />
     <Route
       path='/blocks'
@@ -25,16 +25,16 @@ const Switcher = () => (
       exact
     />
     <Route
-      path='/blocks/:blockNumber'
+      path='/block/:blockNumber'
       component={BlockRoute}
       exact
     />
     <Route
-      path='/blocks/:blockNumber/transactions'
+      path='/block/:blockNumber/transactions'
       component={TransactionsRoute}
     />
     <Route
-      path='/transactions/:hash'
+      path='/transaction/:hash'
       component={TransactionRoute}
     />
   </Switch>

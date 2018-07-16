@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 
 import * as actions from '@/actions/creators';
 
-import Account from '@/components/Account';
+import Address from '@/components/Address';
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchAccount: (address) => dispatch(actions.fetchAccount(address))
+  fetchAddress: (address) => dispatch(actions.fetchAddress(address))
 });
 
-class AccountRoute extends React.Component {
+class AddressRoute extends React.Component {
   componentDidMount() {
     const address = this.props.match.params.address;
-    this.props.fetchAccount(address);
+    this.props.fetchAddress(address);
   }
 
   render() {
     const address = this.props.match.params.address;
-    return <Account address={address} />;
+    return <Address address={address} />;
   }
 }
 
-export default connect(null, mapDispatchToProps)(AccountRoute);
+export default connect(null, mapDispatchToProps)(AddressRoute);

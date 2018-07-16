@@ -20,7 +20,7 @@ const Transaction = ({ transaction }) => (
       <DetailListItem name='Hash' value={transaction.hash} />
       <DetailListItem
         name='Block Number'
-        value={<Link to={`/blocks/${transaction.blockNumber}`}>{transaction.blockNumber}</Link>} />
+        value={<Link to={`/block/${transaction.blockNumber}`}>{transaction.blockNumber}</Link>} />
       <DetailListItem name='Amount' value={`${transaction.valueInEther} ${getCurrency()}`} />
       <DetailListItem
         name='Gas Price'
@@ -28,11 +28,11 @@ const Transaction = ({ transaction }) => (
       />
       <DetailListItem
         name='Sender'
-        value={<Link to={`/accounts/${transaction.from}`}>{transaction.from}</Link>}
+        value={<Link to={`/address/${transaction.from}`}>{transaction.from}</Link>}
       />
       <DetailListItem
         name='Receiver'
-        value={<Link to={`/accounts/${transaction.to}`}>{transaction.to}</Link>}
+        value={<Link to={`/address/${transaction.to}`}>{transaction.to}</Link>}
       />
     </DetailList>
   </div>

@@ -10,7 +10,7 @@ export default (store, adapter = web3, getHistory = getHistoryInstance) => next 
 
     const isAddress = adapter.isAddress(query);
     if (isAddress) {
-      return history.push(`/accounts/${query}`);
+      return history.push(`/address/${query}`);
     }
 
     try {
@@ -18,7 +18,7 @@ export default (store, adapter = web3, getHistory = getHistoryInstance) => next 
       if (blockArray.length === 1) {
         const block = blockArray[0];
         store.dispatch(actions.fetchBlocksSuccess([block.number.toString()], { [block.number]: block }));
-        return history.push(`/blocks/${block.number}`);
+        return history.push(`/block/${block.number}`);
       }
     } catch(e) {
       // handled after trying all data types
@@ -30,7 +30,7 @@ export default (store, adapter = web3, getHistory = getHistoryInstance) => next 
         if (transactionArray.length === 1) {
           const transaction = transactionArray[0];
           store.dispatch(actions.fetchTransactionsSuccess({ [transaction.hash]: transaction }));
-          return history.push(`/transactions/${transaction.hash}`);
+          return history.push(`/transaction/${transaction.hash}`);
         }
       } catch(e) {
         // handled after trying all data types

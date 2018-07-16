@@ -104,18 +104,18 @@ describe('selectors/blocks', () => {
           },
           number: {
             value: 2,
-            linkReactRouter: '/blocks/2',
+            linkReactRouter: '/block/2',
           },
           time: {
             value: 242424,
           },
           transactions: {
             value: 3,
-            linkReactRouter: '/blocks/2/transactions',
+            linkReactRouter: '/block/2/transactions',
           },
           miner: {
             value: '0xminer1',
-            linkReactRouter: '/accounts/0xminer1',
+            linkReactRouter: '/address/0xminer1',
           },
         },
         {
@@ -124,18 +124,18 @@ describe('selectors/blocks', () => {
           },
           number: {
             value: 3,
-            linkReactRouter: '/blocks/3',
+            linkReactRouter: '/block/3',
           },
           time: {
             value: 3535353,
           },
           transactions: {
             value: 2,
-            linkReactRouter: '/blocks/3/transactions',
+            linkReactRouter: '/block/3/transactions',
           },
           miner: {
             value: '0xminer2',
-            linkReactRouter: '/accounts/0xminer2',
+            linkReactRouter: '/address/0xminer2',
           },
         },
       ];

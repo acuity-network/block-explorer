@@ -1,6 +1,6 @@
-import * as web3 from './accounts';
+import * as web3 from './addresses';
 
-describe('adapters/web3/accounts', () => {
+describe('adapters/web3/addresses', () => {
   let mockGetInstance, mockEth;
 
   beforeEach(() => {

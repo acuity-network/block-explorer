@@ -1,18 +1,18 @@
 import * as t from './types';
 
-export function fetchAccount(address) {
+export function fetchAddress(address) {
   return {
-    type: t.FETCH_ACCOUNT,
+    type: t.FETCH_ADDRESS,
     payload: {
       address,
     },
   };
 }
 
-export function fetchAccountSuccess(account) {
+export function fetchAddressSuccess(address) {
   return {
-    type: t.FETCH_ACCOUNT_SUCCESS,
-    payload: account,
+    type: t.FETCH_ADDRESS_SUCCESS,
+    payload: address,
   };
 }
 

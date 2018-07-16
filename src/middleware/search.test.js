@@ -67,11 +67,11 @@ describe('middleware/search', () => {
       expect(mockAdapter.getTransactions).not.toBeCalled();
     });
 
-    it('should redirect to account details', () => {
+    it('should redirect to address details', () => {
       middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockHistory.push).toBeCalled();
-      expect(mockHistory.push).toBeCalledWith('/accounts/test');
+      expect(mockHistory.push).toBeCalledWith('/address/test');
     });
   });
 
@@ -87,7 +87,7 @@ describe('middleware/search', () => {
       mockAdapter.getBlocks = jest.fn(() => [{ number: 1212 }]);
     });
 
-    it('should try to fetch the block if the query is not an account', async () => {
+    it('should try to fetch the block if the query is not an address', async () => {
       await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getBlocks).toBeCalled();
@@ -108,7 +108,7 @@ describe('middleware/search', () => {
       await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockHistory.push).toBeCalled();
-      expect(mockHistory.push).toBeCalledWith('/blocks/1212');
+      expect(mockHistory.push).toBeCalledWith('/block/1212');
     });
 
     it('should dispatch an error if the request fails', async () => {
@@ -141,7 +141,7 @@ describe('middleware/search', () => {
       mockAdapter.getTransactions = jest.fn(() => ([{ hash: validQuery, test: true }]));
     });
 
-    it('should try to fetch the transaction if the query is not an account or block', async () => {
+    it('should try to fetch the transaction if the query is not an address or block', async () => {
       await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockAdapter.getTransactions).toBeCalled();
@@ -161,7 +161,7 @@ describe('middleware/search', () => {
       await middleware(mockStore, mockAdapter, mockGetHistory)(mockNext)(mockAction);
 
       expect(mockHistory.push).toBeCalled();
-      expect(mockHistory.push).toBeCalledWith(`/transactions/${validQuery}`);
+      expect(mockHistory.push).toBeCalledWith(`/transaction/${validQuery}`);
     });
 
     it('should dispatch an error if the request fails', async () => {

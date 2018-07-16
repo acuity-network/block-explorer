@@ -1,7 +1,7 @@
 import * as t from '@/actions/types';
-import middleware from './accounts';
+import middleware from './addresses';
 
-describe('middleware/accounts', () => {
+describe('middleware/addresses', () => {
   let mockStore, mockNext, mockAction, mockDispatch, mockGetState,
       mockAdapter;
 
@@ -30,7 +30,7 @@ describe('middleware/accounts', () => {
 
   it('should fetch balance and transactionCount', async () => {
     mockAction = {
-      type: t.FETCH_ACCOUNT,
+      type: t.FETCH_ADDRESS,
       payload: {
         address: 'test',
       },
@@ -47,7 +47,7 @@ describe('middleware/accounts', () => {
 
   it('should dispatch a success action with the fetched data', async () => {
     mockAction = {
-      type: t.FETCH_ACCOUNT,
+      type: t.FETCH_ADDRESS,
       payload: {
         address: 'test',
       },
@@ -56,7 +56,7 @@ describe('middleware/accounts', () => {
     await middleware(mockStore, mockAdapter)(mockNext)(mockAction);
 
     const dispatchedAction = mockDispatch.mock.calls[0][0];
-    expect(dispatchedAction).toHaveProperty('type', t.FETCH_ACCOUNT_SUCCESS);
+    expect(dispatchedAction).toHaveProperty('type', t.FETCH_ADDRESS_SUCCESS);
     expect(dispatchedAction).toHaveProperty('payload');
     expect(dispatchedAction.payload).toHaveProperty('address', 'test');
     expect(dispatchedAction.payload).toHaveProperty('balance', 100);
@@ -65,7 +65,7 @@ describe('middleware/accounts', () => {
 
   it('should dispatch an error if the request fails', async () => {
     mockAction = {
-      type: t.FETCH_ACCOUNT,
+      type: t.FETCH_ADDRESS,
       payload: {
         address: 'test',
       },
