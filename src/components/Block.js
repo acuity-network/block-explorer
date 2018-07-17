@@ -26,7 +26,7 @@ const Block = ({ block = {} }) => (
         : <DetailListItem name='Transactions' value='0' />
       }
 
-      <DetailListItem name='Timestamp' value={block.timestamp} />
+      <DetailListItem name='Timestamp' value={new Date(block.timestamp * 1000).toLocaleString()} />
       <DetailListItem
         name='Mined by'
         value={<Link to={`/address/${block.miner}`}>{block.miner}</Link>}
