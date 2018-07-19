@@ -56,7 +56,6 @@ export function getLatestBlocksForDisplay(state, amountOfBlocks, methods = { get
       },
       transactions: {
         value: block.transactions.length,
-        linkReactRouter: `/block/${block.number}/transactions`,
       },
       miner: {
         value: block.miner,
