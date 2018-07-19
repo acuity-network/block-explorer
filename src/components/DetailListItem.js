@@ -16,7 +16,7 @@ const DetailListItem = ({ name = '', linkTarget = '', value = '' }) => (
 
 DetailListItem.propTypes = {
   name: PropTypes.string,
-  link: PropTypes.string,
+  linkTarget: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
