@@ -111,7 +111,6 @@ describe('selectors/blocks', () => {
           },
           transactions: {
             value: 3,
-            linkReactRouter: '/block/2/transactions',
           },
           miner: {
             value: '0xminer1',
@@ -131,7 +130,6 @@ describe('selectors/blocks', () => {
           },
           transactions: {
             value: 2,
-            linkReactRouter: '/block/3/transactions',
           },
           miner: {
             value: '0xminer2',

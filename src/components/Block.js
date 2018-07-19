@@ -15,14 +15,14 @@ const mapStateToProps = (state, { blockNumber }) => ({
 });
 
 const Block = ({ block = {} }) => [
-  <div className='mix-content-wrapper'>
+  <div key='block-data' className='mix-content-wrapper'>
     <h2 className='content-block__title'>Block # {block.number}</h2>
     <DetailList>
       <DetailListItem name='Hash' value={block.hash} />
       {block.transactions && block.transactions.length > 0
         ? <DetailListItem
             name='Transactions'
-            value={<Link to={`/block/${block.number}/transactions`}>{block.transactions.length}</Link>}
+            value={block.transactions.length}
           />
         : <DetailListItem name='Transactions' value='0' />
       }
@@ -44,7 +44,7 @@ const Block = ({ block = {} }) => [
     </DetailList>
   </div>
   ,
-  <Transactions blockNumber={block.number} />
+  <Transactions key='block-transactions' blockNumber={block.number} />
 ];
 
 Block.propTypes = {
