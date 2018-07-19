@@ -18,14 +18,10 @@ const Block = ({ block = {} }) => [
     <h2 className='content-block__title'>Block # {block.number}</h2>
     <DetailList>
       <DetailListItem name='Hash' value={block.hash} />
-      {block.transactions && block.transactions.length > 0
-        ? <DetailListItem
-            name='Transactions'
-            value={block.transactions.length}
-          />
-        : <DetailListItem name='Transactions' value='0' />
-      }
-
+      <DetailListItem
+        name='Transactions'
+        value={block.transactions ? block.transactions.length : 0}
+      />
       <DetailListItem name='Timestamp' value={new Date(block.timestamp * 1000).toLocaleString()} />
       <DetailListItem
         name='Mined by'
@@ -44,7 +40,8 @@ const Block = ({ block = {} }) => [
     </DetailList>
   </div>
   ,
-  <Transactions key='block-transactions' blockNumber={block.number} />
+  block.transactions && block.transactions.length > 0
+    && <Transactions key='block-transactions' blockNumber={block.number} />
 ];
 
 Block.propTypes = {
