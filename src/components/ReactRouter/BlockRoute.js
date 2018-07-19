@@ -24,11 +24,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 class BlockRoute extends React.Component {
   componentDidMount() {
+    const blockNumber = this.props.match.params.blockNumber;
+
     if (!this.props.blockInState) {
-      const blockNumber = this.props.match.params.blockNumber;
       this.props.fetchSingleBlock(blockNumber);
-      this.props.fetchTransactions(blockNumber);
     }
+
+    this.props.fetchTransactions(blockNumber);
   }
 
   render() {
