@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { getSingleBlock } from '@/reducers/selectors';
 
@@ -21,7 +20,8 @@ const Block = ({ block = {} }) => (
       {block.transactions && block.transactions.length > 0
         ? <DetailListItem
             name='Transactions'
-            value={<Link to={`/block/${block.number}/transactions`}>{block.transactions.length}</Link>}
+            linkTarget={`/block/${block.number}/transactions`}
+            value={block.transactions.length}
           />
         : <DetailListItem name='Transactions' value='0' />
       }
@@ -29,7 +29,8 @@ const Block = ({ block = {} }) => (
       <DetailListItem name='Timestamp' value={new Date(block.timestamp * 1000).toLocaleString()} />
       <DetailListItem
         name='Mined by'
-        value={<Link to={`/address/${block.miner}`}>{block.miner}</Link>}
+        linkTarget={`/address/${block.miner}`}
+        value={block.miner}
       />
       <DetailListItem name='Gas Limit' value={block.gasLimit} />
       <DetailListItem name='Gas used' value={block.gasUsed} />
