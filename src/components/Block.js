@@ -8,12 +8,13 @@ import { getSingleBlock } from '@/reducers/selectors';
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
 import BigNumber from './BigNumber';
+import Transactions from './Transactions';
 
 const mapStateToProps = (state, { blockNumber }) => ({
   block: getSingleBlock(state, blockNumber),
 });
 
-const Block = ({ block = {} }) => (
+const Block = ({ block = {} }) => [
   <div className='mix-content-wrapper'>
     <h2 className='content-block__title'>Block # {block.number}</h2>
     <DetailList>
@@ -42,7 +43,9 @@ const Block = ({ block = {} }) => (
       <DetailListItem name='Nonce' value={block.nonce} />
     </DetailList>
   </div>
-);
+  ,
+  <Transactions blockNumber={block.number} />
+];
 
 Block.propTypes = {
   block: PropTypes.object,

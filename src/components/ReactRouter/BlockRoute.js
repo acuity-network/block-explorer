@@ -19,6 +19,7 @@ const mapStateToProps = (state, { match }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchSingleBlock: (blockNumber) => dispatch(actions.fetchBlocks(blockNumber, 1)),
+  fetchTransactions: (blockNumber) => dispatch(actions.fetchTransactionsForBlock(blockNumber)),
 });
 
 class BlockRoute extends React.Component {
@@ -26,6 +27,7 @@ class BlockRoute extends React.Component {
     if (!this.props.blockInState) {
       const blockNumber = this.props.match.params.blockNumber;
       this.props.fetchSingleBlock(blockNumber);
+      this.props.fetchTransactions(blockNumber);
     }
   }
 
