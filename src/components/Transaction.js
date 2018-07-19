@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import * as selectors from '@/reducers/selectors';
 import { getCurrency } from '@/adapters/web3';
@@ -20,7 +19,9 @@ const Transaction = ({ transaction }) => (
       <DetailListItem name='Hash' value={transaction.hash} />
       <DetailListItem
         name='Block Number'
-        value={<Link to={`/block/${transaction.blockNumber}`}>{transaction.blockNumber}</Link>} />
+        linkTarget={`/block/${transaction.blockNumber}`}
+        value={transaction.blockNumber}
+      />
       <DetailListItem name='Amount' value={`${transaction.valueInEther} ${getCurrency()}`} />
       <DetailListItem
         name='Gas Price'
@@ -28,11 +29,13 @@ const Transaction = ({ transaction }) => (
       />
       <DetailListItem
         name='Sender'
-        value={<Link to={`/address/${transaction.from}`}>{transaction.from}</Link>}
+        linkTarget={`/address/${transaction.from}`}
+        value={transaction.from}
       />
       <DetailListItem
         name='Receiver'
-        value={<Link to={`/address/${transaction.to}`}>{transaction.to}</Link>}
+        linkTarget={`/address/${transaction.to}`}
+        value={transaction.to}
       />
     </DetailList>
   </div>

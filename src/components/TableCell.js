@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import FormatValue from './FormatValue';
+
 const TableCell = ({
   entry = {},
   field = {},
@@ -11,8 +13,8 @@ const TableCell = ({
       ? <Link
           to={entry.linkReactRouter}
           className='mix-table__link'
-        >{entry.value}</Link>
-      : entry.value
+        ><FormatValue>{entry.value}</FormatValue></Link>
+      : <FormatValue>{entry.value}</FormatValue>
     }
   </td>
 );
