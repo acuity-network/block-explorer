@@ -27,6 +27,12 @@ $color-cta: $mix-orange;
   color: $color-light;
 }
 
+@mixin mix-font-mono {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+  font-size: 16.5px;
+}
+
 /* MEASURES */
 
 $mix-tiny-gap: 4px;
