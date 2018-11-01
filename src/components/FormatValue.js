@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FormatValue = ({ children = '' }) => {
-  if (children.toString().substring(0, 2) === '0x') {
+  if (children && children.toString().substring(0, 2) === '0x') {
     return <span className='hash'>{children}</span>;
   }
 
