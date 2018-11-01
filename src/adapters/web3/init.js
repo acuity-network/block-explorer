@@ -17,6 +17,7 @@ export function initializeWeb3(browser = window, Web3 = pkg) {
       isUsingFallback = true;
     }
     web3 = new Web3(provider || fallbackUrl);
+    web3.eth.defaultBlock = 'pending';
   }
 }
 
