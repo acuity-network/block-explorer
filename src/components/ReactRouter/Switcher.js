@@ -6,7 +6,6 @@ import AddressRoute from '@/components/ReactRouter/AddressRoute';
 import BlockRoute from '@/components/ReactRouter/BlockRoute';
 import BlocksRoute from '@/components/ReactRouter/BlocksRoute';
 import TransactionRoute from '@/components/ReactRouter/TransactionRoute';
-import TransactionsRoute from '@/components/ReactRouter/TransactionsRoute';
 
 const Switcher = () => (
   <Switch>
@@ -28,10 +27,6 @@ const Switcher = () => (
       path='/block/:blockNumber'
       component={BlockRoute}
       exact
-    />
-    <Route
-      path='/block/:blockNumber/transactions'
-      component={TransactionsRoute}
     />
     <Route
       path='/transaction/:hash'

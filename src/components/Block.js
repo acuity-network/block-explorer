@@ -1,35 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { getSingleBlock } from '@/reducers/selectors';
 
 import DetailList from './DetailList';
 import DetailListItem from './DetailListItem';
 import BigNumber from './BigNumber';
+import Transactions from './Transactions';
 
 const mapStateToProps = (state, { blockNumber }) => ({
   block: getSingleBlock(state, blockNumber),
 });
 
-const Block = ({ block = {} }) => (
-  <div className='mix-content-wrapper'>
+const Block = ({ block = {} }) => [
+  <div key='block-data' className='mix-content-wrapper'>
     <h2 className='content-block__title'>Block # {block.number}</h2>
     <DetailList>
       <DetailListItem name='Hash' value={block.hash} />
-      {block.transactions && block.transactions.length > 0
-        ? <DetailListItem
-            name='Transactions'
-            value={<Link to={`/block/${block.number}/transactions`}>{block.transactions.length}</Link>}
-          />
-        : <DetailListItem name='Transactions' value='0' />
-      }
-
+      <DetailListItem
+        name='Transactions'
+        value={block.transactions ? block.transactions.length : 0}
+      />
       <DetailListItem name='Timestamp' value={new Date(block.timestamp * 1000).toLocaleString()} />
       <DetailListItem
         name='Mined by'
-        value={<Link to={`/address/${block.miner}`}>{block.miner}</Link>}
+        linkTarget={`/address/${block.miner}`}
+        value={block.miner}
       />
       <DetailListItem name='Gas Limit' value={block.gasLimit} />
       <DetailListItem name='Gas used' value={block.gasUsed} />
@@ -42,7 +39,10 @@ const Block = ({ block = {} }) => (
       <DetailListItem name='Nonce' value={block.nonce} />
     </DetailList>
   </div>
-);
+  ,
+  block.transactions && block.transactions.length > 0
+    && <Transactions key='block-transactions' blockNumber={block.number} />
+];
 
 Block.propTypes = {
   block: PropTypes.object,
