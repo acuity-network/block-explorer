@@ -10,13 +10,8 @@ export function getWeb3Instance() {
 
 export function initializeWeb3(browser = window, Web3 = pkg) {
   if (!web3) {
-    let provider;
-    if (browser.web3 && browser.web3.currentProvider) {
-      provider = browser.web3.currentProvider;
-    } else {
-      isUsingFallback = true;
-    }
-    web3 = new Web3(provider || fallbackUrl);
+    isUsingFallback = true;
+    web3 = new Web3(fallbackUrl);
     web3.eth.defaultBlock = 'pending';
   }
 }
